@@ -1,0 +1,109 @@
+body,html,p{
+  padding: 0;
+  margin: 0;
+}
+body{
+  overflow: hidden;
+}
+.background{
+  display: flex;
+  flex-grow: 100;
+  align-items: stretch;
+  height: 100vh;
+  width: 100vw;
+  background: url("../img/astronomy-3264140.jpg") center no-repeat;
+  background-size: cover;
+  overflow: hidden;
+};
+.comet{
+  display: flex;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background: url("../img/comet1.png") center no-repeat;
+  background-size: cover;
+  height: 180px;
+  width: 153px;
+  z-index: 100;
+}
+.comet1{
+  opacity: 0;
+  animation: comet1 12s infinite cubic-bezier(1,1,1,1);
+}
+.comet2{
+  opacity: 0;
+  animation: comet2 13s cubic-bezier(1,1,1,1) 0.5s infinite;
+}
+.comet3{
+  opacity: 0;
+  animation: comet3 12.7s linear 1s infinite;
+}
+.comet4{
+  opacity: 0;
+  animation: comet4 13.2s linear 1.5s infinite;
+}
+.comet5{
+  opacity: 0;
+  animation: comet5 11.8s linear 2s infinite;
+}
+.comet6{
+  opacity: 0;
+  animation: comet1 12s linear 3.5s infinite;
+}
+.comet7{
+  opacity: 0;
+  animation: comet2 13s linear 4s infinite;
+}
+.comet8{
+  opacity: 0;
+  animation: comet3 12.7s linear 4.5s infinite;
+}
+.comet9{
+  opacity: 0;
+  animation: comet4 13.2s linear 5s infinite;
+}
+.comet10{
+  opacity: 0;
+  animation: comet5 11.8s linear 5.5s infinite;
+}
+
+@keyframes comet1 {
+  from {
+    opacity: 1;
+    transform: translate(0, 0) scale(0.1) rotate(228deg);  }
+  to {
+    opacity: 1;
+    transform: translate(40vw, 100vh) scale(0.7) rotate(0);  }
+}
+@keyframes comet2 {
+  from {
+    opacity: 1;
+    transform: translate(-10vw, 10vh) scale(0.1) rotate(-208deg);  }
+  to {
+    opacity: 1;
+    transform: translate(-40vw, 50vh) scale(0.6) rotate(0);  }
+}
+@keyframes comet3 {
+  from {
+    opacity: 1;
+    transform: translate(-5vw, -10vh) scale(0.1) rotate(-155deg);  }
+  to {
+    opacity: 1;
+    transform: translate(-60vw, -50vh) scale(1.8) rotate(0);  }
+}
+@keyframes comet4 {
+  from {
+    opacity: 1;
+    transform: translate(0, -10vh) scale(0.1) rotate(-58deg);  }
+  to {
+    opacity: 1;
+    transform: translate(0, -70vh) scale(1.2) rotate(0);  }
+}
+@keyframes comet5 {
+  from {
+    opacity: 1;
+    transform: translate(10vw, -10vh) scale(0.1) rotate(-508deg);  }
+  to {
+    opacity: 1;
+    transform: translate(55vw, -80vh) scale(0.3) rotate(0);  }
+}
