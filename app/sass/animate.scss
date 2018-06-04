@@ -1,0 +1,53 @@
+.menuActive{
+  animation: menuAnimate 2s forwards;
+}
+@keyframes menuAnimate {
+  from{
+    visibility: hidden;
+    transform: translateX(-100%);
+  }
+  to{
+    visibility: visible;
+    transform: translateX(0);
+  }
+}
+.openInfo{
+  animation: openInfo 3s forwards;
+}
+@keyframes openInfo {
+  from{
+    visibility: hidden;
+    transform: translateX(100%);
+  }
+  to{
+    visibility: visible;
+    transform: translateX(0);
+  }
+}
+
+.menuDefault{
+  animation: menuDefault 3s forwards;
+}
+@keyframes menuDefault {
+  from{
+    transform: translateX(0);
+    visibility: visible;
+  }
+  to{
+    transform: translateX(-100%);
+    visibility: hidden;
+  }
+}
+.closedInfo{
+  animation: closedInfo 3s forwards;
+}
+@keyframes closedInfo {
+  from{
+    visibility: hidden;
+    transform: translateX(0);
+  }
+  to{
+    visibility: visible;
+    transform: translateX(100%);
+  }
+}
