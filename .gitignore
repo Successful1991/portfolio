@@ -5,6 +5,5 @@
 /gulpfile.js
 /package-lock.json
 /package.json
-.idea
-.git
+/.git
 /build/
