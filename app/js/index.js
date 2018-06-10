@@ -188,6 +188,7 @@ function init() {
           star = new THREE.Points(starGeometry, starMaterial);
           star.scale.set(20, 20, 20);
           scene.add(star);
+          console.log(star);
         }
         // ---- добовление планет ----
 
@@ -602,8 +603,10 @@ function init() {
   window.addEventListener('mousemove', onDocumentMouseMove, false);
   document.getElementById('burger').addEventListener("click", openMenu);
   document.getElementById('menu__list').addEventListener("click", getIdClick);
-  addStar(stars, 10000, 5500, 0.2, 1);
-  addStar(stars2, 5000, 4500, 1, 1.4);
+  // addStar(stars, 10000, 5500, 0.2, 1);
+  // addStar(stars2, 5000, 4500, 1, 1.4);
+  addStar(stars, 100, 500, 0.2, 1);
+  addStar(stars2, 500, 400, 1, 1.4);
   addEventClosed();
   loaderMeteorite();
   //loaderSpaceship2();
