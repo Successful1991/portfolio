@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+				content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+	<link rel="stylesheet" href="app/css/main.css">
+	<link rel="stylesheet" href="app/css/animate.css">
+
+	<title>TEST</title>
+</head>
+<body>
+<article id="desktop">
+    <nav id="menu">
+        <input type="checkbox" id="burger">
+        <label for="burger">
+            <div></div>
+            <div></div>
+            <div></div>
+        </label>
+        <ul id="menu__list">
+            <li class="menu__item" id="menu__aboutMe">About me</li>
+            <li class="menu__item" id="menu__portfolio">Portfolio</li>
+            <li class="menu__item" id="menu__contact">Contact</li>
+        </ul>
+    </nav>
+
+    <div id="shar1"> Обо мне</div>
+    <div id="shar2"> Портфолио</div>
+    <div id="shar3"> Контакты</div>
+
+    <section id="aboutMe">
+        <div class="closed">
+            <div></div>
+            <div></div>
+        </div>
+        <img src="app/img/myPhoto3.jpg" alt="my photo" class="aboutMe__photo">
+        <h3>Hello!</h3>
+        <p class="aboutMe__description">My name is Artem Tsys<br>
+            I'm engaged  in the development<br>
+            of sites and applications </p>
+        <h4 class="aboutMe__skills">skills:</h4>
+        <p class="skills__name">JavaScript,  Angular, JQuery, Ajax, REST API, HTTP, HTML5, CSS3, SASS, Bootstrap, npm, Gulp, WebStorm, GitHub</p>
+        <h4 class="aboutMe__techno">technologies</h4>
+        <p class="techno__list">Gulp,  WebStorm, GitHub, Photoshop, Avocode</p>
+    </section>
+    <section id="contact">
+        <div class="closed" id="contact__closed">
+            <div></div>
+            <div></div>
+        </div>
+        <h3>Contacts</h3>
+        <p>City: Kiev</p>
+        <p class="contact__phone">Tell: +38 068 247 99 06</p>
+        <p>Email: 19successful91@gmail.com</p>
+        <p class="contact__skype">Skype: successful1991m</p>
+        <p>LinkedIn: <a class="contact__linkedIn" href="https://www.linkedin.com/in/artem-tsys/">https://www.linkedin.com</a></p>
+    </section>
+    <section id="portfolio">
+        <div class="closed" id="portfolio__closed">
+            <div></div>
+            <div></div>
+        </div>
+        <h3>Portfolio</h3>
+        <div class="portfolio__jobs">
+            <div class="job">
+                <div class="job__card job__card--front">
+                    <div class="job__image job__image7"></div>
+                    <div class="job__name">Parking App</div>
+                </div>
+                <div class="job__card job__card--back">
+                    <div class="job__description">
+                        <p class="job__description__name">Description</p>
+                        Application for calculation of empty parking spaces.
+                        forms the parking with blank spaces of 3 types.
+                        the detailed description on GitHub
+                        <div class="job__description__skill"> <p>Skill</p> HTML, CSS, JavaScript, Angular2, SCSS</div>
+                        <div class="job__description__link">
+                            <!--<a href="https://successful1991.github.io/Landing-acnostia/" target="_blank">view</a>-->
+                            <a href="https://github.com/Successful1991/parking" target="_blank">code</a>
+                            <span class="job__description__data">April 2018</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="job">
+                <div class="job__card job__card--front">
+                    <div class="job__image job__image6"></div>
+                    <div class="job__name">teaser-guru</div>
+                </div>
+                <div class="job__card job__card--back">
+                    <div class="job__description">
+                        <p class="job__description__name">Description</p>
+                        small landing page with a large number of animation.
+                        imposition under screens to 768 and of 1200.
+                        the detailed description on GitHub
+                        <div class="job__description__skill"> <p>Skill</p> HTML, CSS, SCSS, animation, JavaScript</div>
+                        <div class="job__description__link">
+                            <a href="https://successful1991.github.io/teaser-guru-test/" target="_blank">view</a>
+                            <a href="https://github.com/Successful1991/teaser-guru-test" target="_blank">code</a>
+                            <span class="job__description__data">March 2018</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="job">
+                <div class="job__card job__card--front">
+                    <div class="job__image job__image5"></div>
+                    <div class="job__name">TodoList</div>
+                </div>
+                <div class="job__card job__card--back">
+                    <div class="job__description">
+                        <p class="job__description__name">Description</p>
+                        The application is written on Angular 2+ with use of TypeScript.
+                        It is realized: a pagination, addition and removal of records, validation of new records, the choice of number of records on the page.
+                        <div class="job__description__skill"> <p>Skill</p> HTML, CSS, JavaScript, Angular2, TypeScript</div>
+                        <div class="job__description__link">
+                            <!--<a href="https://successful1991.github.io/Landing-acnostia/" target="_blank">view</a>-->
+                            <a href="https://github.com/Successful1991/TodoList" target="_blank">code</a>
+                            <span class="job__description__data">February 2018</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="job">
+                <div class="job__card job__card--front">
+                    <div class="job__image job__image4"></div>
+                    <div class="job__name">Angular2_messenger</div>
+                </div>
+                <div class="job__card job__card--back">
+                    <div class="job__description">
+                        <p class="job__description__name">Description</p>
+                        The application for communication, is written on Angular 2.
+                        The chat receives users on API, at the choice of the user correspondence in which BOT answers opens, correspondences remain in LocalStorage.
+                        <div class="job__description__skill"> <p>Skill</p> HTML, CSS, JavaScript, Angular2, Ajax, REST API</div>
+                        <div class="job__description__link">
+                            <a href="https://successful1991.github.io/Angular2-chat/Angular2-chat/" target="_blank">view</a>
+                            <a href="https://github.com/Successful1991/Angular2-chat" target="_blank">code</a>
+                            <span class="job__description__data">January 2018</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="job">
+                <div class="job__card job__card--front">
+                    <div class="job__image job__image3"></div>
+                    <div class="job__name">FACILITY TEST</div>
+                </div>
+                <div class="job__card job__card--back">
+                    <div class="job__description">
+                        <p class="job__description__name">Description</p>
+                        The simple one-page website with 2 sliders of slick-slider, navigation,
+                        google map, popup (with different content of breakpoint 1200px.)
+                        <div class="job__description__skill"> <p>Skill</p> HTML, CSS, JavaScript, WebStorm, GitHub, Photoshop</div>
+                        <div class="job__description__link">
+                            <a href="https://successful1991.github.io/Landing-page/" target="_blank">view</a>
+                            <a href="https://github.com/Successful1991/Landing-page" target="_blank">code</a>
+                            <span class="job__description__data">January 2018</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="job">
+                <div class="job__card job__card--front">
+                    <div class="job__image job__image2"></div>
+                    <div class="job__name">GitHub-App</div>
+                </div>
+                <div class="job__card job__card--back">
+                    <div class="job__description">
+                        <p class="job__description__name">Description</p>
+                        The application on the basis of GitHub, carries out search in users or repositories with a
+                        possibility of addition in chosen, there are pages: Home, Favorite, Contact.
+                        <div class="job__description__skill"> <p>Skill</p> HTML, CSS, JavaScript, AngularJs, WebStorm, GitHub Api</div>
+                        <div class="job__description__link">
+                            <a href="https://successful1991.github.io/GitHub-app-Angular/" target="_blank">view</a>
+                            <a href="https://github.com/Successful1991/GitHub-app-Angular" target="_blank">code</a>
+                            <span class="job__description__data">December 2017</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="job">
+                <div class="job__card job__card--front">
+                    <div class="job__image job__image1"></div>
+                    <div class="job__name">Acnostia</div>
+                </div>
+                <div class="job__card job__card--back">
+                    <div class="job__description">
+                        <p class="job__description__name">Description</p>
+                        The acnostia project has in itself 5 blocks: The homepage, Services, About us, Work, Contacts.
+                        FullPage.js slider, various effects during the targeting, scroll on blocks, adaptability for different devices.
+                        <div class="job__description__skill"> <p>Skill</p> HTML, CSS, JavaScript, FullPage.js, npm, Gulp, WebStorm</div>
+                        <div class="job__description__link">
+                            <a href="https://successful1991.github.io/Landing-acnostia/" target="_blank">view</a>
+                            <a href="https://github.com/Successful1991/Landing-acnostia" target="_blank">code</a>
+                            <span class="job__description__data">October 2017</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</article>
+<article id="mobile">
+
+</article>
+
+
+    <script>
+       var iOS = !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
+       var ua = navigator.userAgent.toLowerCase();
+       var isAndroid = ua.indexOf("android") > -1;
+       if(iOS) {
+         document.getElementById('mobile').style.display='none';
+         console.log(navigator.platform);
+       }else if (isAndroid) {
+         document.getElementById('mobile').style.display='none';
+         console.log(navigator.platform);
+       }else {
+         console.log(navigator.platform);
+         document.getElementById('mobile').style.display='none';
+         var script = document.createElement("script");
+         var script2 = document.createElement("script");
+         var script3 = document.createElement("script");
+         var script4 = document.createElement("script");
+         var script5 = document.createElement("script");
+         script.setAttribute('src', 'app/js/lib/three.min.js');
+         script.async = false;
+         script2.setAttribute('src', 'app/js/lib/OrbitControls.js');
+         script2.async = false;
+         script3.setAttribute('src', 'app/js/lib/MTLLoader.js');
+         script3.async = false;
+         script4.setAttribute('src', 'app/js/lib/OBJLoader.js');
+         script4.async = false;
+         script5.setAttribute('src', 'app/js/index.js');
+         script5.async = false;
+
+         document.body.appendChild(script);
+         document.body.appendChild(script2);
+         document.body.appendChild(script3);
+         document.body.appendChild(script4);
+         document.body.appendChild(script5);
+       }
+    </script>
+	<!--<script src="js/lib/three.min.js"></script>-->
+	<!--<script src="js/lib/OBJLoader.js"></script>-->
+	<!--<script src="js/lib/OrbitControls.js"></script>-->
+	<!--<script src="js/lib/MTLLoader.js"></script>-->
+	<!--<script src="js/index.js" id="index" defer></script>-->
+
+</body>
+</html>

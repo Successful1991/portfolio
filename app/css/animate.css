@@ -1,0 +1,111 @@
+.menuActive {
+  -webkit-animation: menuAnimate 1s forwards;
+          animation: menuAnimate 1s forwards; }
+
+@-webkit-keyframes menuAnimate {
+  from {
+    visibility: hidden;
+    -webkit-transform: translateX(-100%);
+            transform: translateX(-100%); }
+  to {
+    visibility: visible;
+    -webkit-transform: translateX(0);
+            transform: translateX(0); } }
+
+@keyframes menuAnimate {
+  from {
+    visibility: hidden;
+    -webkit-transform: translateX(-100%);
+            transform: translateX(-100%); }
+  to {
+    visibility: visible;
+    -webkit-transform: translateX(0);
+            transform: translateX(0); } }
+
+.openInfo {
+  -webkit-animation: openInfo 0.5s forwards;
+          animation: openInfo 0.5s forwards; }
+
+@-webkit-keyframes openInfo {
+  from {
+    visibility: hidden;
+    -webkit-transform: translateX(0);
+            transform: translateX(0); }
+  to {
+    visibility: visible;
+    -webkit-transform: translateX(-100%);
+            transform: translateX(-100%); } }
+
+@keyframes openInfo {
+  from {
+    visibility: hidden;
+    -webkit-transform: translateX(0);
+            transform: translateX(0); }
+  to {
+    visibility: visible;
+    -webkit-transform: translateX(-100%);
+            transform: translateX(-100%); } }
+
+.menuDefault {
+  -webkit-animation: menuDefault 1s forwards;
+          animation: menuDefault 1s forwards; }
+
+@-webkit-keyframes menuDefault {
+  from {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+    visibility: visible; }
+  to {
+    -webkit-transform: translateX(-100%);
+            transform: translateX(-100%);
+    visibility: hidden; } }
+
+@keyframes menuDefault {
+  from {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+    visibility: visible; }
+  to {
+    -webkit-transform: translateX(-100%);
+            transform: translateX(-100%);
+    visibility: hidden; } }
+
+.closedInfo {
+  -webkit-animation: closedInfo 0.2s forwards;
+          animation: closedInfo 0.2s forwards; }
+
+@-webkit-keyframes closedInfo {
+  from {
+    visibility: hidden;
+    -webkit-transform: translateX(-100%);
+            transform: translateX(-100%); }
+  to {
+    visibility: visible;
+    -webkit-transform: translateX(0);
+            transform: translateX(0); } }
+
+@keyframes closedInfo {
+  from {
+    visibility: hidden;
+    -webkit-transform: translateX(-100%);
+            transform: translateX(-100%); }
+  to {
+    visibility: visible;
+    -webkit-transform: translateX(0);
+            transform: translateX(0); } }
+
+@-webkit-keyframes color {
+  from {
+    background: rgba(221, 221, 221, 0.7); }
+  50% {
+    background: rgba(44, 44, 44, 0.4); }
+  to {
+    background: rgba(221, 221, 221, 0.7); } }
+
+@keyframes color {
+  from {
+    background: rgba(221, 221, 221, 0.7); }
+  50% {
+    background: rgba(44, 44, 44, 0.4); }
+  to {
+    background: rgba(221, 221, 221, 0.7); } }

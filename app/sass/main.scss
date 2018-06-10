@@ -1,3 +1,11 @@
+@font-face {
+  font-family: "Proxima-Nova-Regular";
+  src: url(../font/ProximaNova-Regular.ttf);
+}
+@font-face {
+  font-family: "Proxima-Nova-semiBold";
+  src: url(../font/ProximaNova-Semibold.ttf);
+}
 body,html,p{
   padding: 0;
   margin: 0;
@@ -5,105 +13,405 @@ body,html,p{
 body{
   overflow: hidden;
 }
-.background{
-  display: flex;
-  flex-grow: 100;
-  align-items: stretch;
-  height: 100vh;
-  width: 100vw;
-  background: url("../img/astronomy-3264140.jpg") center no-repeat;
-  background-size: cover;
-  overflow: hidden;
-};
-.comet{
-  display: flex;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  background: url("../img/comet1.png") center no-repeat;
-  background-size: cover;
-  height: 180px;
-  width: 153px;
-  z-index: 100;
+canvas{
+  height: 100%;
+  width: 100%;
+  z-index: 0;
 }
-.comet1{
-  opacity: 0;
-  animation: comet1 12s infinite cubic-bezier(1,1,1,1);
-}
-.comet2{
-  opacity: 0;
-  animation: comet2 13s cubic-bezier(1,1,1,1) 0.5s infinite;
-}
-.comet3{
-  opacity: 0;
-  animation: comet3 12.7s linear 1s infinite;
-}
-.comet4{
-  opacity: 0;
-  animation: comet4 13.2s linear 1.5s infinite;
-}
-.comet5{
-  opacity: 0;
-  animation: comet5 11.8s linear 2s infinite;
-}
-.comet6{
-  opacity: 0;
-  animation: comet1 12s linear 3.5s infinite;
-}
-.comet7{
-  opacity: 0;
-  animation: comet2 13s linear 4s infinite;
-}
-.comet8{
-  opacity: 0;
-  animation: comet3 12.7s linear 4.5s infinite;
-}
-.comet9{
-  opacity: 0;
-  animation: comet4 13.2s linear 5s infinite;
-}
-.comet10{
-  opacity: 0;
-  animation: comet5 11.8s linear 5.5s infinite;
+h2{
+  font-size: 26px;
+  font-weight: normal;
 }
 
-@keyframes comet1 {
-  from {
-    opacity: 1;
-    transform: translate(0, 0) scale(0.1) rotate(228deg);  }
-  to {
-    opacity: 1;
-    transform: translate(40vw, 100vh) scale(0.7) rotate(0);  }
+*{
+  box-sizing: border-box;
 }
-@keyframes comet2 {
-  from {
-    opacity: 1;
-    transform: translate(-10vw, 10vh) scale(0.1) rotate(-208deg);  }
-  to {
-    opacity: 1;
-    transform: translate(-40vw, 50vh) scale(0.6) rotate(0);  }
+#desktop{
+  height: 100%;
+  width: 100%;
 }
-@keyframes comet3 {
-  from {
-    opacity: 1;
-    transform: translate(-5vw, -10vh) scale(0.1) rotate(-155deg);  }
-  to {
-    opacity: 1;
-    transform: translate(-60vw, -50vh) scale(1.8) rotate(0);  }
+#menu input{
+  display: none;
 }
-@keyframes comet4 {
-  from {
-    opacity: 1;
-    transform: translate(0, -10vh) scale(0.1) rotate(-58deg);  }
-  to {
-    opacity: 1;
-    transform: translate(0, -70vh) scale(1.2) rotate(0);  }
+#menu label{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: absolute;
+  top: 0;
+  left: 60px;
+  height: 30px;
+  width: 40px;
+  transition: all 0.7s;
+  div{
+    height: 4px;
+    width: 40px;
+    background: #747171;
+  }
 }
-@keyframes comet5 {
-  from {
-    opacity: 1;
-    transform: translate(10vw, -10vh) scale(0.1) rotate(-508deg);  }
-  to {
-    opacity: 1;
-    transform: translate(55vw, -80vh) scale(0.3) rotate(0);  }
+#burger:checked+label{
+  top:0;
+  left: 60px;
+  transform: rotate(-360deg);
+  div{
+    position: relative;
+  }
+  div:first-child{
+    transform: rotate(-45deg);
+    width: 20px;
+    top:7px;
+    left: -5px;
+  }
+  div:nth-child(2){
+    width: 30px;
+  }
+  div:last-child{
+    transform: rotate(45deg);
+    width: 20px;
+    top: -7px;
+    left: -5px;
+  }
+}
+#menu {
+  position: absolute;
+  top: 50px;
+  left: 0;
+  font-family: "Proxima-Nova-Regular";
+}
+#menu__list {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0;
+  margin: 200px 0 0 0;
+  visibility: hidden;
+}
+.menu__item{
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 40px;
+  height: 45px;
+  background: rgba(136, 136, 136, 0.4);
+  color: #ffffff;
+  font-size: 26px;
+  margin: 0 0 40px 0;
+  cursor: pointer;
+  &:before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    right: 5px;
+    background: rgba(116, 113, 113, 0.4);
+    height: 10px;
+    width: 100%;
+    transform: skewX(45deg);
+  }
+}
+@mixin hint{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 150px;
+  height: 40px;
+  position: absolute;
+  top:0;
+  left: 0;
+  font-size: 22px;
+  color: #ffffff;
+  font-family: Proxima-Nova-Regular, sans-serif;
+  z-index: 1000;
+  visibility: hidden;
+}
+
+#shar1,#shar2,#shar3{
+  @include hint;
+}
+
+.infoActive{
+  animation: openInfo 2s forwards 1s;
+}
+.infoClose{
+  animation: closedInfo 2s forwards;
+}
+.closed{
+  position: absolute;
+  top:50px;
+  right: 50px;
+  height: 30px;
+  width: 30px;
+  div:first-child{
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 35px;
+    height: 3px;
+    border-radius: 10px;
+    background: #eeeeee;
+    transform: rotate(45deg);
+  }
+  div:last-child{
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 35px;
+    height: 3px;
+    border-radius: 10px;
+    background: #eeeeee;
+    transform: rotate(-45deg);
+  }
+}
+@mixin info {
+  position: absolute;
+  top: 0;
+  left: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  width: 40%;
+  background: rgba(127, 127, 127, 0.4);
+  font-family: 'Proxima-Nova-Regular',sans-serif;
+  padding: 0 2%;
+  box-sizing: border-box;
+  visibility: hidden;
+}
+
+#aboutMe{
+  @include info;
+  font-size: 26px;
+  h2{
+    color: #3cdf6a;
+  }
+}
+.aboutMe {
+  &__photo {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+  }
+  &__description{
+    text-align: center;
+    color: #ffffff;
+    font-size: 18px;
+  }
+  &__skills{
+    text-align: center;
+    font-size: 26px;
+    color: #4a8aff;
+    text-transform: uppercase;
+    margin: 15px 0 10px 0;
+  }
+  &__techno{
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 26px;
+    color: #4a8aff;
+    margin: 15px 0 10px 0;
+  }
+}
+.skills__name{
+  color: #ffffff;
+  font-size: 18px;
+}
+.techno__list{
+  text-align: center;
+  font-size: 18px;
+  color: #ffffff;
+}
+#contact{
+  @include info;
+  font-size: 18px;
+  color: #ffffff;
+  h2{
+    color: #3cdf6a;
+  }
+}
+.contact__linkedIn{
+  text-decoration: none;
+  color: #ffffff;
+}
+.contact__phone, .contact__skype{
+  margin-bottom: 15px;
+}
+#portfolio{
+  @include info;
+  width: 50%;
+  justify-content: flex-end;
+  background: linear-gradient(-65deg , #717171 -10%, transparent 101%);
+  h2{
+    color: #ffffff;
+    margin-bottom: 0;
+  }
+}
+.portfolio__jobs{
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 85%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 30px 0;
+}
+
+.job{
+  display: flex;
+  flex-grow: 1;
+  //width: 200px;
+  min-width: 200px;
+  max-width: 260px;
+  //height: 35%;
+  //min-height: 150px;
+  height: 180px;
+  margin: 20px 5px 0;
+  position: relative;
+  box-sizing: border-box;
+  transform-style: preserve-3d;
+  perspective: 15rem;
+  &:hover &__card{
+    &--front{transform: rotateY(180deg);}
+    &--back{transform: rotateY(0);}
+  }
+  &__card{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top:0;
+    left:0;
+    overflow: hidden;
+    border-radius: 5px 5px 8px 8px;
+    //background: #eeeeee;
+    background: #ff7777;
+    //filter: hue-rotate(0deg);
+    box-sizing: border-box;
+    backface-visibility: hidden;
+    transition: all 1s;
+    animation: color 10s infinite;
+    &--front{
+    }
+    &--back{
+      transform: rotateY(-180deg);
+    }
+  }
+  &__image{
+    //width: 100%;
+    height: calc( 80% - 10px);
+    margin: 10px 10px 0 10px;
+    box-sizing: border-box;
+    &1{
+      background: url("../img/portfolio/acnostia.jpg") center no-repeat;
+      background-size: contain;
+    }
+    &2{
+      background: url("../img/portfolio/gitHub-angular.jpg") center no-repeat;
+      background-size: contain;
+    }
+    &3{
+      background: url("../img/portfolio/facility_test.jpg") center no-repeat;
+      background-size: contain;
+    }
+    &4{
+      background: url("../img/portfolio/messenger.jpg") center no-repeat;
+      background-size: contain;
+    }
+    &5{
+      background: url("../img/portfolio/Todo-List.jpg") center no-repeat;
+      background-size: contain;
+    }
+    &6{
+      background: url("../img/portfolio/TeaserGuru.jpg") center no-repeat;
+      background-size: contain;
+    }
+    &7{
+      background: url("../img/portfolio/Autoparking2.jpg") center no-repeat;
+      background-size: contain;
+    }
+  }
+  &__name{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 20%;
+    width: 100%;
+    background: #646464;
+    border-radius: 5px 5px 0 0;
+    font-size: 16px;
+    color: #ffffff;
+    line-height: 1.2em;
+    font-family: 'Proxima-Nova-Regular', sans-serif;
+  }
+  &__description{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    font-size: 10px;
+    //background: yellow;
+    background: linear-gradient(220deg, #6c6c6c, #dedede);
+    transition: all 1s;
+    &__name{
+      width: 100%;
+      font-size: 14px;
+      text-align: center;
+      //border-bottom:1px dashed #3cdf6a;
+    }
+    &__skill{
+      text-align: center;
+      p{
+        font-size: 14px;
+        //border-bottom:1px dashed #3cdf6a;
+        margin: 0;}
+    }
+    &__data{
+      align-self: flex-end;
+    }
+    &__link {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      a {
+        text-decoration: none;
+        background: #888888;
+        border-radius: 5px;
+        border: 1px solid #747171;
+        font-size: 10px;
+        color: #ffffff;
+        padding: 0 10px;
+      }
+    }
+  }
+}
+
+
+.portfolio__jobs::-webkit-scrollbar {
+  width: 0.4em;
+}
+
+.portfolio__jobs::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+
+.portfolio__jobs::-webkit-scrollbar-thumb {
+  background-color: #bfbfbf;
+  outline: 1px solid slategrey;
+  border-radius: 15px;
+}
+
+
+@media (min-width: 1400px) {
+  #portfolio{
+    padding: 0 5%;
+  }
+}
+
+@media (min-width: 2200px) {
+  .job{
+    margin: 20px 45px 0;
+  }
 }

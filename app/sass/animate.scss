@@ -1,5 +1,5 @@
 .menuActive{
-  animation: menuAnimate 2s forwards;
+  animation: menuAnimate 1s forwards;
 }
 @keyframes menuAnimate {
   from{
@@ -12,21 +12,21 @@
   }
 }
 .openInfo{
-  animation: openInfo 3s forwards;
+  animation: openInfo 0.5s forwards;
 }
 @keyframes openInfo {
   from{
     visibility: hidden;
-    transform: translateX(100%);
+    transform: translateX(0);
   }
   to{
     visibility: visible;
-    transform: translateX(0);
+    transform: translateX(-100%);
   }
 }
 
 .menuDefault{
-  animation: menuDefault 3s forwards;
+  animation: menuDefault 1s forwards;
 }
 @keyframes menuDefault {
   from{
@@ -39,15 +39,30 @@
   }
 }
 .closedInfo{
-  animation: closedInfo 3s forwards;
+  animation: closedInfo 0.2s forwards;
 }
 @keyframes closedInfo {
   from{
     visibility: hidden;
-    transform: translateX(0);
+    transform: translateX(-100%);
+    //transform: translateX(0);
   }
   to{
     visibility: visible;
-    transform: translateX(100%);
+    transform: translateX(0);
+    //transform: translateX(100%);
   }
 }
+
+@keyframes color {
+   from{
+     background: rgba(221,221,221,0.7);
+   }
+   50%{
+     //background: #2c2c2c;
+     background: rgba(44,44,44,0.4);
+   }
+   to{
+     background: rgba(221,221,221,0.7);
+   }
+ }
