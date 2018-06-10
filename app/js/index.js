@@ -603,10 +603,9 @@ function init() {
   window.addEventListener('mousemove', onDocumentMouseMove, false);
   document.getElementById('burger').addEventListener("click", openMenu);
   document.getElementById('menu__list').addEventListener("click", getIdClick);
-  // addStar(stars, 10000, 5500, 0.2, 1);
-  // addStar(stars2, 5000, 4500, 1, 1.4);
-  addStar(stars, 100, 500, 0.2, 1);
-  addStar(stars2, 500, 400, 1, 4);
+  addStar(stars, 7000, 5500, 0.2, 1);
+  addStar(stars2, 3000, 4500, 1, 1.4);
+
   addEventClosed();
   loaderMeteorite();
   //loaderSpaceship2();
