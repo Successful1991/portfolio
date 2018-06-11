@@ -272,14 +272,14 @@ window.addEventListener('load',function () {
 // ------ клики на объект ------
 
   //var t = 0;
-  function onMouseClick() {
-    document.getElementById("shar1").style.visibility = "hidden";
-    document.getElementById("shar2").style.visibility = "hidden";
-    document.getElementById("shar3").style.visibility = "hidden";
-    renderClick();
-  }
+  // function onMouseClick() {
+  //   document.getElementById("shar1").style.visibility = "hidden";
+  //   document.getElementById("shar2").style.visibility = "hidden";
+  //   document.getElementById("shar3").style.visibility = "hidden";
+  //   renderClick();
+  // }
 
-  function renderClick() {
+  function renderClick(event) {
     mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
     mouse.y = -( event.clientY / window.innerHeight ) * 2 + 1;
 
@@ -358,21 +358,21 @@ window.addEventListener('load',function () {
   //   //info = true;
   // }
 
-  function toScreenPosition(obj, camera) {
-    var vector = new THREE.Vector3();
-    var widthHalf = 0.5 * renderer.context.canvas.width;
-    var heightHalf = 0.5 * renderer.context.canvas.height;
-
-    obj.updateMatrixWorld();
-    vector.setFromMatrixPosition(obj.matrixWorld);
-    vector.project(camera);
-    vector.x = ( vector.x * widthHalf ) + widthHalf;
-    vector.y = -( vector.y * heightHalf ) + heightHalf;
-    return {
-      x: vector.x,
-      y: vector.y
-    };
-  }
+  // function toScreenPosition(obj, camera) {
+  //   var vector = new THREE.Vector3();
+  //   var widthHalf = 0.5 * renderer.context.canvas.width;
+  //   var heightHalf = 0.5 * renderer.context.canvas.height;
+  //
+  //   obj.updateMatrixWorld();
+  //   vector.setFromMatrixPosition(obj.matrixWorld);
+  //   vector.project(camera);
+  //   vector.x = ( vector.x * widthHalf ) + widthHalf;
+  //   vector.y = -( vector.y * heightHalf ) + heightHalf;
+  //   return {
+  //     x: vector.x,
+  //     y: vector.y
+  //   };
+  // }
 
   function movementToThePlanet(shar) {
     var pl = shar.geometry.parameters.radius * 1.5;
@@ -388,17 +388,17 @@ window.addEventListener('load',function () {
       z: shar.position.z
     };
     cameraPurpose(currentDirectionCamera, sharik);
-    if (camera.position.x > shar.position.x + 90) {
+    if (camera.position.x > shar.position.x + 110) {
       camera.position.x -= 60;
     } else if (camera.position.x < shar.position.x) {
       camera.position.x += 50;
     }
     if (camera.position.z > shar.position.z + 5000) {
-      camera.position.z -= 210;
+      camera.position.z -= 200;
     } else if (camera.position.z < shar.position.z - 5000) {
-      camera.position.z += 210;
+      camera.position.z += 200;
     }
-    if (camera.position.y > shar.position.y + 90) {
+    if (camera.position.y > shar.position.y + 110) {
       camera.position.y -= 60;
     } else if (camera.position.y < shar.position.y) {
       camera.position.y += 50;
@@ -613,7 +613,7 @@ window.addEventListener('load',function () {
     renderer.render(scene, camera);
   };
 
-  window.addEventListener('click', onMouseClick, false);
+  window.addEventListener('click', renderClick, false);
   window.addEventListener('resize', onWindowResize, false);
   //window.addEventListener('mousemove', onDocumentMouseMove, false);
   document.getElementById('burger').addEventListener("click", openMenu);
