@@ -283,10 +283,8 @@ window.addEventListener('load',function () {
     mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
     mouse.y = -( event.clientY / window.innerHeight ) * 2 + 1;
 
-
     raycaster.setFromCamera(mouse, camera);
     var intersects = raycaster.intersectObjects(scene.children);
-    console.log(intersects);
     for (var i = 0; i < intersects.length; i++) {
       if (intersects[i].object.uuid === shar1.uuid && !infoAboutMe && !infoPortfolio && !infoContact) {
         clickMenuItem("aboutMe");
@@ -495,7 +493,6 @@ window.addEventListener('load',function () {
         menuItem[i].style.animation = animate;
       }
       menu = true;
-      info = true;
     }
     else if (attr === false) {
       var menuItem = document.getElementsByClassName("menu__item");
@@ -503,7 +500,7 @@ window.addEventListener('load',function () {
         menuItem[i].style.animation = "menuDefault 1s forwards";
       }
       menu = false;
-      info = false;
+
     }
   }
 
