@@ -6,8 +6,8 @@ window.addEventListener('load',function () {
   var camera;
   var controls;
   var renderer;
-  var y = 1700;
-  var x = 0;
+  // var y = 1700;
+  // var x = 0;
 //var t = 0;
 
   var info = false;
@@ -261,40 +261,12 @@ window.addEventListener('load',function () {
   };
 
   // ---- анимацию полета метеоритов ----
-  function comet() {
-    if (obj.position.z <= -12000 && obj.position.z >= 18000) {
-      obj.position.z = -12000;
-    }
-    if (obj1.position.z <= -12000 && obj1.position.z >= 18000) {
-      obj1.position.z = -12000;
-    }
-    if (obj2.position.z <= -12000 && obj2.position.z >= 18000) {
-      obj2.position.z = -12000;
-    }
-    if (obj3.position.z <= -12000 && obj3.position.z >= 18000) {
-      obj3.position.z = -12000;
-    }
-    if (obj3.position.z <= -12000 && obj3.position.z >= 18000) {
-      obj3.position.z = -12000;
-    }
-    if (obj4.position.z <= -12000 && obj4.position.z >= 18000) {
-      obj4.position.z = -12000;
-    }
-    if (obj5.position.z <= -12000 && obj5.position.z >= 18000) {
-      obj5.position.z = -12000;
-    }
-    if (obj6.position.z <= -12000 && obj6.position.z >= 18000) {
-      obj6.position.z = -12000;
-    }
-    if (obj7.position.z <= -12000 && obj7.position.z >= 18000) {
-      obj7.position.z = -12000;
-    }
-    if (obj8.position.z <= -12000 && obj8.position.z >= 18000) {
-      obj8.position.z = -12000;
-    }
-    if (obj9.position.z <= -12000 && obj9.position.z >= 18000) {
-      obj9.position.z = -12000;
-    }
+  function comet(cometa) {
+    cometa.forEach(function (obj) {
+      if (obj.position.z <= -12000 && obj.position.z >= 18000) {
+        obj.position.z = -12000;
+      }
+    });
   }
 
 // ------ клики на объект ------
@@ -308,8 +280,13 @@ window.addEventListener('load',function () {
   }
 
   function renderClick() {
+    mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+    mouse.y = -( event.clientY / window.innerHeight ) * 2 + 1;
+
+
     raycaster.setFromCamera(mouse, camera);
     var intersects = raycaster.intersectObjects(scene.children);
+    console.log(intersects);
     for (var i = 0; i < intersects.length; i++) {
       if (intersects[i].object.uuid === shar1.uuid && !infoAboutMe && !infoPortfolio && !infoContact) {
         clickMenuItem("aboutMe");
@@ -338,49 +315,50 @@ window.addEventListener('load',function () {
   }
 
 // ------ наведение на объект ------
-  function onDocumentMouseMove(event) {
-    mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-    mouse.y = -( event.clientY / window.innerHeight ) * 2 + 1;
-    y = parseInt(event.offsetY) + 1700;
-    x = parseInt(event.offsetX);
-    renderMouseMove();
-  }
+//   function onDocumentMouseMove(event) {
+//     mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+//     mouse.y = -( event.clientY / window.innerHeight ) * 2 + 1;
+//     y = parseInt(event.offsetY) + 1700;
+//     x = parseInt(event.offsetX);
+//     renderMouseMove();
+//   }
 
-  function renderMouseMove() {
-    raycaster.setFromCamera(mouse, camera);
-    var intersects = raycaster.intersectObjects(scene.children);
-    if (!info) {
-      for (var i = 0; i < intersects.length; i++) {
-        if (intersects[i].object.uuid === shar1.uuid) {
-          addMouseEffect("shar1", intersects[i].object);
-        }
-        else if (intersects[i].object.uuid === shar2.uuid) {
-          addMouseEffect("shar2", intersects[i].object);
-        }
-        else if (intersects[i].object.uuid === shar3.uuid) {
-          addMouseEffect("shar3", intersects[i].object);
-        }
-      }
-    }
-    if(intersects.length === 0) {
-      document.getElementById("shar1").style.visibility = "hidden";
-      document.getElementById("shar2").style.visibility = "hidden";
-      document.getElementById("shar3").style.visibility = "hidden";
-      //info = false;
-      hint = false;
+  // function renderMouseMove() {
+  //   raycaster.setFromCamera(mouse, camera);
+  //   var intersects = raycaster.intersectObjects(scene.children);
+  //   console.log(intersects);
+  //   if (!info) {
+  //     for (var i = 0; i < intersects.length; i++) {
+  //       if (intersects[i].object.uuid === shar1.uuid) {
+  //         addMouseEffect("shar1", intersects[i].object);
+  //       }
+  //       else if (intersects[i].object.uuid === shar2.uuid) {
+  //         addMouseEffect("shar2", intersects[i].object);
+  //       }
+  //       else if (intersects[i].object.uuid === shar3.uuid) {
+  //         addMouseEffect("shar3", intersects[i].object);
+  //       }
+  //     }
+  //   }
+  //   if(intersects.length === 0) {
+  //     document.getElementById("shar1").style.visibility = "hidden";
+  //     document.getElementById("shar2").style.visibility = "hidden";
+  //     document.getElementById("shar3").style.visibility = "hidden";
+  //     //info = false;
+  //     hint = false;
+  //
+  //   }
+  //   renderer.render(scene, camera);
+  // }
 
-    }
-    renderer.render(scene, camera);
-  }
-
-  function addMouseEffect(planet, object) {
-    hint = true;
-    var proj = toScreenPosition(object, camera);
-    document.getElementById(planet).style.visibility = "visible";
-    document.getElementById(planet).style.top = proj.y - (proj.y / 3) + 'px';
-    document.getElementById(planet).style.left = proj.x - 75 + 'px';
-    //info = true;
-  }
+  // function addMouseEffect(planet, object) {
+  //   hint = true;
+  //   var proj = toScreenPosition(object, camera);
+  //   document.getElementById(planet).style.visibility = "visible";
+  //   document.getElementById(planet).style.top = proj.y - (proj.y / 3) + 'px';
+  //   document.getElementById(planet).style.left = proj.x - 75 + 'px';
+  //   //info = true;
+  // }
 
   function toScreenPosition(obj, camera) {
     var vector = new THREE.Vector3();
@@ -412,10 +390,10 @@ window.addEventListener('load',function () {
       z: shar.position.z
     };
     cameraPurpose(currentDirectionCamera, sharik);
-    if (camera.position.x > shar.position.x + 100) {
-      camera.position.x -= 80;
+    if (camera.position.x > shar.position.x + 90) {
+      camera.position.x -= 60;
     } else if (camera.position.x < shar.position.x) {
-      camera.position.x += 80;
+      camera.position.x += 50;
     }
     if (camera.position.z > shar.position.z + 5000) {
       camera.position.z -= 210;
@@ -423,25 +401,25 @@ window.addEventListener('load',function () {
       camera.position.z += 210;
     }
     if (camera.position.y > shar.position.y + 90) {
-      camera.position.y -= 80;
+      camera.position.y -= 60;
     } else if (camera.position.y < shar.position.y) {
-      camera.position.y += 80;
+      camera.position.y += 50;
     }
   }
 
 
   function resetCameraPosition(cam){
     if(camera.position.x > cam.x +100 ){
-      camera.position.x-=80;
+      camera.position.x-=60;
     }else if(camera.position.x < cam.x ){
       camera.position.x+=50;
     }
     if(camera.position.y > cam.y + 100 ){
-      camera.position.y-=80;
+      camera.position.y-=60;
     }else if(camera.position.y < cam.y ){
       camera.position.y+=50;
     }
-    if(camera.position.z > cam.z + 200 ){
+    if(camera.position.z > cam.z + 220 ){
       camera.position.z-=160;
     }else if(camera.position.z < cam.z ){
       camera.position.z+=120;
@@ -453,12 +431,12 @@ window.addEventListener('load',function () {
 
   function cameraPurpose(from, to){
     if(from.x > to.x +240 ){
-      from.x-=80;
+      from.x-=60;
     }else if(from.x < to.x ){
       from.x+=50;
     }
     if(from.y > to.y + 240 ){
-      from.y-=80;
+      from.y-=60;
     }else if(from.y < to.y ){
       from.y+=50;
     }
@@ -480,8 +458,8 @@ window.addEventListener('load',function () {
       infoPortfolio = true;
       //info = true;
     } else if (event.target.id === "menu__contact") {
-      infoContact = true;
       clickMenuItem("contact");
+      infoContact = true;
       //info = true;
     }
   }
@@ -562,8 +540,8 @@ window.addEventListener('load',function () {
       rotateAroundWorldAxis(shar3, new THREE.Vector3(0, 1, 0), 0.001);
       rotateAroundWorldAxis(shar2, new THREE.Vector3(0, 1, 0), 0.001);
       rotateAroundWorldAxis(shar1, new THREE.Vector3(0, 1, 0), 0.001);
-      camera.position.y = y * 1.5;
-      camera.position.x = x * 1.5;
+      //camera.position.y = y * 1.5;
+      //camera.position.x = x * 1.5;
       controls.enableRotate = false;
       controls.update();
     }
@@ -581,7 +559,7 @@ window.addEventListener('load',function () {
       resetCameraPosition(defaultPositionCamera);
     }
     if(comets) {
-      comet();
+      comet([obj,obj1,obj2,obj3,obj4,obj5,obj6,obj7,obj8,obj9]);
       obj.rotation.x += 0.01;
       obj.position.z += 10;
       obj1.rotation.x += 0.02;
@@ -640,7 +618,7 @@ window.addEventListener('load',function () {
 
   window.addEventListener('click', onMouseClick, false);
   window.addEventListener('resize', onWindowResize, false);
-  window.addEventListener('mousemove', onDocumentMouseMove, false);
+  //window.addEventListener('mousemove', onDocumentMouseMove, false);
   document.getElementById('burger').addEventListener("click", openMenu);
   document.getElementById('menu__list').addEventListener("click", getIdClick);
   addStar(stars, 7000, 5500, 0.2, 1);
