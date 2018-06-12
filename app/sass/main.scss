@@ -270,6 +270,7 @@ h2{
   position: relative;
   box-sizing: border-box;
   transform-style: preserve-3d;
+  //will-change: transform;
   perspective: 15rem;
   &:hover &__card{
     &--front{transform: rotateY(180deg);}

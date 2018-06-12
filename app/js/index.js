@@ -216,15 +216,19 @@ window.addEventListener('load',function () {
       sizeAttenuation: false
     });
 
+
+    console.log('addStar');
     for (var i = 0; i < amount; i++) {
       var vertex = new THREE.Vector3();
       vertex.set(Math.random() * 2 - 1, Math.random() * 2 - 1, Math.random() * 2 - 1);
       vertex.multiplyScalar(scalar);
       starGeometry.vertices.push(vertex);
     }
+    console.log('starGeometry.vertices ', starGeometry.vertices);
     star = new THREE.Points(starGeometry, starMaterial);
     star.scale.set(20, 20, 20);
     scene.add(star);
+    console.log('star2 ', star);
   }
   // ---- добовление планет ----
 
