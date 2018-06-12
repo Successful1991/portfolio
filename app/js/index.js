@@ -1,7 +1,8 @@
 window.addEventListener('load',function () {
 
   var comets = false;
-  var stars,stars2,shar1,shar2,shar3;
+  var stars1,stars2,stars3,stars4,stars5,stars6,stars7,stars20;
+  var shar1,shar2,shar3;
   var scene;
   var camera;
   var controls;
@@ -622,8 +623,14 @@ window.addEventListener('load',function () {
   //window.addEventListener('mousemove', onDocumentMouseMove, false);
   document.getElementById('burger').addEventListener("click", openMenu);
   document.getElementById('menu__list').addEventListener("click", getIdClick);
-  addStar(stars, 7000, 5500, 0.2, 1);
-  addStar(stars2, 3000, 4500, 1, 1.4);
+  addStar(stars1, 1000, 5500, 0.2, 1);
+  addStar(stars2, 1000, 5500, 0.2, 1);
+  addStar(stars3, 1000, 5500, 0.2, 1);
+  addStar(stars4, 1000, 5500, 0.2, 1);
+  addStar(stars5, 1000, 5500, 0.2, 1);
+  addStar(stars6, 1000, 5500, 0.2, 1);
+  addStar(stars7, 1000, 5500, 0.2, 1);
+  addStar(stars20, 3000, 4500, 1, 1.4);
 
   addEventClosed();
   loaderMeteorite();
