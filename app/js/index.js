@@ -1,7 +1,8 @@
 window.addEventListener('load',function () {
 
   var comets = false;
-  var stars,stars2,shar1,shar2,shar3;
+  var stars,stars1,stars2,stars3,stars4,stars5,shar1,shar2,shar3;
+  var plane;
   var scene;
   var camera;
   var controls;
@@ -37,16 +38,13 @@ window.addEventListener('load',function () {
 
 
   function init() {
-    //var scene = new THREE.Scene();
     scene = new THREE.Scene();
-    //var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 200000);
+
     camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 200000);
     camera.position.set(0, 3800, 17000);
     camera.rotation.set(0, 0, 0);
 
-    // var renderer = new THREE.WebGLRenderer();
     renderer = new THREE.WebGLRenderer();
-
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setClearColor(0x000000, 0.5);
 
@@ -62,15 +60,15 @@ window.addEventListener('load',function () {
     scene.add(amLight);
 
 // ------ add controller -----
-    //var controls = new THREE.OrbitControls(camera);
     controls = new THREE.OrbitControls(camera);
     controls.maxDistance = 18000;
-    controls.minDistance = 10500;
+    controls.minDistance = -10500;
     controls.zoomSpeed = 0.5;
     controls.rotateSpeed = 0.1;
     controls.panSpeed = 0.1;
     controls.enablePan = false;
     controls.enableRotate = true;
+
   }
   init();
   //var spaceship = false;
@@ -207,29 +205,54 @@ window.addEventListener('load',function () {
   }
 
   // ---- добовление звезд -----
-  function addStar(star, amount, scalar, opacity, size) {
+  function addStar(star, amount, scalar, opacity, size,url) {
     var starGeometry = new THREE.Geometry();
     var starMaterial = new THREE.PointsMaterial({
-      color: 0xbbbbbb,
+      color: 0xffffff,
       opacity: opacity,
       size: size,
-      sizeAttenuation: false
+      blending: THREE.AdditiveBlending,
+      sizeAttenuation: false,
+      //depthTest: false,
+      depthWrite: false,
+      transparent: true,
+      map: new THREE.TextureLoader().load(url)
     });
 
-
-    console.log('addStar');
     for (var i = 0; i < amount; i++) {
       var vertex = new THREE.Vector3();
+      //vertex.set(Math.random() * 2 - 1, Math.random() * 2 - 1, Math.random() * 2 - 1);
       vertex.set(Math.random() * 2 - 1, Math.random() * 2 - 1, Math.random() * 2 - 1);
       vertex.multiplyScalar(scalar);
       starGeometry.vertices.push(vertex);
     }
-    console.log('starGeometry.vertices ', starGeometry.vertices);
     star = new THREE.Points(starGeometry, starMaterial);
-    star.scale.set(20, 20, 20);
+    star.scale.set(30, 30, 30);
     scene.add(star);
-    console.log('star2 ', star);
   }
+  function addStar2(star, amount, scalar, opacity, size) {
+    var starGeometry = new THREE.Geometry();
+    var starMaterial = new THREE.PointsMaterial({
+      color: 0xffffff,
+      opacity: opacity,
+      size: size,
+      sizeAttenuation: false,
+      //depthTest: false,
+      depthWrite: false,
+    });
+
+    for (var i = 0; i < amount; i++) {
+      var vertex = new THREE.Vector3();
+      //vertex.set(Math.random() * 2 - 1, Math.random() * 2 - 1, Math.random() * 2 - 1);
+      vertex.set(Math.random() * 2 - 1, Math.random() * 2 - 1, Math.random() * 2 - 1);
+      vertex.multiplyScalar(scalar);
+      starGeometry.vertices.push(vertex);
+    }
+    star = new THREE.Points(starGeometry, starMaterial);
+    star.scale.set(30, 30, 30);
+    scene.add(star);
+  }
+
   // ---- добовление планет ----
 
   function addShar(radius, segment, url, posX, posY, posZ) {
@@ -262,7 +285,7 @@ window.addEventListener('load',function () {
     object.matrix = rotWorldMatrix;
     object.rotation.setFromRotationMatrix(object.matrix);
     object.position.set(newPos.x, newPos.y, newPos.z);
-  };
+  }
 
   // ---- анимацию полета метеоритов ----
   function comet(cometa) {
@@ -273,6 +296,38 @@ window.addEventListener('load',function () {
     });
   }
 
+function addGalactic() {
+  var galacticTopMaterial = new THREE.MeshBasicMaterial({
+    map: THREE.ImageUtils.loadTexture('app/img/stars/galactictop.png'),
+    blending: THREE.AdditiveBlending,
+    depthWrite: false,
+    transparent: true,
+  });
+  var geometry = new THREE.PlaneGeometry( 17000, 17000, 1 );
+  var material = galacticTopMaterial;
+  plane = new THREE.Mesh( geometry, material );
+  plane.position.set(16000,7000,-62000);
+  scene.add(plane);
+
+}
+  addGalactic();
+
+  function addGalactic2() {
+    var galacticTopMaterial = new THREE.MeshBasicMaterial({
+      map: THREE.ImageUtils.loadTexture('app/img/stars/galactic2.jpg'),
+      blending: THREE.AdditiveBlending,
+      depthWrite: false,
+      transparent: true,
+    });
+    var geometry = new THREE.PlaneGeometry( 24000, 18000, 1 );
+    var material = galacticTopMaterial;
+    plane2 = new THREE.Mesh( geometry, material );
+    plane2.position.set(-34000,-30000,-42000);
+    plane2.rotation.y = 20;
+    scene.add(plane2);
+    console.log(plane);
+  }
+  addGalactic2();
 // ------ клики на объект ------
 
   //var t = 0;
@@ -543,7 +598,7 @@ window.addEventListener('load',function () {
       rotateAroundWorldAxis(shar1, new THREE.Vector3(0, 1, 0), 0.001);
       //camera.position.y = y * 1.5;
       //camera.position.x = x * 1.5;
-      controls.enableRotate = false;
+      //controls.enableRotate = false;
       controls.update();
     }
     else if (info) {
@@ -606,6 +661,8 @@ window.addEventListener('load',function () {
     shar2.rotation.y += 0.001;
     shar3.rotation.y += 0.001;
 
+
+    plane.rotation.z -= 0.0005;
     // if(spaceship) {
     //   intercept2.position.x = (Math.sin(t * 0.15) * 100) + (shar1.position.x);
     //   intercept2.position.z = (Math.cos(t * 0.15) * 100) + (shar1.position.z);
@@ -615,15 +672,23 @@ window.addEventListener('load',function () {
     //
     // t += Math.PI / 180 * 2;
     renderer.render(scene, camera);
-  };
+  }
 
   window.addEventListener('click', renderClick, false);
   window.addEventListener('resize', onWindowResize, false);
   //window.addEventListener('mousemove', onDocumentMouseMove, false);
   document.getElementById('burger').addEventListener("click", openMenu);
   document.getElementById('menu__list').addEventListener("click", getIdClick);
-  addStar(stars, 7000, 5500, 0.2, 1);
-  addStar(stars2, 3000, 4500, 1, 1.4);
+  addStar(stars, 4000, 5500, 1, 6,'app/img/stars/p_0.png');
+  addStar(stars1, 3000, 5500, 0.5, 4,'app/img/stars/star_preview.png');
+  addStar(stars2, 2000, 5500, 1, 8,'app/img/stars/galactic_blur.png');
+  addStar(stars3, 10, 5500, 1, 60,'app/img/stars/corona.png');
+  addStar(stars4, 100, 5000, 1, 15,'app/img/stars/galactic_sharp.png');
+  addStar(stars5, 300, 5500, 1, 15,'app/img/stars/lensflare0.png');
+
+  var stars8;
+  addStar2(stars8, 7000, 5500, 1, 1);
+  //fog(17000, 1000, 0.2, 0.4);
 
   addEventClosed();
   loaderMeteorite();
