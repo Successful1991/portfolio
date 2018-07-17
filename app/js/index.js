@@ -312,22 +312,26 @@ function addGalactic() {
 }
   addGalactic();
 
-  function addGalactic2() {
+  var plane2,plane3;
+  function addGalactic2(height,width,name,x,y,z,rotateY,imageLink) {
     var galacticTopMaterial = new THREE.MeshBasicMaterial({
-      map: THREE.ImageUtils.loadTexture('app/img/stars/galactic2.jpg'),
+      map: THREE.ImageUtils.loadTexture(imageLink),
       blending: THREE.AdditiveBlending,
       depthWrite: false,
       transparent: true,
     });
-    var geometry = new THREE.PlaneGeometry( 24000, 18000, 1 );
+    var geometry = new THREE.PlaneGeometry( height,width, 1 );
     var material = galacticTopMaterial;
-    plane2 = new THREE.Mesh( geometry, material );
-    plane2.position.set(-34000,-30000,-42000);
-    plane2.rotation.y = 20;
-    scene.add(plane2);
-    console.log(plane);
+    name = new THREE.Mesh( geometry, material );
+    name.position.set(x,y,z);
+    name.rotation.y = rotateY;
+
+    //plane3.rotation.y = -20;
+    scene.add(name);
   }
-  addGalactic2();
+  addGalactic2(24000,18000,'plane2',-34000,-30000,-42000,20,'app/img/stars/galactic2.jpg');
+
+  addGalactic2(64000,45000,'plane3',104000,-20000,-122000,-1,'app/img/stars/atlantis_nebula-min.png');
 // ------ клики на объект ------
 
   //var t = 0;

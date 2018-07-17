@@ -212,12 +212,14 @@
        var iOS = !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
        var ua = navigator.userAgent.toLowerCase();
        var isAndroid = ua.indexOf("android") > -1;
-       if(iOS) {
+
+       var ie = (/trident/gi).test(ua) || (/msie/gi).test(ua) || (/edge/gi).test(ua);
+       console.log(ie);
+
+       if(iOS && isAndroid) {
          document.getElementById('mobile').style.display='none';
-         console.log(navigator.platform);
-       }else if (isAndroid) {
-         document.getElementById('mobile').style.display='none';
-         console.log(navigator.platform);
+       }else if (ie) {
+         console.log('работает');
        }else {
          console.log(navigator.platform);
          document.getElementById('mobile').style.display='none';
