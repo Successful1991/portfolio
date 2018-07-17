@@ -5,12 +5,12 @@ window.addEventListener('load',function () {
   var y = 1700;
   var x = 0;
   //var t = 0;
-  let info = false,infoAboutMe = false,infoPortfolio = false,infoContact = false,hint = false;
-  // var info = false;
-  // var infoAboutMe = false;
-  // var infoPortfolio = false;
-  // var infoContact = false;
-  // var hint = false;
+
+  var info = false;
+  var infoAboutMe = false;
+  var infoPortfolio = false;
+  var infoContact = false;
+  var hint = false;
   var raycaster = new THREE.Raycaster();
   var mouse = new THREE.Vector2();
   var menu = false;
@@ -30,11 +30,6 @@ window.addEventListener('load',function () {
     y: 3800,
     z: 17000
   };
-
-  console.log( info);
-  console.log( infoAboutMe);
-  console.log( infoPortfolio);
-  console.log( infoContact);
 
   function init() {
     scene = new THREE.Scene();
@@ -302,14 +297,14 @@ window.addEventListener('load',function () {
   }
 
 function addGalactic() {
-  let galacticTopMaterial = new THREE.MeshBasicMaterial({
+  var galacticTopMaterial = new THREE.MeshBasicMaterial({
     map: THREE.ImageUtils.loadTexture('app/img/stars/galactictop.png'),
     blending: THREE.AdditiveBlending,
     depthWrite: false,
     transparent: true,
   });
-  let geometry = new THREE.PlaneGeometry( 17000, 17000, 1 );
-  let material = galacticTopMaterial;
+  var geometry = new THREE.PlaneGeometry( 17000, 17000, 1 );
+  var material = galacticTopMaterial;
   plane = new THREE.Mesh( geometry, material );
   plane.position.set(16000,7000,-92000);
   scene.add(plane);
@@ -352,8 +347,8 @@ function addGalactic() {
     mouse.y = -( event.clientY / window.innerHeight ) * 2 + 1;
 
     raycaster.setFromCamera(mouse, camera);
-    let intersects = raycaster.intersectObjects(scene.children);
-    for (let i = 0; i < intersects.length; i++) {
+    var intersects = raycaster.intersectObjects(scene.children);
+    for (var i = 0; i < intersects.length; i++) {
       if (intersects[i].object.uuid === shar1.uuid && !infoAboutMe && !infoPortfolio && !infoContact) {
         clickMenuItem("aboutMe");
         infoAboutMe = true;
@@ -420,8 +415,8 @@ function addGalactic() {
     hint = true;
     var proj = toScreenPosition(object, camera);
     document.getElementById(planet).style.visibility = "visible";
-    let distance = camera.position.z - object.position.z;
-    let width = object.geometry.parameters.radius/(distance/(object.geometry.parameters.radius*4.5));
+    var distance = camera.position.z - object.position.z;
+    var width = object.geometry.parameters.radius/(distance/(object.geometry.parameters.radius*4.5));
 
     document.getElementById(planet).style.top = proj.y - (width / 2) + 'px';
     //document.getElementById(planet).style.top = proj.y - (proj.y / 3) + 'px';
@@ -554,23 +549,23 @@ function addGalactic() {
   }
 
   function addEventClosed() {
-    let close = document.querySelectorAll('.closed');
-    for (let i = 0; i < close.length; i++) {
+    var close = document.querySelectorAll('.closed');
+    for (var i = 0; i < close.length; i++) {
       close[i].addEventListener("click", closedInfo);
     }
   }
 
   function openMenu() {
-    let attr = document.querySelector('#menu > input').checked;
-    let menuItem = document.getElementsByClassName("menu__item");
+    var attr = document.querySelector('#menu > input').checked;
+    var menuItem = document.getElementsByClassName("menu__item");
     if(attr) {
-      for (let i = 0; i < menuItem.length; i++) {
-        let animate = "menuAnimate 1s forwards " + (i / 2) + "s";
+      for (var i = 0; i < menuItem.length; i++) {
+        var animate = "menuAnimate 1s forwards " + (i / 2) + "s";
         menuItem[i].style.animation = animate;
       }
       menu = true;
     } else{
-      for (let i = 0; i < menuItem.length; i++) {
+      for (var i = 0; i < menuItem.length; i++) {
         menuItem[i].style.animation = "menuDefault 1s forwards";
       }
       menu = false;
@@ -595,7 +590,7 @@ function addGalactic() {
     }, 1000);
   }
   function removeClassActive() {
-    let infoActive = document.querySelectorAll('.infoActive');
+    var infoActive = document.querySelectorAll('.infoActive');
     if (infoActive.length > 0) {
       document.querySelector('.infoActive').classList.add('infoClose');
       document.querySelector('.infoActive').classList.remove('infoActive');

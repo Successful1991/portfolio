@@ -26,6 +26,17 @@ h2{
 *{
   box-sizing: border-box;
 }
+#ie{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  background: #000000;
+  color: #ffffff;
+  font-size: 3vw;
+  font-family: "Proxima-Nova-Regular";
+}
 #desktop{
   height: 100%;
   width: 100%;

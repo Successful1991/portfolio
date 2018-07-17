@@ -206,6 +206,7 @@
 <article id="mobile">
 
 </article>
+<article id="ie">Your browser is outdated. Please, use the last version of Google Chrome, Opera or Firefox.</article>
 
 
     <script>
@@ -220,11 +221,13 @@
          document.getElementById('mobile').style.display='flex';
          document.getElementById('desktop').style.display='none';
        }
-//       else if (ie) {
-//         console.log('работает');
-//       }
+       else if (ie) {
+         console.log('работает');
+         document.getElementById('mobile').style.display='none';
+         document.getElementById('desktop').style.display='none';
+
+       }
        else {
-         console.log(navigator.platform);
          document.getElementById('mobile').style.display='none';
          document.getElementById('desktop').style.display='flex';
          var script = document.createElement("script");
@@ -249,7 +252,6 @@
          document.body.appendChild(script3);
          document.body.appendChild(script4);
          document.body.appendChild(script5);
-
        }
     </script>
 	<!--<script src="js/lib/three.min.js"></script>-->
