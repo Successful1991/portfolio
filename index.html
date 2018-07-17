@@ -217,12 +217,16 @@
        console.log(ie);
 
        if(iOS && isAndroid) {
-         document.getElementById('mobile').style.display='none';
-       }else if (ie) {
-         console.log('работает');
-       }else {
+         document.getElementById('mobile').style.display='flex';
+         document.getElementById('desktop').style.display='none';
+       }
+//       else if (ie) {
+//         console.log('работает');
+//       }
+       else {
          console.log(navigator.platform);
          document.getElementById('mobile').style.display='none';
+         document.getElementById('desktop').style.display='flex';
          var script = document.createElement("script");
          var script2 = document.createElement("script");
          var script3 = document.createElement("script");

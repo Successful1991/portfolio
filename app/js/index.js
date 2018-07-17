@@ -1,21 +1,16 @@
 window.addEventListener('load',function () {
 
   var comets = false;
-  var stars,stars1,stars2,stars3,stars4,stars5,shar1,shar2,shar3;
-  var plane;
-  var scene;
-  var camera;
-  var controls;
-  var renderer;
-  // var y = 1700;
-  // var x = 0;
-//var t = 0;
-
-  var info = false;
-  var infoAboutMe = false;
-  var infoPortfolio = false;
-  var infoContact = false;
-  var hint = false;
+  var stars,stars1,stars2,stars3,stars4,stars5,shar1,shar2,shar3,plane,scene,camera,controls,renderer;
+  var y = 1700;
+  var x = 0;
+  //var t = 0;
+  let info = false,infoAboutMe = false,infoPortfolio = false,infoContact = false,hint = false;
+  // var info = false;
+  // var infoAboutMe = false;
+  // var infoPortfolio = false;
+  // var infoContact = false;
+  // var hint = false;
   var raycaster = new THREE.Raycaster();
   var mouse = new THREE.Vector2();
   var menu = false;
@@ -36,6 +31,10 @@ window.addEventListener('load',function () {
     z: 17000
   };
 
+  console.log( info);
+  console.log( infoAboutMe);
+  console.log( infoPortfolio);
+  console.log( infoContact);
 
   function init() {
     scene = new THREE.Scene();
@@ -261,6 +260,12 @@ window.addEventListener('load',function () {
       map: new THREE.TextureLoader().load(url),
       side: THREE.FrontSide
     });
+    // var materialShar = new THREE.MeshLambertMaterial({
+    //   map: new THREE.TextureLoader().load(url),
+    //   side: THREE.FrontSide,
+    //   lights: true,
+    //   wireframe: true
+    // });
     var object = new THREE.Mesh(geonetryShar, materialShar);
     object.position.set(posX, posY, posZ);
     object.rotation.x = 90;
@@ -297,16 +302,16 @@ window.addEventListener('load',function () {
   }
 
 function addGalactic() {
-  var galacticTopMaterial = new THREE.MeshBasicMaterial({
+  let galacticTopMaterial = new THREE.MeshBasicMaterial({
     map: THREE.ImageUtils.loadTexture('app/img/stars/galactictop.png'),
     blending: THREE.AdditiveBlending,
     depthWrite: false,
     transparent: true,
   });
-  var geometry = new THREE.PlaneGeometry( 17000, 17000, 1 );
-  var material = galacticTopMaterial;
+  let geometry = new THREE.PlaneGeometry( 17000, 17000, 1 );
+  let material = galacticTopMaterial;
   plane = new THREE.Mesh( geometry, material );
-  plane.position.set(16000,7000,-62000);
+  plane.position.set(16000,7000,-92000);
   scene.add(plane);
 
 }
@@ -347,7 +352,7 @@ function addGalactic() {
     mouse.y = -( event.clientY / window.innerHeight ) * 2 + 1;
 
     raycaster.setFromCamera(mouse, camera);
-    var intersects = raycaster.intersectObjects(scene.children);
+    let intersects = raycaster.intersectObjects(scene.children);
     for (let i = 0; i < intersects.length; i++) {
       if (intersects[i].object.uuid === shar1.uuid && !infoAboutMe && !infoPortfolio && !infoContact) {
         clickMenuItem("aboutMe");
@@ -417,10 +422,6 @@ function addGalactic() {
     document.getElementById(planet).style.visibility = "visible";
     let distance = camera.position.z - object.position.z;
     let width = object.geometry.parameters.radius/(distance/(object.geometry.parameters.radius*4.5));
-    console.log(camera.position.z);
-    console.log(object.position.z);
-    console.log(distance);
-    console.log(width);
 
     document.getElementById(planet).style.top = proj.y - (width / 2) + 'px';
     //document.getElementById(planet).style.top = proj.y - (proj.y / 3) + 'px';
@@ -586,7 +587,7 @@ function addGalactic() {
     removeClassActive();
     setTimeout(function () {
       controls = new THREE.OrbitControls(camera);
-      controls.maxDistance = 19000;
+      controls.maxDistance = 38000;
       controls.minDistance = 10500;
       controls.zoomSpeed = 0.5;
       resetVariableInfo();
@@ -594,8 +595,8 @@ function addGalactic() {
     }, 1000);
   }
   function removeClassActive() {
-    var t = document.querySelectorAll('.infoActive');
-    if (t.length > 0) {
+    let infoActive = document.querySelectorAll('.infoActive');
+    if (infoActive.length > 0) {
       document.querySelector('.infoActive').classList.add('infoClose');
       document.querySelector('.infoActive').classList.remove('infoActive');
       setTimeout(function () {
