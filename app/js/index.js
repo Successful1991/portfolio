@@ -61,8 +61,8 @@ window.addEventListener('load',function () {
 
 // ------ add controller -----
     controls = new THREE.OrbitControls(camera);
-    controls.maxDistance = 18000;
-    controls.minDistance = -10500;
+    controls.maxDistance = 38000;
+    controls.minDistance = 10500;
     controls.zoomSpeed = 0.5;
     controls.rotateSpeed = 0.1;
     controls.panSpeed = 0.1;
@@ -329,10 +329,10 @@ function addGalactic() {
     //plane3.rotation.y = -20;
     scene.add(name);
   }
-  addGalactic2(24000,18000,'plane2',-34000,-30000,-42000,20,'app/img/stars/galactic2.jpg');
+  addGalactic2(90000,60000,'plane2',-34000,-10000,-42000,20,'app/img/stars/galactic2.jpg');
 
-  addGalactic2(64000,45000,'plane3',104000,-20000,-122000,-1,'app/img/stars/atlantis_nebula-min.png');
-// ------ клики на объект ------
+  addGalactic2(64000,45000,'plane3',104000,-50000,-100000,-1,'app/img/stars/atlantis_nebula-final.png');
+  addGalactic2(64000,45000,'plane4',104000,20000,-100000,-1,'app/img/stars/downloaded-finish.png');
 
   //var t = 0;
   // function onMouseClick() {
@@ -348,7 +348,7 @@ function addGalactic() {
 
     raycaster.setFromCamera(mouse, camera);
     var intersects = raycaster.intersectObjects(scene.children);
-    for (var i = 0; i < intersects.length; i++) {
+    for (let i = 0; i < intersects.length; i++) {
       if (intersects[i].object.uuid === shar1.uuid && !infoAboutMe && !infoPortfolio && !infoContact) {
         clickMenuItem("aboutMe");
         infoAboutMe = true;
@@ -376,66 +376,73 @@ function addGalactic() {
   }
 
 // ------ наведение на объект ------
-//   function onDocumentMouseMove(event) {
-//     mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-//     mouse.y = -( event.clientY / window.innerHeight ) * 2 + 1;
-//     y = parseInt(event.offsetY) + 1700;
-//     x = parseInt(event.offsetX);
-//     renderMouseMove();
-//   }
+  function onDocumentMouseMove(event) {
+    mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+    mouse.y = -( event.clientY / window.innerHeight ) * 2 + 1;
+    y = parseInt(event.offsetY) + 1700;
+    x = parseInt(event.offsetX);
+    renderMouseMove();
+  }
 
-  // function renderMouseMove() {
-  //   raycaster.setFromCamera(mouse, camera);
-  //   var intersects = raycaster.intersectObjects(scene.children);
-  //   console.log(intersects);
-  //   if (!info) {
-  //     for (var i = 0; i < intersects.length; i++) {
-  //       if (intersects[i].object.uuid === shar1.uuid) {
-  //         addMouseEffect("shar1", intersects[i].object);
-  //       }
-  //       else if (intersects[i].object.uuid === shar2.uuid) {
-  //         addMouseEffect("shar2", intersects[i].object);
-  //       }
-  //       else if (intersects[i].object.uuid === shar3.uuid) {
-  //         addMouseEffect("shar3", intersects[i].object);
-  //       }
-  //     }
-  //   }
-  //   if(intersects.length === 0) {
-  //     document.getElementById("shar1").style.visibility = "hidden";
-  //     document.getElementById("shar2").style.visibility = "hidden";
-  //     document.getElementById("shar3").style.visibility = "hidden";
-  //     //info = false;
-  //     hint = false;
-  //
-  //   }
-  //   renderer.render(scene, camera);
-  // }
+  function renderMouseMove() {
+    raycaster.setFromCamera(mouse, camera);
+    var intersects = raycaster.intersectObjects(scene.children);
+    if (!info) {
+      for (var i = 0; i < intersects.length; i++) {
+        if (intersects[i].object.uuid === shar1.uuid) {
+          addMouseEffect("shar1", intersects[i].object);
+        }
+        else if (intersects[i].object.uuid === shar2.uuid) {
+          addMouseEffect("shar2", intersects[i].object);
+        }
+        else if (intersects[i].object.uuid === shar3.uuid) {
+          addMouseEffect("shar3", intersects[i].object);
+        }
+      }
+    }
+    if(intersects.length === 0) {
+      document.getElementById("shar1").style.visibility = "hidden";
+      document.getElementById("shar2").style.visibility = "hidden";
+      document.getElementById("shar3").style.visibility = "hidden";
+      //info = false;
+      hint = false;
 
-  // function addMouseEffect(planet, object) {
-  //   hint = true;
-  //   var proj = toScreenPosition(object, camera);
-  //   document.getElementById(planet).style.visibility = "visible";
-  //   document.getElementById(planet).style.top = proj.y - (proj.y / 3) + 'px';
-  //   document.getElementById(planet).style.left = proj.x - 75 + 'px';
-  //   //info = true;
-  // }
+    }
+    renderer.render(scene, camera);
+  }
 
-  // function toScreenPosition(obj, camera) {
-  //   var vector = new THREE.Vector3();
-  //   var widthHalf = 0.5 * renderer.context.canvas.width;
-  //   var heightHalf = 0.5 * renderer.context.canvas.height;
-  //
-  //   obj.updateMatrixWorld();
-  //   vector.setFromMatrixPosition(obj.matrixWorld);
-  //   vector.project(camera);
-  //   vector.x = ( vector.x * widthHalf ) + widthHalf;
-  //   vector.y = -( vector.y * heightHalf ) + heightHalf;
-  //   return {
-  //     x: vector.x,
-  //     y: vector.y
-  //   };
-  // }
+  function addMouseEffect(planet, object) {
+    hint = true;
+    var proj = toScreenPosition(object, camera);
+    document.getElementById(planet).style.visibility = "visible";
+    let distance = camera.position.z - object.position.z;
+    let width = object.geometry.parameters.radius/(distance/(object.geometry.parameters.radius*4.5));
+    console.log(camera.position.z);
+    console.log(object.position.z);
+    console.log(distance);
+    console.log(width);
+
+    document.getElementById(planet).style.top = proj.y - (width / 2) + 'px';
+    //document.getElementById(planet).style.top = proj.y - (proj.y / 3) + 'px';
+    document.getElementById(planet).style.left = proj.x - 75 + 'px';
+    //info = true;
+  }
+
+  function toScreenPosition(obj, camera) {
+    var vector = new THREE.Vector3();
+    var widthHalf = 0.5 * renderer.context.canvas.width;
+    var heightHalf = 0.5 * renderer.context.canvas.height;
+
+    obj.updateMatrixWorld();
+    vector.setFromMatrixPosition(obj.matrixWorld);
+    vector.project(camera);
+    vector.x = ( vector.x * widthHalf ) + widthHalf;
+    vector.y = -( vector.y * heightHalf ) + heightHalf;
+    return {
+      x: vector.x,
+      y: vector.y
+    };
+  }
 
   function movementToThePlanet(shar) {
     var pl = shar.geometry.parameters.radius * 1.5;
@@ -470,24 +477,29 @@ function addGalactic() {
 
 
   function resetCameraPosition(cam){
+    if(camera.position.z >= 0) {
+      cameraPurpose(currentDirectionCamera, defaultDirectionCamera);
+    }
+
+
     if(camera.position.x > cam.x +100 ){
-      camera.position.x-=60;
+      camera.position.x-=80;
     }else if(camera.position.x < cam.x ){
       camera.position.x+=50;
     }
     if(camera.position.y > cam.y + 100 ){
-      camera.position.y-=60;
+      camera.position.y-=80;
     }else if(camera.position.y < cam.y ){
       camera.position.y+=50;
     }
-    if(camera.position.z > cam.z + 220 ){
+    if(camera.position.z > cam.z + 200 ){
       camera.position.z-=160;
     }else if(camera.position.z < cam.z ){
       camera.position.z+=120;
     }else{
       cameraReset = false;
     }
-    cameraPurpose(currentDirectionCamera, defaultDirectionCamera);
+
   }
 
   function cameraPurpose(from, to){
@@ -541,29 +553,26 @@ function addGalactic() {
   }
 
   function addEventClosed() {
-    var close = document.querySelectorAll('.closed');
-    for (var i = 0; i < close.length; i++) {
+    let close = document.querySelectorAll('.closed');
+    for (let i = 0; i < close.length; i++) {
       close[i].addEventListener("click", closedInfo);
     }
   }
 
   function openMenu() {
-    var attr = document.querySelector('#menu > input').checked;
-    if (attr === true) {
-      var menuItem = document.getElementsByClassName("menu__item");
-      for (var i = 0; i < menuItem.length; i++) {
-        var animate = "menuAnimate 1s forwards " + (i / 2) + "s";
+    let attr = document.querySelector('#menu > input').checked;
+    let menuItem = document.getElementsByClassName("menu__item");
+    if(attr) {
+      for (let i = 0; i < menuItem.length; i++) {
+        let animate = "menuAnimate 1s forwards " + (i / 2) + "s";
         menuItem[i].style.animation = animate;
       }
       menu = true;
-    }
-    else if (attr === false) {
-      var menuItem = document.getElementsByClassName("menu__item");
-      for (var i = 0; i < menuItem.length; i++) {
+    } else{
+      for (let i = 0; i < menuItem.length; i++) {
         menuItem[i].style.animation = "menuDefault 1s forwards";
       }
       menu = false;
-
     }
   }
 
@@ -579,6 +588,7 @@ function addGalactic() {
       controls = new THREE.OrbitControls(camera);
       controls.maxDistance = 19000;
       controls.minDistance = 10500;
+      controls.zoomSpeed = 0.5;
       resetVariableInfo();
       cameraReset = true;
     }, 1000);
@@ -600,9 +610,9 @@ function addGalactic() {
       rotateAroundWorldAxis(shar3, new THREE.Vector3(0, 1, 0), 0.001);
       rotateAroundWorldAxis(shar2, new THREE.Vector3(0, 1, 0), 0.001);
       rotateAroundWorldAxis(shar1, new THREE.Vector3(0, 1, 0), 0.001);
-      //camera.position.y = y * 1.5;
-      //camera.position.x = x * 1.5;
-      //controls.enableRotate = false;
+      // camera.position.y = y * 1.5;
+      // camera.position.x = x * 1.5;
+      // controls.enableRotate = false;
       controls.update();
     }
     else if (info) {
@@ -680,7 +690,9 @@ function addGalactic() {
 
   window.addEventListener('click', renderClick, false);
   window.addEventListener('resize', onWindowResize, false);
-  //window.addEventListener('mousemove', onDocumentMouseMove, false);
+
+  window.addEventListener('mousemove', onDocumentMouseMove, false);
+
   document.getElementById('burger').addEventListener("click", openMenu);
   document.getElementById('menu__list').addEventListener("click", getIdClick);
   addStar(stars, 4000, 5500, 1, 6,'app/img/stars/p_0.png');
