@@ -206,7 +206,14 @@
 <article id="mobile">
 
 </article>
-<article id="ie">Your browser is outdated. Please, use the last version of Google Chrome, Opera or Firefox.</article>
+<article id="ie">
+    <span>Your browser is outdated. Please, use the last version of Google Chrome, Opera or Firefox.</span>
+    <div class="ie__browser">
+        <a href="https://www.google.ru/chrome/index.html" target="_blank" class="browser__chrome"></a>
+        <a href="https://www.opera.com/ru" target="_blank" class="browser__opera"></a>
+        <a href="https://www.mozilla.org/ru/firefox/new/" target="_blank" class="browser__firefox"></a>
+    </div>
+</article>
 
 
     <script>
@@ -220,16 +227,18 @@
        if(iOS && isAndroid) {
          document.getElementById('mobile').style.display='flex';
          document.getElementById('desktop').style.display='none';
+         document.getElementById('ie').style.display='none';
        }
        else if (ie) {
          console.log('работает');
          document.getElementById('mobile').style.display='none';
          document.getElementById('desktop').style.display='none';
-
+         document.getElementById('ie').style.display='flex';
        }
        else {
          document.getElementById('mobile').style.display='none';
          document.getElementById('desktop').style.display='flex';
+         document.getElementById('ie').style.display='none';
          var script = document.createElement("script");
          var script2 = document.createElement("script");
          var script3 = document.createElement("script");

@@ -31,6 +31,11 @@ h2 {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
   -webkit-box-pack: center;
   -webkit-justify-content: center;
       -ms-flex-pack: center;
@@ -39,12 +44,35 @@ h2 {
   -webkit-align-items: center;
       -ms-flex-align: center;
           align-items: center;
-  height: 100%;
-  width: 100%;
+  height: 100vh;
+  width: 100vw;
   background: #000000;
   color: #ffffff;
-  font-size: 3vw;
+  font-size: 2vw;
   font-family: "Proxima-Nova-Regular"; }
+
+.ie__browser {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin-top: 5vh; }
+  .ie__browser a {
+    height: 50px;
+    width: 50px;
+    margin: 10px; }
+
+.browser__chrome {
+  background: url("../img/ie/chrome-logo.svg") center no-repeat;
+  background-size: contain; }
+
+.browser__opera {
+  background: url("../img/ie/Opera_2015_icon.svg") center no-repeat;
+  background-size: contain; }
+
+.browser__firefox {
+  background: url("../img/ie/logo-firefox.png") center no-repeat;
+  background-size: contain; }
 
 #desktop {
   height: 100%;
