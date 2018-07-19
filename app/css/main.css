@@ -74,7 +74,32 @@ h2 {
   background: url("../img/ie/logo-firefox.png") center no-repeat;
   background-size: contain; }
 
+#loader {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: none;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background: #000000; }
+  #loader canvas {
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    position: absolute;
+    right: 0;
+    top: 0; }
+
 #desktop {
+  opacity: 0;
   height: 100%;
   width: 100%; }
 

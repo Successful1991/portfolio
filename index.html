@@ -7,9 +7,10 @@
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 
 	<link rel="stylesheet" href="app/css/main.css">
+	<link rel="stylesheet" href="app/css/mobile.css">
 	<link rel="stylesheet" href="app/css/animate.css">
 
-	<title>TEST</title>
+	<title>Portfolio</title>
 </head>
 <body>
 <article id="desktop">
@@ -27,9 +28,9 @@
         </ul>
     </nav>
 
-    <div id="shar1"> Обо мне</div>
-    <div id="shar2"> Портфолио</div>
-    <div id="shar3"> Контакты</div>
+    <div id="shar1"> About me</div>
+    <div id="shar2"> Portfolio</div>
+    <div id="shar3"> Contact</div>
 
     <section id="aboutMe">
         <div class="closed">
@@ -203,9 +204,10 @@
         </div>
     </section>
 </article>
-<article id="mobile">
-
-</article>
+<div id="loader">
+    <div class="loader__image"></div>
+</div>
+<article id="mobile"></article>
 <article id="ie">
     <span>Your browser is outdated. Please, use the last version of Google Chrome, Opera or Firefox.</span>
     <div class="ie__browser">
@@ -215,59 +217,66 @@
     </div>
 </article>
 
-
+<script src="app/js/loader.js"></script>
     <script>
        var iOS = !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
        var ua = navigator.userAgent.toLowerCase();
        var isAndroid = ua.indexOf("android") > -1;
 
        var ie = (/trident/gi).test(ua) || (/msie/gi).test(ua) || (/edge/gi).test(ua);
-       console.log(ie);
-
        if(iOS && isAndroid) {
-         document.getElementById('mobile').style.display='flex';
-         document.getElementById('desktop').style.display='none';
-         document.getElementById('ie').style.display='none';
-       }
-       else if (ie) {
-         console.log('работает');
-         document.getElementById('mobile').style.display='none';
-         document.getElementById('desktop').style.display='none';
-         document.getElementById('ie').style.display='flex';
-       }
-       else {
-         document.getElementById('mobile').style.display='none';
-         document.getElementById('desktop').style.display='flex';
-         document.getElementById('ie').style.display='none';
-         var script = document.createElement("script");
-         var script2 = document.createElement("script");
-         var script3 = document.createElement("script");
-         var script4 = document.createElement("script");
-         var script5 = document.createElement("script");
+           document.getElementById('mobile').style.display='flex';
+           document.getElementById('desktop').style.display='none';
+           document.getElementById('ie').style.display='none';
+         }
+         else if (ie) {
+           document.getElementById('mobile').style.display='none';
+           document.getElementById('desktop').style.display='none';
+           document.getElementById('ie').style.display='flex';
+         }
+         else {
+           document.getElementById('mobile').style.display='none';
+           document.getElementById('loader').style.display='flex';
+           //document.getElementById('desktop').style.display='flex';
+           document.getElementById('ie').style.display='none';
 
-         script.setAttribute('src', 'app/js/lib/three.min.js');
-         script.async = false;
-         script2.setAttribute('src', 'app/js/lib/OrbitControls.js');
-         script2.async = false;
-         script3.setAttribute('src', 'app/js/lib/MTLLoader.js');
-         script3.async = false;
-         script4.setAttribute('src', 'app/js/lib/OBJLoader.js');
-         script4.async = false;
-         script5.setAttribute('src', 'app/js/index.js');
-         script5.async = false;
+           $.init();
 
-         document.body.appendChild(script);
-         document.body.appendChild(script2);
-         document.body.appendChild(script3);
-         document.body.appendChild(script4);
-         document.body.appendChild(script5);
+           var scriptArray = ['app/js/lib/three.min.js', 'app/js/lib/OrbitControls.js', 'app/js/lib/MTLLoader.js', 'app/js/lib/OBJLoader.js', 'app/js/index.js']
+
+             scriptArray.map(scriptPath => {
+               let script = document.createElement("script");
+               script.setAttribute('src', scriptPath);
+               script.async = false;
+               document.body.appendChild(script);
+             });
+
+
+//           var script = document.createElement("script");
+//           var script2 = document.createElement("script");
+//           var script3 = document.createElement("script");
+//           var script4 = document.createElement("script");
+//           var script5 = document.createElement("script");
+//
+//           script.setAttribute('src', 'app/js/lib/three.min.js');
+//           script.async = false;
+//           script2.setAttribute('src', 'app/js/lib/OrbitControls.js');
+//           script2.async = false;
+//           script3.setAttribute('src', 'app/js/lib/MTLLoader.js');
+//           script3.async = false;
+//           script4.setAttribute('src', 'app/js/lib/OBJLoader.js');
+//           script4.async = false;
+//           script5.setAttribute('src', 'app/js/index.js');
+//           script5.async = false;
+//
+//           document.body.appendChild(script);
+//           document.body.appendChild(script2);
+//           document.body.appendChild(script3);
+//           document.body.appendChild(script4);
+//           document.body.appendChild(script5);
        }
     </script>
-	<!--<script src="js/lib/three.min.js"></script>-->
-	<!--<script src="js/lib/OBJLoader.js"></script>-->
-	<!--<script src="js/lib/OrbitControls.js"></script>-->
-	<!--<script src="js/lib/MTLLoader.js"></script>-->
-	<!--<script src="js/index.js" id="index" defer></script>-->
+
 
 </body>
 </html>

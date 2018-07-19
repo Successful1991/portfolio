@@ -60,9 +60,34 @@ h2{
   background-size: contain;
 }
 
-
+#loader{
+  position: absolute;
+  top:0;
+  left: 0;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background: #000000;
+  canvas {
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+}
+//.loader__image{
+//  height: 50%;
+//  width: 50%;
+//  background: url('../img/loader_ai_for_rokid_by_fantasy.gif') center no-repeat;
+//  background-size: contain;
+//}
 
 #desktop{
+  opacity: 0;
   height: 100%;
   width: 100%;
 }
