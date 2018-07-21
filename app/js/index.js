@@ -8,10 +8,10 @@ window.addEventListener('load',function () {
     var galaxyAdd;
     var spaceship;
 
-    var info = false;
-    var infoAboutMe = false;
-    var infoPortfolio = false;
-    var infoContact = false;
+    var infoActive = false;
+    var aboutMeInfoActive = false;
+    var portfolioInfoActive = false;
+    var contactInfoActive = false;
     var indicatorHint = false;
     var spaceshipIndicator = false;
     var raycaster = new THREE.Raycaster();
@@ -319,7 +319,6 @@ window.addEventListener('load',function () {
       controls.maxAzimuthAngle = 0.6;
     }
 
-
     function loaderSpaceship2() {
       var mtlLoader = new THREE.MTLLoader();
       var interceptUrl = "app/img/intercept2/tie-intercept.mtl";
@@ -368,7 +367,7 @@ window.addEventListener('load',function () {
 
     // ---- добовление звезд -----
     // function addStar(star, amount, scalar, opacity, size,url=false) {
-  function addStar(stars) {
+    function addStar(stars) {
       stars.forEach(star=>{
         var starGeometry = new THREE.Geometry();
         var starMaterial = new THREE.PointsMaterial({
@@ -455,34 +454,34 @@ window.addEventListener('load',function () {
   }
     addGalactic(galactic);
 
-    function onMouseClick() {
+    function hideTooltips() {
       document.getElementById("planet1").style.visibility = "hidden";
       document.getElementById("planet2").style.visibility = "hidden";
       document.getElementById("planet3").style.visibility = "hidden";
     }
 
     function renderClick(event) {
-      onMouseClick();
+      hideTooltips();
       mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
       mouse.y = -( event.clientY / window.innerHeight ) * 2 + 1;
 
       raycaster.setFromCamera(mouse, camera);
       var intersects = raycaster.intersectObjects(scene.children);
-      for (var i = 0; i < intersects.length; i++) {
-        if (intersects[i].object.uuid === planet1.uuid && !infoAboutMe && !infoPortfolio && !infoContact) {
+      for (let i = 0; i < intersects.length; i++) {
+        if (intersects[i].object.uuid === planet1.uuid && !aboutMeInfoActive && !portfolioInfoActive && !contactInfoActive) {
           clickMenuItem("aboutMe");
-          infoAboutMe = true;
-          info = true;
+          aboutMeInfoActive = true;
+          infoActive = true;
         }
-        else if (intersects[i].object.uuid === planet2.uuid && !infoAboutMe && !infoPortfolio && !infoContact) {
+        else if (intersects[i].object.uuid === planet2.uuid && !aboutMeInfoActive && !portfolioInfoActive && !contactInfoActive) {
           clickMenuItem("portfolio");
-          infoPortfolio = true;
-          info = true;
+          portfolioInfoActive = true;
+          infoActive = true;
         }
-        else if (intersects[i].object.uuid === planet3.uuid && !infoAboutMe && !infoPortfolio && !infoContact) {
+        else if (intersects[i].object.uuid === planet3.uuid && !aboutMeInfoActive && !portfolioInfoActive && !contactInfoActive) {
           clickMenuItem("contact");
-          infoContact = true;
-          info = true;
+          contactInfoActive = true;
+          infoActive = true;
         }
       }
       renderer.render(scene, camera);
@@ -499,32 +498,29 @@ window.addEventListener('load',function () {
     function onDocumentMouseMove(event) {
       mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
       mouse.y = -( event.clientY / window.innerHeight ) * 2 + 1;
-      y = parseInt(event.offsetY) + 1700;
-      x = parseInt(event.offsetX);
+      //y = parseInt(event.offsetY) + 1700;
+      //x = parseInt(event.offsetX);
       renderMouseMove();
     }
 
     function renderMouseMove() {
       raycaster.setFromCamera(mouse, camera);
-      var intersects = raycaster.intersectObjects(scene.children);
-      if (!info) {
-        for (var i = 0; i < intersects.length; i++) {
-          if (intersects[i].object.uuid === planet1.uuid) {
-            addMouseEffect("planet1", intersects[i].object);
+      let intersects = raycaster.intersectObjects(scene.children);
+
+      if (!indicatorHint) {
+          if (intersects.length > 0 && intersects[0].object.uuid === planet1.uuid) {
+            addMouseEffect("planet1", intersects[0].object);
           }
-          else if (intersects[i].object.uuid === planet2.uuid) {
-            addMouseEffect("planet2", intersects[i].object);
+          else if (intersects.length > 0 && intersects[0].object.uuid === planet2.uuid) {
+            addMouseEffect("planet2", intersects[0].object);
           }
-          else if (intersects[i].object.uuid === planet3.uuid) {
-            addMouseEffect("planet3", intersects[i].object);
+          else if (intersects.length > 0 && intersects[0].object.uuid === planet3.uuid) {
+            addMouseEffect("planet3", intersects[0].object);
           }
-        }
       }
-      if(intersects.length === 0) {
-        document.getElementById("planet1").style.visibility = "hidden";
-        document.getElementById("planet2").style.visibility = "hidden";
-        document.getElementById("planet3").style.visibility = "hidden";
-        //info = false;
+
+      if(intersects.length === 0 || intersects[0].object.uuid !== planet3.uuid && intersects[0].object.uuid !== planet2.uuid && intersects[0].object.uuid !== planet1.uuid) {
+        hideTooltips();
         indicatorHint = false;
       }
       renderer.render(scene, camera);
@@ -565,12 +561,12 @@ window.addEventListener('load',function () {
       } else {
         x = shar.position.x - pl;
       }
-      var sharik = {
+      let planet = {
         x: x,
         y: shar.position.y,
         z: shar.position.z
       };
-      cameraPurpose(currentDirectionCamera, sharik);
+      cameraPurpose(currentDirectionCamera, planet);
       if (camera.position.x > shar.position.x + 110) {
         camera.position.x -= 60;
       } else if (camera.position.x < shar.position.x) {
@@ -635,16 +631,16 @@ window.addEventListener('load',function () {
     function getIdClick(event) {
       if (event.target.id === "menu__aboutMe") {
         clickMenuItem("aboutMe");
-        infoAboutMe = true;
-        //info = true;
+        aboutMeInfoActive = true;
+        //infoActive = true;
       } else if (event.target.id === "menu__portfolio") {
         clickMenuItem("portfolio");
-        infoPortfolio = true;
-        //info = true;
+        portfolioInfoActive = true;
+        //infoActive = true;
       } else if (event.target.id === "menu__contact") {
         clickMenuItem("contact");
-        infoContact = true;
-        //info = true;
+        contactInfoActive = true;
+        //infoActive = true;
       }
     }
 
@@ -653,14 +649,14 @@ window.addEventListener('load',function () {
       resetVariableInfo();
       controls.dispose();
       openInfo(id);
-      info = true;
+      infoActive = true;
     }
 
     function resetVariableInfo() {
-      info = false;
-      infoAboutMe = false;
-      infoPortfolio = false;
-      infoContact = false;
+      infoActive = false;
+      aboutMeInfoActive = false;
+      portfolioInfoActive = false;
+      contactInfoActive = false;
     }
 
     function addEventClosed() {
@@ -714,25 +710,28 @@ window.addEventListener('load',function () {
 
     function animate() {
       requestAnimationFrame(animate);
-      if (!info && !indicatorHint) {
+      if (!infoActive && !indicatorHint) {
         rotateAroundWorldAxis(planet3, new THREE.Vector3(0, 1, 0), 0.001);
         rotateAroundWorldAxis(planet2, new THREE.Vector3(0, 1, 0), 0.001);
         rotateAroundWorldAxis(planet1, new THREE.Vector3(0, 1, 0), 0.001);
         controls.update();
       }
-      else if (info) {
+      else if (infoActive) {
         controls.enableRotate = false;
       }
-      if (infoAboutMe) {
+
+      if (aboutMeInfoActive) {
         movementToThePlanet(planet1);
-      } else if (infoPortfolio) {
+      } else if (portfolioInfoActive) {
         movementToThePlanet(planet2);
-      } else if (infoContact) {
+      } else if (contactInfoActive) {
         movementToThePlanet(planet3);
       }
+
       if(cameraReset){
         resetCameraPosition(defaultPositionCamera);
       }
+
       if(cometLoadingIndicator) {
         meteorite.forEach((comet,i)=>{
           comet.position.z = returnCometsPosition(comet);
@@ -741,6 +740,7 @@ window.addEventListener('load',function () {
           comet.rotation.y += cometsConfig[i].animate.rotation.y;
         });
       }
+
       planet1.rotation.y -= 0.001;
       planet2.rotation.y += 0.001;
       planet3.rotation.y += 0.001;
