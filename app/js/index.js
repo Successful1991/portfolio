@@ -1,6 +1,6 @@
 window.addEventListener('load',function () {
     var cometLoadingIndicator = false;
-    var starsType1,starsType2,starsType3,starsType4,starsType5,starsType6,starsType7,planet1,planet2,planet3,galaxy1,galaxy2,galaxy3,galaxy4,scene,camera,controls,renderer,meteorite;
+    var planet1,planet2,planet3,scene,camera,controls,renderer,meteorite;
     var y = 1700;
     var x = 0;
     var t=0;
@@ -196,7 +196,8 @@ window.addEventListener('load',function () {
         }
       }
       ];
-    let galactic = [{
+    let galactic = [
+      {
       height: 17000,
       width: 17000,
       position: {
@@ -236,6 +237,44 @@ window.addEventListener('load',function () {
       },
       rotation: -1,
       url:'app/img/stars/downloaded-finish.jpg'
+    }];
+    let starsType = [
+      {
+      amount:4000,
+      distance:5500,
+      opacity:1,
+      size:6,
+      url:'app/img/stars/p_0.png'
+    },{
+      amount:3000,
+      distance:5500,
+      opacity:0.5,
+      size:4,
+      url:'app/img/stars/star_preview.png'
+    },{
+      amount:2000,
+      distance:5500,
+      opacity:1,
+      size:8,
+      url:'app/img/stars/galactic_blur.png'
+    },{
+      amount:10,
+      distance:5500,
+      opacity:1,
+      size:60,
+      url:'app/img/stars/corona.png'
+    },{
+      amount:100,
+      distance:5500,
+      opacity:1,
+      size:15,
+      url:'app/img/stars/galactic_sharp.png'
+    },{
+      amount:7000,
+      distance:5500,
+      opacity:1,
+      size:1,
+      url:false
     }];
 
     function init() {
@@ -328,29 +367,31 @@ window.addEventListener('load',function () {
     }
 
     // ---- добовление звезд -----
-    function addStar(star, amount, scalar, opacity, size,url=false) {
+    // function addStar(star, amount, scalar, opacity, size,url=false) {
+  function addStar(stars) {
+      stars.forEach(star=>{
+        var starGeometry = new THREE.Geometry();
+        var starMaterial = new THREE.PointsMaterial({
+          color: 0xffffff,
+          opacity: star.opacity,
+          size: star.size,
+          blending: THREE.AdditiveBlending,
+          sizeAttenuation: false,
+          depthWrite: false,
+          transparent: true,
+        });
+        if(star.url){starMaterial.map = new THREE.TextureLoader().load(star.url)};
+        for (let i = 0; i < star.amount; i++) {
+          var vertex = new THREE.Vector3();
+          vertex.set(Math.random() * 2 - 1, Math.random() * 2 - 1, Math.random() * 2 - 1);
+          vertex.multiplyScalar(star.distance);
+          starGeometry.vertices.push(vertex);
+        }
 
-      var starGeometry = new THREE.Geometry();
-      var starMaterial = new THREE.PointsMaterial({
-        color: 0xffffff,
-        opacity: opacity,
-        size: size,
-        blending: THREE.AdditiveBlending,
-        sizeAttenuation: false,
-        depthWrite: false,
-        transparent: true,
-        //map: new THREE.TextureLoader().load(url)
+        star = new THREE.Points(starGeometry, starMaterial);
+        star.scale.set(30, 30, 30);
+        scene.add(star);
       });
-      if(url){starMaterial.map = new THREE.TextureLoader().load(url)};
-      for (var i = 0; i < amount; i++) {
-        var vertex = new THREE.Vector3();
-        vertex.set(Math.random() * 2 - 1, Math.random() * 2 - 1, Math.random() * 2 - 1);
-        vertex.multiplyScalar(scalar);
-        starGeometry.vertices.push(vertex);
-      }
-      star = new THREE.Points(starGeometry, starMaterial);
-      star.scale.set(30, 30, 30);
-      scene.add(star);
     }
 
     // ---- добовление планет ----
@@ -395,22 +436,7 @@ window.addEventListener('load',function () {
         }
     }
 
-    // function addGalactic() {
-    //   var galacticTopMaterial = new THREE.MeshBasicMaterial({
-    //     map: THREE.ImageUtils.loadTexture('app/img/stars/galactictop.png'),
-    //     blending: THREE.AdditiveBlending,
-    //     depthWrite: false,
-    //     transparent: true,
-    //   });
-    //   var geometry = new THREE.PlaneGeometry( 17000, 17000, 1 );
-    //   var material = galacticTopMaterial;
-    //   galaxy1 = new THREE.Mesh( geometry, material );
-    //   galaxy1.position.set(16000,7000,-92000);
-    //   scene.add(galaxy1);
-    // }
-    // addGalactic();
-
-  function addGalactic(galactic) {
+    function addGalactic(galactic) {
         galaxyAdd = galactic.map((galaxy)=>{
         var galacticTopMaterial = new THREE.MeshBasicMaterial({
           map: THREE.ImageUtils.loadTexture(galaxy.url),
@@ -426,35 +452,8 @@ window.addEventListener('load',function () {
         scene.add(galaxyAdd);
         return galaxyAdd;
       });
-
-    //console.log(galactic);
-
   }
-  addGalactic(galactic);
-
-    // function addGalactic2(height,width,name,x,y,z,rotateY,imageLink) {
-    //   var galacticTopMaterial = new THREE.MeshBasicMaterial({
-    //     map: THREE.ImageUtils.loadTexture(imageLink),
-    //     blending: THREE.AdditiveBlending,
-    //     depthWrite: false,
-    //     transparent: true,
-    //   });
-    //   var geometry = new THREE.PlaneGeometry( height,width, 1 );
-    //   var material = galacticTopMaterial;
-    //   name = new THREE.Mesh( geometry, material );
-    //   name.position.set(x,y,z);
-    //   name.rotation.y = rotateY;
-    //
-    //   //plane3.rotation.y = -20;
-    //   scene.add(name);
-    //   // console.log(name);
-    //   // console.log(scene);
-    // }
-    //addGalactic2(17000,17000,'galaxy1',16000,7000,-92000,0,'app/img/stars/galactictop.png');
-    // addGalactic2(90000,60000,'galaxy2',-34000,-10000,-42000,20,'app/img/stars/galactic2.jpg');
-    // addGalactic2(64000,45000,'galaxy3',104000,-50000,-100000,-1,'app/img/stars/atlantis_nebula-final.png');
-    // addGalactic2(64000,45000,'galaxy4',104000,20000,-100000,-1,'app/img/stars/downloaded-finish.jpg');
-
+    addGalactic(galactic);
 
     function onMouseClick() {
       document.getElementById("planet1").style.visibility = "hidden";
@@ -765,14 +764,8 @@ window.addEventListener('load',function () {
 
     document.getElementById('burger').addEventListener("click", openMenu);
     document.getElementById('menu__list').addEventListener("click", getIdClick);
-    addStar(starsType1, 4000, 5500, 1, 6,'app/img/stars/p_0.png');
-    addStar(starsType2, 3000, 5500, 0.5, 4,'app/img/stars/star_preview.png');
-    addStar(starsType3, 2000, 5500, 1, 8,'app/img/stars/galactic_blur.png');
-    addStar(starsType4, 10, 5500, 1, 60,'app/img/stars/corona.png');
-    addStar(starsType5, 100, 5000, 1, 15,'app/img/stars/galactic_sharp.png');
-    addStar(starsType6, 300, 5500, 1, 15,'app/img/stars/lensflare0.png');
-    addStar(starsType7, 7000, 5500, 1, 1);
 
+    addStar(starsType);
     addEventClosed();
     loaderMeteorite();
     loaderSpaceship2();
