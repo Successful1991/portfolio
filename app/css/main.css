@@ -215,7 +215,7 @@ h2 {
         -ms-transform: skewX(45deg);
             transform: skewX(45deg); }
 
-#shar1, #shar2, #shar3 {
+#planet1, #planet2, #planet3 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;

@@ -1,15 +1,19 @@
 window.addEventListener('load',function () {
-    var comets = false;
-    var stars,stars1,stars2,stars3,stars4,stars5,stars6,shar1,shar2,shar3,plane,scene,camera,controls,renderer;
+    var cometLoadingIndicator = false;
+    var starsType1,starsType2,starsType3,starsType4,starsType5,starsType6,starsType7,planet1,planet2,planet3,galaxy1,galaxy2,galaxy3,galaxy4,scene,camera,controls,renderer,meteorite;
     var y = 1700;
     var x = 0;
+    var t=0;
     //var t = 0;
+    var galaxyAdd;
+    var spaceship;
 
     var info = false;
     var infoAboutMe = false;
     var infoPortfolio = false;
     var infoContact = false;
-    var hint = false;
+    var indicatorHint = false;
+    var spaceshipIndicator = false;
     var raycaster = new THREE.Raycaster();
     var mouse = new THREE.Vector2();
     var menu = false;
@@ -29,6 +33,210 @@ window.addEventListener('load',function () {
       y: 3800,
       z: 17000
     };
+    let cometsConfig = [
+      {
+        position: {
+          x: 3600,
+          y: 3200,
+          z: -1600
+        },
+        scale: 40,
+        animate:{
+          rotation:{
+            x: 0.01,
+            y: 0.03
+          },
+          position:{
+            z: 10
+          }
+      }
+      },{
+        position:{
+          x:-2200,
+          y:1200,
+          z:-3000
+        },
+        scale: 50,
+        animate:{
+          rotation:{
+            x: 0.02,
+            y: 0
+          },
+          position:{
+            z: 12
+          }
+        }
+      },{
+        position:{
+          x:2800,
+          y:1900,
+          z:-6500
+        },
+        scale: 40,
+        animate:{
+          rotation:{
+            x: 0.01,
+            y: 0.02
+          },
+          position:{
+            z: 25
+          }
+        }
+      },{
+        position:{
+          x:-2500,
+          y:-3200,
+          z:-13000
+        },
+        scale: 55,
+        animate:{
+          rotation:{
+            x: 0.03,
+            y: 0.01
+          },
+          position:{
+            z: 8
+          }
+        }
+      },{
+        position:{
+          x:-2000,
+          y:2800,
+          z:4000
+        },
+        scale: 30,
+        animate:{
+          rotation:{
+            x:0,
+            y: 0.03
+          },
+          position:{
+            z: 9
+          }
+        }
+      },{
+        position:{
+          x:3000,
+          y:3800,
+          z:500
+        },
+        scale: 40,
+        animate:{
+          rotation:{
+            x: 0.02,
+            y: 0
+          },
+          position:{
+            z: 14
+          }
+        }
+      },{
+        position:{
+          x:2500,
+          y:-4100,
+          z:-10000
+        },
+        scale: 54,
+        animate:{
+          rotation:{
+            x: 0,
+            y:0.01
+          },
+          position:{
+            z: 13
+          }
+        }
+      },{
+        position:{
+          x:1400,
+          y:1300,
+          z:-8100
+        },
+        scale: 40,
+        animate:{
+          rotation:{
+            x: 0.02,
+            y: 0
+          },
+          position:{
+            z: 17
+          }
+        }
+      },{
+        position:{
+          x:0,
+          y:-1500,
+          z:-1100
+        },
+        scale: 45,
+        animate:{
+          rotation:{
+            x: 0.02,
+            y: 0.02
+          },
+          position:{
+            z: 10
+          }
+        }
+      },{
+        position:{
+          x:-3300,
+          y:4500,
+          z:-4000
+        },
+        scale: 35,
+        animate:{
+          rotation:{
+            x: 0.03,
+            y: 0
+          },
+          position:{
+            z: 17
+          }
+        }
+      }
+      ];
+    let galactic = [{
+      height: 17000,
+      width: 17000,
+      position: {
+        x:16000,
+        y:7000,
+        z:-92000
+      },
+      rotation: 0,
+      url:'app/img/stars/galactictop.png'
+    },{
+      height: 90000,
+      width: 60000,
+      position: {
+        x:-34000,
+        y:-10000,
+        z:-42000
+      },
+      rotation: 20,
+      url:'app/img/stars/galactic2.jpg'
+    },{
+      height: 64000,
+      width: 64000,
+      position: {
+        x:104000,
+        y:-50000,
+        z:-100000
+      },
+      rotation: -1,
+      url:'app/img/stars/atlantis_nebula-final.png'
+    },{
+      height: 64000,
+      width: 64000,
+      position: {
+        x:104000,
+        y:20000,
+        z:-100000
+      },
+      rotation: -1,
+      url:'app/img/stars/downloaded-finish.jpg'
+    }];
 
     function init() {
       scene = new THREE.Scene();
@@ -73,10 +281,6 @@ window.addEventListener('load',function () {
     }
 
 
-
-    var intercept2;
-    var t=0;
-    var spaceship = false;
     function loaderSpaceship2() {
       var mtlLoader = new THREE.MTLLoader();
       var interceptUrl = "app/img/intercept2/tie-intercept.mtl";
@@ -86,11 +290,11 @@ window.addEventListener('load',function () {
         objLoader.setMaterials(materials);
         objLoader.setPath('app/img/');
         objLoader.load('intercept2/tie-intercept.obj', function (object) {
-          object.position.set(shar2.position.x, shar2.position.y, shar2.position.z);
+          object.position.set(planet2.position.x, planet2.position.y, planet2.position.z);
           object.scale.set(12.5, 12.5, 12.5);
-          intercept2 = object;
-          scene.add(intercept2);
-          spaceship = true;
+          spaceship = object;
+          scene.add(spaceship);
+          spaceshipIndicator = true;
 
           document.getElementById('desktop').style.opacity=1;
           document.getElementById('loader').style.display='none';
@@ -98,7 +302,6 @@ window.addEventListener('load',function () {
         });
       });
     }
-
 
     function loaderMeteorite() {
       var mtlLoader = new THREE.MTLLoader();
@@ -112,105 +315,14 @@ window.addEventListener('load',function () {
         objLoader.setPath('app/img/meteorite/');
         objLoader.load('meteority_letyat.obj', function (object) {
 
-          object.position.set(-600, 0, -600);
-          object.scale = 30;
-
-          obj = object;
-          scene.add(obj);
-
-          obj1 = object.clone();
-          obj1.position.set(-2200, 1200, -3000);
-          scene.add(obj1);
-
-          obj2 = object.clone();
-          obj2.position.set(-1800, 1600, -3500);
-          obj2.scale = 2;
-          scene.add(obj2);
-
-          obj3 = object.clone();
-          obj3.position.set(-2500, -1200, 3000);
-          scene.add(obj3);
-
-          obj4 = object.clone();
-          obj4.position.set(0, 1200, 4000);
-          obj4.scale = 5;
-          scene.add(obj4);
-
-          obj5 = object.clone();
-          obj5.position.set(3000, -1800, 500);
-          obj5.scale = 1;
-          scene.add(obj5);
-
-          obj6 = object.clone();
-          obj6.position.set(2000, -1100, 1000);
-          obj6.scale = 2;
-          scene.add(obj6);
-
-          obj7 = object.clone();
-          obj7.position.set(1400, 1300, 100);
-          obj7.scale = 3;
-          scene.add(obj7);
-
-          obj8 = object.clone();
-          obj8.position.set(0, -1500, -1000);
-          obj8.scale = 3;
-          scene.add(obj8);
-
-          obj9 = object.clone();
-          obj9.position.set(300, 1500, -4000);
-          scene.add(obj9);
-
-
-
-          // obj10 = object;
-          // obj10.position.set(-2200, 2200, -4000);
-          // scene.add(obj10);
-          //
-          // obj11 = object.clone();
-          // obj1.position.set(-1200, 3000, -2000);
-          // scene.add(obj11);
-          //
-          // obj12 = object.clone();
-          // obj12.position.set(2800, 3200, -7000);
-          // obj12.scale = 20;
-          // scene.add(obj12);
-          //
-          // obj13 = object.clone();
-          // obj13.position.set(2000, 2700, 6500);
-          // obj13.scale = 20;
-          // scene.add(obj13);
-          //
-          // obj14 = object.clone();
-          // obj14.position.set(500, 2500, 7500);
-          // obj14.scale = 35;
-          // scene.add(obj14);
-          //
-          // obj15 = object.clone();
-          // obj15.position.set(0, 2500, 2500);
-          // obj15.scale = 85;
-          // scene.add(obj15);
-          //
-          // obj16 = object.clone();
-          // obj16.position.set(2000, -1200, 2000);
-          // obj16.scale = 25;
-          // scene.add(obj16);
-          //
-          // obj17 = object.clone();
-          // obj17.position.set(1400, 3700, 4000);
-          // obj17.scale = 30;
-          // scene.add(obj17);
-          //
-          // obj18 = object.clone();
-          // obj18.position.set(200, -1500, -1000);
-          // obj18.scale = 30;
-          // scene.add(obj18);
-          //
-          // obj19 = object.clone();
-          // obj19.position.set(-300, 1500, -2000);
-          // obj19.scale = 25;
-          // scene.add(obj19);
-
-          comets = true;
+          meteorite = cometsConfig.map((comet,i)=>{
+            comet = object.clone();
+            comet.position.set(cometsConfig[i].position.x,cometsConfig[i].position.y,cometsConfig[i].position.z);
+            comet.scale = cometsConfig[i].scale;
+            scene.add(comet);
+            return comet;
+          });
+          cometLoadingIndicator = true;
         });
       });
     }
@@ -225,7 +337,6 @@ window.addEventListener('load',function () {
         size: size,
         blending: THREE.AdditiveBlending,
         sizeAttenuation: false,
-        //depthTest: false,
         depthWrite: false,
         transparent: true,
         //map: new THREE.TextureLoader().load(url)
@@ -233,29 +344,6 @@ window.addEventListener('load',function () {
       if(url){starMaterial.map = new THREE.TextureLoader().load(url)};
       for (var i = 0; i < amount; i++) {
         var vertex = new THREE.Vector3();
-        //vertex.set(Math.random() * 2 - 1, Math.random() * 2 - 1, Math.random() * 2 - 1);
-        vertex.set(Math.random() * 2 - 1, Math.random() * 2 - 1, Math.random() * 2 - 1);
-        vertex.multiplyScalar(scalar);
-        starGeometry.vertices.push(vertex);
-      }
-      star = new THREE.Points(starGeometry, starMaterial);
-      star.scale.set(30, 30, 30);
-      scene.add(star);
-    }
-    function addStar2(star, amount, scalar, opacity, size) {
-      var starGeometry = new THREE.Geometry();
-      var starMaterial = new THREE.PointsMaterial({
-        color: 0xffffff,
-        opacity: opacity,
-        size: size,
-        sizeAttenuation: false,
-        //depthTest: false,
-        depthWrite: false,
-      });
-
-      for (var i = 0; i < amount; i++) {
-        var vertex = new THREE.Vector3();
-        //vertex.set(Math.random() * 2 - 1, Math.random() * 2 - 1, Math.random() * 2 - 1);
         vertex.set(Math.random() * 2 - 1, Math.random() * 2 - 1, Math.random() * 2 - 1);
         vertex.multiplyScalar(scalar);
         starGeometry.vertices.push(vertex);
@@ -266,8 +354,7 @@ window.addEventListener('load',function () {
     }
 
     // ---- добовление планет ----
-
-    function addShar(radius, segment, url, posX, posY, posZ) {
+    function addNewPlanet(radius, segment, url, posX, posY, posZ) {
       var geonetryShar = new THREE.SphereGeometry(radius, segment, segment);
       var materialShar = new THREE.MeshLambertMaterial({
         map: new THREE.TextureLoader().load(url),
@@ -281,9 +368,9 @@ window.addEventListener('load',function () {
       return object;
     }
 
-    shar1 = addShar(900, 60, 'app/img/planet_Bog.jpg', 0, 0, -4000);
-    shar2 = addShar(900, 60, 'app/img/Venus2.jpg', -4000, 0, 4000);
-    shar3 = addShar(720, 50, 'app/img/planet_Quom.jpg', 4000, 0, 4000);
+    planet1 = addNewPlanet(900, 60, 'app/img/planet_Bog.jpg', 0, 0, -4000);
+    planet2 = addNewPlanet(900, 60, 'app/img/Venus2.jpg', -4000, 0, 4000);
+    planet3 = addNewPlanet(720, 50, 'app/img/planet_Quom.jpg', 4000, 0, 4000);
 
     // ---- вращение планет вокруг центра ----
     function rotateAroundWorldAxis(object, axis, radians) {
@@ -300,57 +387,79 @@ window.addEventListener('load',function () {
     }
 
     // ---- анимацию полета метеоритов ----
-    function comet(cometa) {
-      cometa.forEach(function (obj) {
-        if (obj.position.z <= -12000 && obj.position.z >= 18000) {
-          obj.position.z = -12000;
+    function returnCometsPosition(comet) {
+        if (comet.position.z <= -12000 || comet.position.z >= 18000) {
+          return -12000;
+        }else {
+          return comet.position.z;
         }
-      });
     }
 
-    function addGalactic() {
-      var galacticTopMaterial = new THREE.MeshBasicMaterial({
-        map: THREE.ImageUtils.loadTexture('app/img/stars/galactictop.png'),
-        blending: THREE.AdditiveBlending,
-        depthWrite: false,
-        transparent: true,
+    // function addGalactic() {
+    //   var galacticTopMaterial = new THREE.MeshBasicMaterial({
+    //     map: THREE.ImageUtils.loadTexture('app/img/stars/galactictop.png'),
+    //     blending: THREE.AdditiveBlending,
+    //     depthWrite: false,
+    //     transparent: true,
+    //   });
+    //   var geometry = new THREE.PlaneGeometry( 17000, 17000, 1 );
+    //   var material = galacticTopMaterial;
+    //   galaxy1 = new THREE.Mesh( geometry, material );
+    //   galaxy1.position.set(16000,7000,-92000);
+    //   scene.add(galaxy1);
+    // }
+    // addGalactic();
+
+  function addGalactic(galactic) {
+        galaxyAdd = galactic.map((galaxy)=>{
+        var galacticTopMaterial = new THREE.MeshBasicMaterial({
+          map: THREE.ImageUtils.loadTexture(galaxy.url),
+          blending: THREE.AdditiveBlending,
+          depthWrite: false,
+          transparent: true,
+        });
+        var geometry = new THREE.PlaneGeometry( galaxy.height, galaxy.width, 1 );
+        var material = galacticTopMaterial;
+
+        let galaxyAdd = new THREE.Mesh( geometry, material );
+        galaxyAdd.position.set(galaxy.position.x,galaxy.position.y,galaxy.position.z);
+        scene.add(galaxyAdd);
+        return galaxyAdd;
       });
-      var geometry = new THREE.PlaneGeometry( 17000, 17000, 1 );
-      var material = galacticTopMaterial;
-      plane = new THREE.Mesh( geometry, material );
-      plane.position.set(16000,7000,-92000);
-      scene.add(plane);
 
-    }
-    addGalactic();
+    //console.log(galactic);
 
-    var plane2,plane3;
-    function addGalactic2(height,width,name,x,y,z,rotateY,imageLink) {
-      var galacticTopMaterial = new THREE.MeshBasicMaterial({
-        map: THREE.ImageUtils.loadTexture(imageLink),
-        blending: THREE.AdditiveBlending,
-        depthWrite: false,
-        transparent: true,
-      });
-      var geometry = new THREE.PlaneGeometry( height,width, 1 );
-      var material = galacticTopMaterial;
-      name = new THREE.Mesh( geometry, material );
-      name.position.set(x,y,z);
-      name.rotation.y = rotateY;
+  }
+  addGalactic(galactic);
 
-      //plane3.rotation.y = -20;
-      scene.add(name);
-    }
+    // function addGalactic2(height,width,name,x,y,z,rotateY,imageLink) {
+    //   var galacticTopMaterial = new THREE.MeshBasicMaterial({
+    //     map: THREE.ImageUtils.loadTexture(imageLink),
+    //     blending: THREE.AdditiveBlending,
+    //     depthWrite: false,
+    //     transparent: true,
+    //   });
+    //   var geometry = new THREE.PlaneGeometry( height,width, 1 );
+    //   var material = galacticTopMaterial;
+    //   name = new THREE.Mesh( geometry, material );
+    //   name.position.set(x,y,z);
+    //   name.rotation.y = rotateY;
+    //
+    //   //plane3.rotation.y = -20;
+    //   scene.add(name);
+    //   // console.log(name);
+    //   // console.log(scene);
+    // }
+    //addGalactic2(17000,17000,'galaxy1',16000,7000,-92000,0,'app/img/stars/galactictop.png');
+    // addGalactic2(90000,60000,'galaxy2',-34000,-10000,-42000,20,'app/img/stars/galactic2.jpg');
+    // addGalactic2(64000,45000,'galaxy3',104000,-50000,-100000,-1,'app/img/stars/atlantis_nebula-final.png');
+    // addGalactic2(64000,45000,'galaxy4',104000,20000,-100000,-1,'app/img/stars/downloaded-finish.jpg');
 
-    addGalactic2(90000,60000,'plane2',-34000,-10000,-42000,20,'app/img/stars/galactic2.jpg');
-    addGalactic2(64000,45000,'plane3',104000,-50000,-100000,-1,'app/img/stars/atlantis_nebula-final.png');
-    addGalactic2(64000,45000,'plane4',104000,20000,-100000,-1,'app/img/stars/downloaded-finish.jpg');
 
-    //var t = 0;
     function onMouseClick() {
-      document.getElementById("shar1").style.visibility = "hidden";
-      document.getElementById("shar2").style.visibility = "hidden";
-      document.getElementById("shar3").style.visibility = "hidden";
+      document.getElementById("planet1").style.visibility = "hidden";
+      document.getElementById("planet2").style.visibility = "hidden";
+      document.getElementById("planet3").style.visibility = "hidden";
     }
 
     function renderClick(event) {
@@ -361,17 +470,17 @@ window.addEventListener('load',function () {
       raycaster.setFromCamera(mouse, camera);
       var intersects = raycaster.intersectObjects(scene.children);
       for (var i = 0; i < intersects.length; i++) {
-        if (intersects[i].object.uuid === shar1.uuid && !infoAboutMe && !infoPortfolio && !infoContact) {
+        if (intersects[i].object.uuid === planet1.uuid && !infoAboutMe && !infoPortfolio && !infoContact) {
           clickMenuItem("aboutMe");
           infoAboutMe = true;
           info = true;
         }
-        else if (intersects[i].object.uuid === shar2.uuid && !infoAboutMe && !infoPortfolio && !infoContact) {
+        else if (intersects[i].object.uuid === planet2.uuid && !infoAboutMe && !infoPortfolio && !infoContact) {
           clickMenuItem("portfolio");
           infoPortfolio = true;
           info = true;
         }
-        else if (intersects[i].object.uuid === shar3.uuid && !infoAboutMe && !infoPortfolio && !infoContact) {
+        else if (intersects[i].object.uuid === planet3.uuid && !infoAboutMe && !infoPortfolio && !infoContact) {
           clickMenuItem("contact");
           infoContact = true;
           info = true;
@@ -401,39 +510,36 @@ window.addEventListener('load',function () {
       var intersects = raycaster.intersectObjects(scene.children);
       if (!info) {
         for (var i = 0; i < intersects.length; i++) {
-          if (intersects[i].object.uuid === shar1.uuid) {
-            addMouseEffect("shar1", intersects[i].object);
+          if (intersects[i].object.uuid === planet1.uuid) {
+            addMouseEffect("planet1", intersects[i].object);
           }
-          else if (intersects[i].object.uuid === shar2.uuid) {
-            addMouseEffect("shar2", intersects[i].object);
+          else if (intersects[i].object.uuid === planet2.uuid) {
+            addMouseEffect("planet2", intersects[i].object);
           }
-          else if (intersects[i].object.uuid === shar3.uuid) {
-            addMouseEffect("shar3", intersects[i].object);
+          else if (intersects[i].object.uuid === planet3.uuid) {
+            addMouseEffect("planet3", intersects[i].object);
           }
         }
       }
       if(intersects.length === 0) {
-        document.getElementById("shar1").style.visibility = "hidden";
-        document.getElementById("shar2").style.visibility = "hidden";
-        document.getElementById("shar3").style.visibility = "hidden";
+        document.getElementById("planet1").style.visibility = "hidden";
+        document.getElementById("planet2").style.visibility = "hidden";
+        document.getElementById("planet3").style.visibility = "hidden";
         //info = false;
-        hint = false;
-
+        indicatorHint = false;
       }
       renderer.render(scene, camera);
     }
 
     function addMouseEffect(planet, object) {
-      hint = true;
+      indicatorHint = true;
       var proj = toScreenPosition(object, camera);
       document.getElementById(planet).style.visibility = "visible";
       var distance = camera.position.z - object.position.z;
       var width = object.geometry.parameters.radius/(distance/(object.geometry.parameters.radius* Math.PI));
 
       document.getElementById(planet).style.top = proj.y - (width / 1.5) + 'px';
-      //document.getElementById(planet).style.top = proj.y - (proj.y / 3) + 'px';
       document.getElementById(planet).style.left = proj.x - 75 + 'px';
-      //info = true;
     }
 
     function toScreenPosition(obj, camera) {
@@ -609,91 +715,46 @@ window.addEventListener('load',function () {
 
     function animate() {
       requestAnimationFrame(animate);
-      if (!info && !hint) {
-        rotateAroundWorldAxis(shar3, new THREE.Vector3(0, 1, 0), 0.001);
-        rotateAroundWorldAxis(shar2, new THREE.Vector3(0, 1, 0), 0.001);
-        rotateAroundWorldAxis(shar1, new THREE.Vector3(0, 1, 0), 0.001);
-        // camera.position.y = y * 1.5;
-        // camera.position.x = x * 1.5;
-        // controls.enableRotate = false;
+      if (!info && !indicatorHint) {
+        rotateAroundWorldAxis(planet3, new THREE.Vector3(0, 1, 0), 0.001);
+        rotateAroundWorldAxis(planet2, new THREE.Vector3(0, 1, 0), 0.001);
+        rotateAroundWorldAxis(planet1, new THREE.Vector3(0, 1, 0), 0.001);
         controls.update();
       }
       else if (info) {
         controls.enableRotate = false;
       }
       if (infoAboutMe) {
-        movementToThePlanet(shar1);
+        movementToThePlanet(planet1);
       } else if (infoPortfolio) {
-        movementToThePlanet(shar2);
+        movementToThePlanet(planet2);
       } else if (infoContact) {
-        movementToThePlanet(shar3);
+        movementToThePlanet(planet3);
       }
       if(cameraReset){
         resetCameraPosition(defaultPositionCamera);
       }
-      if(comets) {
-        comet([obj,obj1,obj2,obj3,obj4,obj5,obj6,obj7,obj8,obj9]);
-        obj.rotation.x += 0.01;
-        obj.position.z += 10;
-        obj1.rotation.x += 0.02;
-        obj1.position.z += 12;
-        obj2.rotation.y += 0.02;
-        obj2.position.z += 5;
-        obj3.rotation.x += 0.03;
-        obj3.position.z += 8;
-        obj4.rotation.y += 0.03;
-        obj4.position.z += 9;
-        obj5.rotation.x += 0.02;
-        obj5.position.z += 14;
-        obj6.rotation.y += 0.01;
-        obj6.position.z += 13;
-        obj7.rotation.x += 0.02;
-        obj7.position.z += 17;
-        obj8.rotation.y += 0.02;
-        obj8.position.z += 10;
-        obj9.rotation.x += 0.03;
-        obj9.position.z += 7;
-        // comet(obj10, 10);
-        // obj10.rotation.x += 0.01;
-        // comet(obj11, 12);
-        // obj11.rotation.x += 0.02;
-        // comet(obj12, 5);
-        // obj12.rotation.y += 0.02;
-        // comet(obj13, 8);
-        // obj13.rotation.x += 0.03;
-        // comet(obj14, 9);
-        // obj14.rotation.y += 0.03;
-        // comet(obj15, 30);
-        // obj15.rotation.x += 0.07;
-        // comet(obj16, 13);
-        // obj16.rotation.y += 0.01;
-        // comet(obj17, 17);
-        // obj17.rotation.x += 0.02;
-        // comet(obj18, 10);
-        // obj18.rotation.y += 0.02;
-        // comet(obj19, 7);
-        // obj19.rotation.x += 0.03;
+      if(cometLoadingIndicator) {
+        meteorite.forEach((comet,i)=>{
+          comet.position.z = returnCometsPosition(comet);
+          comet.position.z += cometsConfig[i].animate.position.z;
+          comet.rotation.x += cometsConfig[i].animate.rotation.x;
+          comet.rotation.y += cometsConfig[i].animate.rotation.y;
+        });
       }
-      shar1.rotation.y -= 0.001;
-      shar2.rotation.y += 0.001;
-      shar3.rotation.y += 0.001;
-      plane.rotation.z -= 0.0005;
+      planet1.rotation.y -= 0.001;
+      planet2.rotation.y += 0.001;
+      planet3.rotation.y += 0.001;
+      galaxyAdd[0].rotation.z += 0.0005;
 
-
-
-
-      if(spaceship) {
-        intercept2.position.x = (Math.sin(t * 0.15) * 100) + (shar2.position.x);
-        intercept2.position.z = (Math.cos(t * 0.15) * 100) + (shar2.position.z);
-        intercept2.rotation.x -= 0.005;
-        intercept2.rotation.y -= 0.005;
+      if(spaceshipIndicator) {
+        spaceship.position.x = (Math.sin(t * 0.15) * 100) + (planet2.position.x);
+        spaceship.position.z = (Math.cos(t * 0.15) * 100) + (planet2.position.z);
+        spaceship.rotation.x -= 0.005;
+        spaceship.rotation.y -= 0.005;
       }
 
       t += Math.PI / 180 * 2;
-
-
-
-
 
       renderer.render(scene, camera);
     }
@@ -704,35 +765,19 @@ window.addEventListener('load',function () {
 
     document.getElementById('burger').addEventListener("click", openMenu);
     document.getElementById('menu__list').addEventListener("click", getIdClick);
-    addStar(stars, 4000, 5500, 1, 6,'app/img/stars/p_0.png');
-    addStar(stars1, 3000, 5500, 0.5, 4,'app/img/stars/star_preview.png');
-    addStar(stars2, 2000, 5500, 1, 8,'app/img/stars/galactic_blur.png');
-    addStar(stars3, 10, 5500, 1, 60,'app/img/stars/corona.png');
-    addStar(stars4, 100, 5000, 1, 15,'app/img/stars/galactic_sharp.png');
-    addStar(stars5, 300, 5500, 1, 15,'app/img/stars/lensflare0.png');
-    addStar(stars6, 7000, 5500, 1, 1);
-    //addStar2(stars6, 7000, 5500, 1, 1);
+    addStar(starsType1, 4000, 5500, 1, 6,'app/img/stars/p_0.png');
+    addStar(starsType2, 3000, 5500, 0.5, 4,'app/img/stars/star_preview.png');
+    addStar(starsType3, 2000, 5500, 1, 8,'app/img/stars/galactic_blur.png');
+    addStar(starsType4, 10, 5500, 1, 60,'app/img/stars/corona.png');
+    addStar(starsType5, 100, 5000, 1, 15,'app/img/stars/galactic_sharp.png');
+    addStar(starsType6, 300, 5500, 1, 15,'app/img/stars/lensflare0.png');
+    addStar(starsType7, 7000, 5500, 1, 1);
 
     addEventClosed();
     loaderMeteorite();
-
-
     loaderSpaceship2();
-
 
     animate();
   });
 
-// function promise(load) {
-//   return new Promise(function(resolve, reject){
-//     console.log(load);
-//     if (load == true){
-//       resolve();
-//     }
-//   });
-// }
-//
-// promise(load).then(()=>{
-//   console.log('rjytw');
-// });
 
