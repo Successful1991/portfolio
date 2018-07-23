@@ -232,7 +232,8 @@ h2 {
   height: 40px;
   position: absolute;
   top: 0;
-  left: 0;
+  left: calc( 50% - 75px);
+  border: 1px solid blue;
   font-size: 22px;
   color: #ffffff;
   font-family: Proxima-Nova-Regular, sans-serif;

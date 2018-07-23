@@ -17,7 +17,7 @@ window.addEventListener('load',function () {
     var raycaster = new THREE.Raycaster();
     var mouse = new THREE.Vector2();
     var menu = false;
-    var cameraReset = false;
+    //var cameraReset = false;
     var defaultDirectionCamera = {
       x: 0,
       y: 0,
@@ -276,6 +276,31 @@ window.addEventListener('load',function () {
       size:1,
       url:false
     }];
+  const newCameraPosition = {
+    newPosition: function (from, to,gap,gapZ,shiftX,shiftY,shiftZ) {
+      if(from.x > to.x + gap){
+        from.x-= shiftX+10 ;
+      }else if(from.x < to.x ){
+        from.x+= shiftX;
+      }
+      if(from.y > to.y + gap ){
+        from.y-= shiftY;
+      }else if(from.y < to.y ){
+        from.y+= shiftY;
+      }
+      if(from.z > to.z + gapZ ){
+        from.z-= shiftZ;
+      }else if(from.z < to.z ){
+        from.z+= shiftZ;
+      }else {
+        return cameraPosition = true;
+      }
+    }
+
+  };
+  let cameraPosition = false;
+  let cameraPurposeActive = false;
+
 
     function init() {
       scene = new THREE.Scene();
@@ -470,16 +495,19 @@ window.addEventListener('load',function () {
       for (let i = 0; i < intersects.length; i++) {
         if (intersects[i].object.uuid === planet1.uuid && !aboutMeInfoActive && !portfolioInfoActive && !contactInfoActive) {
           clickMenuItem("aboutMe");
+          movementToThePlanet(planet1);
           aboutMeInfoActive = true;
           infoActive = true;
         }
         else if (intersects[i].object.uuid === planet2.uuid && !aboutMeInfoActive && !portfolioInfoActive && !contactInfoActive) {
           clickMenuItem("portfolio");
+          movementToThePlanet(planet2);
           portfolioInfoActive = true;
           infoActive = true;
         }
         else if (intersects[i].object.uuid === planet3.uuid && !aboutMeInfoActive && !portfolioInfoActive && !contactInfoActive) {
           clickMenuItem("contact");
+          movementToThePlanet(planet3);
           contactInfoActive = true;
           infoActive = true;
         }
@@ -528,92 +556,137 @@ window.addEventListener('load',function () {
 
     function addMouseEffect(planet, object) {
       indicatorHint = true;
-      var proj = toScreenPosition(object, camera);
+      //var proj = toScreenPosition(object, camera);
       document.getElementById(planet).style.visibility = "visible";
-      var distance = camera.position.z - object.position.z;
-      var width = object.geometry.parameters.radius/(distance/(object.geometry.parameters.radius* Math.PI));
+      //var distance = camera.position.z - object.position.z;
+      //var width = object.geometry.parameters.radius/(distance/(object.geometry.parameters.radius* Math.PI));
 
-      document.getElementById(planet).style.top = proj.y - (width / 1.5) + 'px';
-      document.getElementById(planet).style.left = proj.x - 75 + 'px';
+      //document.getElementById(planet).style.top = proj.y - (width / 1.5) + 'px';
+      //document.getElementById(planet).style.left = proj.x - 75 + 'px';
     }
 
-    function toScreenPosition(obj, camera) {
-      var vector = new THREE.Vector3();
-      var widthHalf = 0.5 * renderer.context.canvas.width;
-      var heightHalf = 0.5 * renderer.context.canvas.height;
+    // function toScreenPosition(obj, camera) {
+    //   var vector = new THREE.Vector3();
+    //   var widthHalf = 0.5 * renderer.context.canvas.width;
+    //   var heightHalf = 0.5 * renderer.context.canvas.height;
+    //
+    //   obj.updateMatrixWorld();
+    //   vector.setFromMatrixPosition(obj.matrixWorld);
+    //   vector.project(camera);
+    //   vector.x = ( vector.x * widthHalf ) + widthHalf;
+    //   vector.y = -( vector.y * heightHalf ) + heightHalf;
+    //   return {
+    //     x: vector.x,
+    //     y: vector.y
+    //   };
+    // }
 
-      obj.updateMatrixWorld();
-      vector.setFromMatrixPosition(obj.matrixWorld);
-      vector.project(camera);
-      vector.x = ( vector.x * widthHalf ) + widthHalf;
-      vector.y = -( vector.y * heightHalf ) + heightHalf;
-      return {
-        x: vector.x,
-        y: vector.y
-      };
-    }
+    // function movementToThePlanet(shar) {
+    //   let pl = shar.geometry.parameters.radius * 1.5;
+    //   let x = shar.position.z < camera.position.z? shar.position.x + pl:shar.position.x - pl;
+    //   let planet = {
+    //     x: x,
+    //     y: shar.position.y,
+    //     z: shar.position.z
+    //   };
+    //   console.log(x);
+    //
+    //   cameraPurpose(currentDirectionCamera, planet);
+    //   if (camera.position.x > shar.position.x + 110) {
+    //     camera.position.x -= 60;
+    //   } else if (camera.position.x < shar.position.x) {
+    //     camera.position.x += 50;
+    //   }
+    //
+    //   if (camera.position.z > shar.position.z + 5000) {
+    //     camera.position.z -= 200;
+    //   } else if (camera.position.z < shar.position.z - 5000) {
+    //     camera.position.z += 200;
+    //   }
+    //
+    //   if (camera.position.y > shar.position.y + 110) {
+    //     camera.position.y -= 60;
+    //   } else if (camera.position.y < shar.position.y) {
+    //     camera.position.y += 50;
+    //   }
+    // }
+  //let cameraPosition = false;
+  let animationCameraPosition;
 
-    function movementToThePlanet(shar) {
-      var pl = shar.geometry.parameters.radius * 1.5;
-      var x;
-      if (shar.position.z < camera.position.z) {
-        x = shar.position.x + pl;
+  function movementToThePlanet(sharik) {
+
+    let shar = sharik;
+    let pl = shar.geometry.parameters.radius * 1.5;
+    let x = shar.position.z < camera.position.z ? shar.position.x + pl : shar.position.x - pl;
+    let planet = {
+      x: x,
+      y: shar.position.y,
+      z: shar.position.z
+    };
+    console.log(planet);
+
+    function animate() {
+      if (!cameraPosition || !cameraPurposeActive ) {
+        cameraPurpose(currentDirectionCamera, planet);
+        newCameraPosition.newPosition(camera.position, shar.position, 110, 5000, 50, 50, 200);
+        animationCameraPosition = requestAnimationFrame(animate);
       } else {
-        x = shar.position.x - pl;
+        cancelAnimationFrame(animationCameraPosition);
       }
-      let planet = {
-        x: x,
-        y: shar.position.y,
-        z: shar.position.z
-      };
-      cameraPurpose(currentDirectionCamera, planet);
-      if (camera.position.x > shar.position.x + 110) {
-        camera.position.x -= 60;
-      } else if (camera.position.x < shar.position.x) {
-        camera.position.x += 50;
-      }
-      if (camera.position.z > shar.position.z + 5000) {
-        camera.position.z -= 200;
-      } else if (camera.position.z < shar.position.z - 5000) {
-        camera.position.z += 200;
-      }
-      if (camera.position.y > shar.position.y + 110) {
-        camera.position.y -= 60;
-      } else if (camera.position.y < shar.position.y) {
-        camera.position.y += 50;
-      }
+  }
+    animate()
+
+  }
+
+
+
+  //   function resetCameraPosition(cam){
+  //
+  //     //while(!cameraPosition){
+  //       if(camera.position.z >= 0) {
+  //         cameraPurpose(currentDirectionCamera, defaultDirectionCamera);
+  //       }
+  //
+  //     if(camera.position.x > cam.x +100 ){
+  //       camera.position.x-=80;
+  //     }else if(camera.position.x < cam.x ){
+  //       camera.position.x+=50;
+  //     }
+  //     if(camera.position.y > cam.y + 100 ){
+  //       camera.position.y-=80;
+  //     }else if(camera.position.y < cam.y ){
+  //       camera.position.y+=50;
+  //     }
+  //     if(camera.position.z > cam.z + 200 ){
+  //       camera.position.z-=160;
+  //     }else if(camera.position.z < cam.z ){
+  //       camera.position.z+=120;
+  //     }else{
+  //       cameraReset = false;
+  //       //cameraPosition = true;
+  //     }
+  //   //}
+  //
+  //   }
+
+  function resetCameraPosition(){
+    let animationCameraPosition = requestAnimationFrame(resetCameraPosition);
+    if(!cameraPosition || !cameraPurposeActive) {
+      cameraPurpose(currentDirectionCamera, defaultDirectionCamera);
+      newCameraPosition.newPosition(camera.position, defaultPositionCamera,100,200,50,50,120);
+    }else {
+      cancelAnimationFrame(animationCameraPosition);
     }
 
-    function resetCameraPosition(cam){
-      if(camera.position.z >= 0) {
-        cameraPurpose(currentDirectionCamera, defaultDirectionCamera);
-      }
-
-      if(camera.position.x > cam.x +100 ){
-        camera.position.x-=80;
-      }else if(camera.position.x < cam.x ){
-        camera.position.x+=50;
-      }
-      if(camera.position.y > cam.y + 100 ){
-        camera.position.y-=80;
-      }else if(camera.position.y < cam.y ){
-        camera.position.y+=50;
-      }
-      if(camera.position.z > cam.z + 200 ){
-        camera.position.z-=160;
-      }else if(camera.position.z < cam.z ){
-        camera.position.z+=120;
-      }else{
-        cameraReset = false;
-      }
-
-    }
+  }
 
     function cameraPurpose(from, to){
       if(from.x > to.x +240 ){
         from.x-=60;
       }else if(from.x < to.x ){
         from.x+=50;
+      }else {
+        return cameraPurposeActive = true;
       }
       if(from.y > to.y + 240 ){
         from.y-=60;
@@ -627,20 +700,25 @@ window.addEventListener('load',function () {
       }
       camera.lookAt(from.x,from.y,from.z);
     }
+  // function cameraPurpose(from, to){
+  //   newCameraPosition.newPosition(from, to,240,50,50,120);
+  //   camera.lookAt(from.x,from.y,from.z);
+  // }
+
 
     function getIdClick(event) {
       if (event.target.id === "menu__aboutMe") {
         clickMenuItem("aboutMe");
+        movementToThePlanet(planet1);
         aboutMeInfoActive = true;
-        //infoActive = true;
       } else if (event.target.id === "menu__portfolio") {
         clickMenuItem("portfolio");
+        movementToThePlanet(planet2);
         portfolioInfoActive = true;
-        //infoActive = true;
       } else if (event.target.id === "menu__contact") {
         clickMenuItem("contact");
+        movementToThePlanet(planet3);
         contactInfoActive = true;
-        //infoActive = true;
       }
     }
 
@@ -657,11 +735,13 @@ window.addEventListener('load',function () {
       aboutMeInfoActive = false;
       portfolioInfoActive = false;
       contactInfoActive = false;
+      cameraPosition = false;
+      //resetCameraPosition(defaultPositionCamera);
     }
 
     function addEventClosed() {
-      var close = document.querySelectorAll('.closed');
-      for (var i = 0; i < close.length; i++) {
+      let close = document.querySelectorAll('.closed');
+      for (let i = 0; i < close.length; i++) {
         close[i].addEventListener("click", closedInfo);
       }
     }
@@ -694,7 +774,8 @@ window.addEventListener('load',function () {
       setTimeout(function () {
         addControls();
         resetVariableInfo();
-        cameraReset = true;
+        //cameraReset = true;
+        resetCameraPosition();
       }, 1000);
     }
     function removeClassActive() {
@@ -720,17 +801,17 @@ window.addEventListener('load',function () {
         controls.enableRotate = false;
       }
 
-      if (aboutMeInfoActive) {
-        movementToThePlanet(planet1);
-      } else if (portfolioInfoActive) {
-        movementToThePlanet(planet2);
-      } else if (contactInfoActive) {
-        movementToThePlanet(planet3);
-      }
+      // if () {
+      //   movementToThePlanet(planet1);
+      // } else if (portfolioInfoActive) {
+      //   movementToThePlanet(planet2);
+      // } else if (contactInfoActive) {
+      //   movementToThePlanet(planet3);
+      // }
 
-      if(cameraReset){
-        resetCameraPosition(defaultPositionCamera);
-      }
+      // if(cameraReset){
+      //   resetCameraPosition(defaultPositionCamera);
+      // }
 
       if(cometLoadingIndicator) {
         meteorite.forEach((comet,i)=>{

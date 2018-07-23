@@ -7,8 +7,8 @@ $.Particle = function( opt ) {
   this.angle = opt.angle;
   this.speed = opt.speed;
   this.accel = opt.accel;
-  this.decay = 0.021;
-  this.life = 2;
+  this.decay = 0.004;
+  this.life = 0.9;
 };
 
 $.Particle.prototype.step = function( i ) {
@@ -46,8 +46,8 @@ $.step = function() {
     x: $.width / 2 + Math.cos( $.tick / 20 ) * $.min / 2,
     y: $.height / 2 + Math.sin( $.tick / 20 ) * $.min / 2,
     angle: $.globalRotation + $.globalAngle,
-    speed: 0,
-    accel: 0.01
+    speed: 0.55,
+    accel: 0.002
   }));
 
   $.particles.forEach( function( elem, index ) {
