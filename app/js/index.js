@@ -278,28 +278,61 @@ window.addEventListener('load',function () {
     }];
   const newCameraPosition = {
     newPosition: function (from, to,gap,gapZ,shiftX,shiftY,shiftZ) {
-      if(from.x > to.x + gap){
-        from.x-= shiftX+10 ;
-      }else if(from.x < to.x ){
-        from.x+= shiftX;
+      console.log(from);
+      console.log(to);
+      let config = {
+        gap: {
+          x: gap,
+          y: gap,
+          z: gapZ
+        },
+        shift: {
+          x: shiftX,
+          y: shiftY,
+          z: shiftZ
+        },
+        animateCompleted:{
+          x:false,
+          y:false,
+          z:false
+        }
+      };
+      Object.keys(from).forEach(key => {
+        if (from[key] > to[key] + config.gap[key]) {
+          from[key] -= config.shift[key] * 1.3;
+        } else if (from[key] < to[key]) {
+          from[key] += config.shift[key];
+        } else{config.animateCompleted[key] = true}
+      });
+      if(config.animateCompleted.x && config.animateCompleted.y && config.animateCompleted.z){
+        config.animateCompleted.x = false;
+        config.animateCompleted.y = false;
+        config.animateCompleted.z = false;
+        return true;
       }
-      if(from.y > to.y + gap ){
-        from.y-= shiftY;
-      }else if(from.y < to.y ){
-        from.y+= shiftY;
-      }
-      if(from.z > to.z + gapZ ){
-        from.z-= shiftZ;
-      }else if(from.z < to.z ){
-        from.z+= shiftZ;
-      }else {
-        return cameraPosition = true;
-      }
+      // if(from.x > to.x + gap){
+      //   from.x-= shiftX+10 ;
+      // }else if(from.x < to.x ){
+      //   from.x+= shiftX;
+      // }
+      // if(from.y > to.y + gap ){
+      //   from.y-= shiftY;
+      // }else if(from.y < to.y ){
+      //   from.y+= shiftY;
+      // }
+      // if(from.z > to.z + gapZ ){
+      //   from.z-= shiftZ;
+      // }else if(from.z < to.z ){
+      //   from.z+= shiftZ;
+      // }else {
+      //   return cameraPosition = true;
+      // }
     }
 
   };
   let cameraPosition = false;
   let cameraPurposeActive = false;
+  let animationResetCameraPosition;
 
 
     function init() {
@@ -613,9 +646,9 @@ window.addEventListener('load',function () {
   //let cameraPosition = false;
   let animationCameraPosition;
 
-  function movementToThePlanet(sharik) {
+  function movementToThePlanet(planetObj) {
 
-    let shar = sharik;
+    let shar = planetObj;
     let pl = shar.geometry.parameters.radius * 1.5;
     let x = shar.position.z < camera.position.z ? shar.position.x + pl : shar.position.x - pl;
     let planet = {
@@ -623,16 +656,26 @@ window.addEventListener('load',function () {
       y: shar.position.y,
       z: shar.position.z
     };
-    console.log(planet);
+    //console.log(planet);
+    console.log('camera.position ' ,camera.position);
+    console.log('shar.position ' ,shar.position);
+    console.log('planet ' ,planet);
 
     function animate() {
       if (!cameraPosition || !cameraPurposeActive ) {
+        console.log('cameraPosition ' ,cameraPosition);
+        console.log('cameraPurposeActive ' ,cameraPurposeActive);
         cameraPurpose(currentDirectionCamera, planet);
-        newCameraPosition.newPosition(camera.position, shar.position, 110, 5000, 50, 50, 200);
+        cameraPosition = newCameraPosition.newPosition(camera.position, shar.position, 110, 5000, 80, 80, 200);
+
         animationCameraPosition = requestAnimationFrame(animate);
       } else {
+        console.log('camera.position ' ,camera.position);
+        console.log('shar.position ' ,shar.position);
+        console.log('planet ' ,planet);
         cancelAnimationFrame(animationCameraPosition);
       }
+      console.log(' movementToThePlanet еще выполняет ');
   }
     animate()
 
@@ -670,40 +713,72 @@ window.addEventListener('load',function () {
   //   }
 
   function resetCameraPosition(){
-    let animationCameraPosition = requestAnimationFrame(resetCameraPosition);
+    console.log(cameraPosition,cameraPurposeActive);
     if(!cameraPosition || !cameraPurposeActive) {
       cameraPurpose(currentDirectionCamera, defaultDirectionCamera);
-      newCameraPosition.newPosition(camera.position, defaultPositionCamera,100,200,50,50,120);
+      cameraPosition = newCameraPosition.newPosition(camera.position, defaultPositionCamera,100,200,50,50,120);
+      animationResetCameraPosition = requestAnimationFrame(resetCameraPosition);
     }else {
-      cancelAnimationFrame(animationCameraPosition);
+      cancelAnimationFrame(animationResetCameraPosition);
     }
-
+    console.log(' resetCameraPosition еще выполняет ');
   }
 
-    function cameraPurpose(from, to){
-      if(from.x > to.x +240 ){
-        from.x-=60;
-      }else if(from.x < to.x ){
-        from.x+=50;
-      }else {
-        return cameraPurposeActive = true;
-      }
-      if(from.y > to.y + 240 ){
-        from.y-=60;
-      }else if(from.y < to.y ){
-        from.y+=50;
-      }
-      if(from.z > to.z + 240 ){
-        from.z-=160;
-      }else if(from.z < to.z ){
-        from.z+=120;
-      }
-      camera.lookAt(from.x,from.y,from.z);
-    }
-  // function cameraPurpose(from, to){
-  //   newCameraPosition.newPosition(from, to,240,50,50,120);
-  //   camera.lookAt(from.x,from.y,from.z);
-  // }
+    // function cameraPurpose(from, to) {
+    //   let config = {
+    //     gap: {
+    //       x: 80,
+    //       y: 80,
+    //       z: 140
+    //     },
+    //     shift: {
+    //       x: 50,
+    //       y: 50,
+    //       z: 120
+    //     },
+    //     animateCompleted:{
+    //       x:false,
+    //       y:false,
+    //       z:false
+    //     }
+    //   };
+    //   Object.keys(from).forEach(key => {
+    //     if (from[key] > to[key] + config.gap[key]) {
+    //       from[key] -= config.shift[key] * 1.3;
+    //     } else if (from[key] < to[key]) {
+    //       from[key] += config.shift[key];
+    //     } else{config.animateCompleted[key] = true}
+    //    });
+    //   console.log(from);
+    //   console.log(to);
+    //   console.log(camera.position);
+    //   console.log(planet2.position);
+    //   if(config.animateCompleted.x && config.animateCompleted.y && config.animateCompleted.z){
+    //     return cameraPurposeActive = true;
+    //   }
+    //   // if(from.x > to.x +240 ){
+    //   //   from.x-=60;
+    //   // }else if(from.x < to.x ){
+    //   //   from.x+=50;
+    //   // }else {
+    //   //   return cameraPurposeActive = true;
+    //   // }
+    //   // if(from.y > to.y + 240 ){
+    //   //   from.y-=60;
+    //   // }else if(from.y < to.y ){
+    //   //   from.y+=50;
+    //   // }
+    //   // if(from.z > to.z + 240 ){
+    //   //   from.z-=160;
+    //   // }else if(from.z < to.z ){
+    //   //   from.z+=120;
+    //   // }
+    //   camera.lookAt(from.x,from.y,from.z);
+    // }
+  function cameraPurpose(from, to){
+    cameraPurposeActive = newCameraPosition.newPosition(from, to,240,240,50,50,120);
+    camera.lookAt(from.x,from.y,from.z);
+  }
 
 
     function getIdClick(event) {
@@ -736,6 +811,7 @@ window.addEventListener('load',function () {
       portfolioInfoActive = false;
       contactInfoActive = false;
       cameraPosition = false;
+      cameraPurposeActive = false;
       //resetCameraPosition(defaultPositionCamera);
     }
 
