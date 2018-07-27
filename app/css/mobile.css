@@ -1,3 +1,191 @@
+body {
+  overflow: auto; }
+
 #mobile {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
   width: 100vw;
-  height: 100vh; }
+  height: auto;
+  min-height: 100vh;
+  background: url("../img/mobile/mobile_fon.png") center no-repeat;
+  background-size: cover;
+  overflow: auto;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box; }
+
+h2 {
+  font-size: 18px;
+  text-align: center;
+  margin: 5px; }
+
+header {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+  height: 105px; }
+  header .logo {
+    height: 55px;
+    width: 100%;
+    background: url("../img/mobile/logo.png") center no-repeat;
+    background-size: contain; }
+
+#mobile__aboutMe {
+  height: auto;
+  width: 100%;
+  padding: 10px 15px;
+  border-radius: 15px;
+  background: -webkit-gradient(linear, left top, left bottom, from(#a3c4df), to(#bcbec0));
+  background: -webkit-linear-gradient(top, #a3c4df, #bcbec0);
+  background: -o-linear-gradient(top, #a3c4df, #bcbec0);
+  background: linear-gradient(180deg, #a3c4df, #bcbec0); }
+
+.mobile__aboutMe__description {
+  text-align: center;
+  font-size: 16px; }
+
+.mobile__aboutMe__skills {
+  text-align: center;
+  font-size: 18px;
+  color: #10b97b;
+  margin: 5px 0 5px 0; }
+
+.mobile__aboutMe__techno {
+  text-align: center;
+  font-size: 18px;
+  color: #10b97b;
+  margin: 5px 0 5px 0; }
+
+.mobile__skills__name {
+  font-size: 16px;
+  text-align: center; }
+
+.mobile__techno__list {
+  font-size: 15px;
+  text-align: center; }
+
+footer {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  border-radius: 10px 10px 0 0;
+  padding: 10px 0;
+  background: -webkit-gradient(linear, left top, left bottom, from(#a3c4df), to(#bcbec0));
+  background: -webkit-linear-gradient(top, #a3c4df, #bcbec0);
+  background: -o-linear-gradient(top, #a3c4df, #bcbec0);
+  background: linear-gradient(180deg, #a3c4df, #bcbec0); }
+  footer h2 {
+    margin: 0 0 5px 0;
+    padding: 0; }
+  footer div {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: start;
+    -webkit-justify-content: flex-start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+        -ms-flex-align: center;
+            align-items: center;
+    height: 100%; }
+    footer div:first-child {
+      width: 35%; }
+    footer div:last-child {
+      width: 65%; }
+
+#myPhoto {
+  display: block;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: url("../img/myPhoto3.jpg") center no-repeat;
+  background-size: cover; }
+
+#mobile__contacts {
+  width: 100%;
+  height: auto;
+  text-decoration: none;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 14px; }
+  #mobile__contacts li > span {
+    color: #10b97b; }
+  #mobile__contacts a {
+    text-decoration: none;
+    color: #000000; }
+
+.mobile__slider-p {
+  font-size: 18px;
+  text-align: center; }
+
+#mobile__slider__images {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+  left: 15%;
+  width: auto;
+  height: 164px;
+  padding: 0;
+  list-style: none; }
+  #mobile__slider__images li {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 1px solid grey; }
+
+#mobile__slider__images li {
+  height: 100%;
+  width: 80%; }
+
+#mobile__slider__images li:nth-child(1) {
+  background: url("../img/portfolio/acnostia.jpg") center no-repeat;
+  background-size: contain;
+  z-index: 7; }
+
+#mobile__slider__images li:nth-child(2) {
+  background: url("../img/portfolio/messenger.jpg") center no-repeat;
+  background-size: contain;
+  z-index: 6; }
+
+#mobile__slider__images li:nth-child(3) {
+  background: url("../img/portfolio/gitHub-angular.jpg") center no-repeat;
+  background-size: contain;
+  z-index: 5; }
+
+#mobile__slider__images li:nth-child(4) {
+  background: url("../img/portfolio/facility_test.jpg") center no-repeat;
+  background-size: contain;
+  z-index: 4; }
+
+#mobile__slider__images li:nth-child(5) {
+  background: url("../img/portfolio/Todo-List.jpg") center no-repeat;
+  background-size: contain;
+  z-index: 3; }

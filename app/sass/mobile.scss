@@ -1,4 +1,168 @@
+body {
+  overflow: auto;
+}
 #mobile{
+  display: flex;
+  flex-direction: column;
   width: 100vw;
-  height: 100vh;
+  height: auto;
+  min-height: 100vh;
+  background: url("../img/mobile/mobile_fon.png")center no-repeat;
+  background-size: cover;
+  overflow: auto;
+  box-sizing: border-box;
+}
+h2{
+  font-size: 18px;
+  text-align: center;
+  margin:5px;
+}
+header{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 105px;
+  //background: url("../img/mobile/fonHeader.gif")center no-repeat;
+  //background-size: cover;
+  .logo{
+    height: 55px;
+    width: 100%;
+    background: url("../img/mobile/logo.png")center no-repeat;
+    background-size: contain;
+  }
+}
+#mobile__aboutMe{
+  height: auto;
+  width: 100%;
+  padding:10px 15px;
+  border-radius: 15px;
+  background: linear-gradient( 180deg ,#a3c4df, #bcbec0 );
+}
+.mobile__aboutMe {
+  &__description{
+    text-align: center;
+    font-size: 16px;
+  }
+  &__skills{
+    text-align: center;
+    font-size: 18px;
+    color: #10b97b;
+    margin: 5px 0 5px 0;
+  }
+  &__techno{
+    text-align: center;
+    font-size: 18px;
+    color: #10b97b;
+    margin: 5px 0 5px 0;
+  }
+}
+.mobile{
+  &__skills__name{
+    font-size: 16px;
+    text-align: center;
+  }
+  &__techno__list{
+    font-size: 15px;
+    text-align: center;
+  }
+}
+
+footer{
+  display: flex;
+  border-radius: 10px 10px 0 0;
+  padding: 10px 0;
+  background: linear-gradient( 180deg ,#a3c4df, #bcbec0 );
+  h2{
+    margin: 0 0 5px 0;
+    padding: 0;
+  }
+  div{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    height:100%;
+    &:first-child{
+      width: 35%;
+    }&:last-child{
+      width: 65%;
+    }
+  }
+}
+#myPhoto{
+  display: block;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: url("../img/myPhoto3.jpg")center no-repeat;
+  background-size: cover;
+}
+#mobile__contacts{
+  width: 100%;
+  height: auto;
+  text-decoration: none;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 14px;
+  li > span{
+    color: #10b97b;
+  }
+  a{
+    text-decoration: none;
+    color: #000000;
+  }
+}
+.mobile__slider-p{
+  font-size: 18px;
+  text-align: center;
+}
+#mobile__slider__images{
+  display: flex;
+  position: relative;
+  left: 15%;
+  //width: 85%;
+  width: auto;
+  height: 164px;
+  padding: 0;
+  list-style: none;
+  li{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 1px solid grey;
+  }
+}
+#mobile__slider__images {
+  li {
+    height: 100%;
+    width: 80%;
+  }
+  li:nth-child(1){
+    background: url("../img/portfolio/acnostia.jpg") center no-repeat;
+    background-size: contain;
+    z-index: 7;
+    //transform: translateX(0px);
+    }li:nth-child(2){
+      background: url("../img/portfolio/messenger.jpg") center no-repeat;
+      background-size: contain;
+      z-index: 6;
+         //transform: translateX(10px);
+    }li:nth-child(3){
+      background: url("../img/portfolio/gitHub-angular.jpg") center no-repeat;
+      background-size: contain;
+      z-index: 5;
+      //transform: translateX(20px);
+    }li:nth-child(4){
+      background: url("../img/portfolio/facility_test.jpg") center no-repeat;
+      background-size: contain;
+      z-index: 4;
+      //transform: translateX(30px);
+    }li:nth-child(5){
+      background: url("../img/portfolio/Todo-List.jpg") center no-repeat;
+      background-size: contain;
+      z-index: 3;
+      //transform: translateX(40px);
+    }
 }

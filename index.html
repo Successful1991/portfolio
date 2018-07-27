@@ -22,17 +22,21 @@
             <div></div>
         </label>
         <ul id="menu__list">
-            <li class="menu__item" id="menu__aboutMe">About me</li>
-            <li class="menu__item" id="menu__portfolio">Portfolio</li>
-            <li class="menu__item" id="menu__contact">Contact</li>
+            <li class="menu__item" id="menu__aboutMe" data-planet="planet1">About me</li>
+            <li class="menu__item" id="menu__portfolio" data-planet="planet2">Portfolio</li>
+            <li class="menu__item" id="menu__contact" data-planet="planet3">Contact</li>
         </ul>
     </nav>
 
-    <div id="planet1"> About me</div>
-    <div id="planet2"> Portfolio</div>
-    <div id="planet3"> Contact</div>
+    <!--<div id="planet1"> About me</div>-->
+    <!--<div id="planet2"> Portfolio</div>-->
+    <!--<div id="planet3"> Contact</div>-->
+    <div id="aboutMe"> About me</div>
+    <div id="contact"> Portfolio</div>
+    <div id="portfolio"> Contact</div>
 
-    <section id="aboutMe">
+    <!--<section id="aboutMe">-->
+    <section id="planet1">
         <div class="closed">
             <div></div>
             <div></div>
@@ -47,7 +51,8 @@
         <h4 class="aboutMe__techno">technologies</h4>
         <p class="techno__list">Gulp,  WebStorm, GitHub, Photoshop, Avocode</p>
     </section>
-    <section id="contact">
+    <!--<section id="contact">-->
+    <section id="planet2">
         <div class="closed" id="contact__closed">
             <div></div>
             <div></div>
@@ -59,7 +64,8 @@
         <p class="contact__skype">Skype: successful1991m</p>
         <p>LinkedIn: <a class="contact__linkedIn" href="https://www.linkedin.com/in/artem-tsys/">https://www.linkedin.com</a></p>
     </section>
-    <section id="portfolio">
+    <!--<section id="portfolio">-->
+    <section id="planet3">
         <div class="closed" id="portfolio__closed">
             <div></div>
             <div></div>
@@ -203,11 +209,63 @@
             </div>
         </div>
     </section>
+
 </article>
 <div id="loader">
     <div class="loader__image"></div>
 </div>
-<article id="mobile"></article>
+<article id="mobile">
+    <header>
+        <div class="logo"></div>
+    </header>
+    <div id="mobile__aboutMe">
+        <h2>Hello!</h2>
+        <p class="mobile__aboutMe__description">My name is Artem Tsys,
+            I'm engaged  in the development
+            of sites and applications </p>
+        <h4 class="mobile__aboutMe__skills">Skills:</h4>
+        <p class="mobile__skills__name">JavaScript,  Angular, JQuery, Ajax, REST API, HTTP, HTML5, CSS3, SASS, Bootstrap, npm, Gulp, WebStorm, GitHub</p>
+        <h4 class="mobile__aboutMe__techno">Technologies</h4>
+        <p class="mobile__techno__list">Gulp,  WebStorm, GitHub, Photoshop, Avocode</p>
+    </div>
+    <div id="mobile__slider">
+        <p class="mobile__slider-p">Works</p>
+        <ul id="mobile__slider__images">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+    <footer>
+        <div>
+            <h2>Contacts</h2>
+            <div id="myPhoto"></div>
+        </div>
+        <div>
+            <ul id="mobile__contacts">
+                <li>
+                    <span>City: </span>Kiev
+                </li>
+                <li>
+                    <span>Tell: </span><a href="tel:+380682479906">+380682479906</a>
+                </li>
+                <li>
+                    <span>E-mail: </span><a href="mailto:successful91@gmail.com">19successful91@gmail.com</a>
+                </li>
+                <li>
+                    <span>Skype: </span><a href="skype:successful1991m?chat">successful1991m</a>
+                </li>
+                <li>
+                    <span>LinkedIn: </span><a href="https://www.linkedin.com/in/artem-tsys/">www.linkedin.com</a>
+                </li>
+            </ul>
+        </div>
+    </footer>
+</article>
 <article id="ie">
     <span>Your browser is outdated. Please, use the last version of Google Chrome, Opera or Firefox.</span>
     <div class="ie__browser">

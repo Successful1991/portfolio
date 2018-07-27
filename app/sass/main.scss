@@ -12,6 +12,8 @@ body,html,p{
 }
 body{
   overflow: hidden;
+  width: 100vw;
+  height: 100vh;
 }
 canvas{
   height: 100%;
@@ -87,6 +89,10 @@ h2{
 //}
 
 #desktop{
+  position: absolute;
+  left: 0;
+  top: 0;
+  overflow: hidden;
   opacity: 0;
   height: 100%;
   width: 100%;
@@ -187,7 +193,10 @@ h2{
   visibility: hidden;
 }
 
-#planet1,#planet2,#planet3{
+//#planet1,#planet2,#planet3{
+//  @include hint;
+//}
+#aboutMe,#contact,#portfolio{
   @include hint;
 }
 
@@ -241,7 +250,8 @@ h2{
   visibility: hidden;
 }
 
-#aboutMe{
+//#aboutMe{
+#planet1{
   @include info;
   font-size: 26px;
   h2{
@@ -283,7 +293,8 @@ h2{
   font-size: 18px;
   color: #ffffff;
 }
-#contact{
+//#contact{
+#planet2{
   @include info;
   font-size: 18px;
   color: #ffffff;
@@ -298,7 +309,8 @@ h2{
 .contact__phone, .contact__skype{
   margin-bottom: 15px;
 }
-#portfolio{
+//#portfolio{
+#planet3{
   @include info;
   width: 50%;
   justify-content: flex-end;
