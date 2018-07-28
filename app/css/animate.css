@@ -23,8 +23,8 @@
             transform: translateX(0); } }
 
 .openInfo {
-  -webkit-animation: openInfo 0.5s forwards;
-          animation: openInfo 0.5s forwards; }
+  -webkit-animation: openInfo 0.3s forwards;
+          animation: openInfo 0.3s forwards; }
 
 @-webkit-keyframes openInfo {
   from {

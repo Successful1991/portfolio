@@ -29,7 +29,7 @@ h2{
   box-sizing: border-box;
 }
 #ie{
-  display: flex;
+  display: none;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -81,19 +81,13 @@ h2{
     top: 0;
   }
 }
-//.loader__image{
-//  height: 50%;
-//  width: 50%;
-//  background: url('../img/loader_ai_for_rokid_by_fantasy.gif') center no-repeat;
-//  background-size: contain;
-//}
 
 #desktop{
   position: absolute;
   left: 0;
   top: 0;
+  //display: none;
   overflow: hidden;
-  opacity: 0;
   height: 100%;
   width: 100%;
 }
@@ -193,9 +187,6 @@ h2{
   visibility: hidden;
 }
 
-//#planet1,#planet2,#planet3{
-//  @include hint;
-//}
 #aboutMe,#contact,#portfolio{
   @include hint;
 }
@@ -334,17 +325,13 @@ h2{
 .job{
   display: flex;
   flex-grow: 1;
-  //width: 200px;
   min-width: 200px;
   max-width: 260px;
-  //height: 35%;
-  //min-height: 150px;
   height: 180px;
   margin: 20px 5px 0;
   position: relative;
   box-sizing: border-box;
   transform-style: preserve-3d;
-  //will-change: transform;
   perspective: 15rem;
   &:hover &__card{
     &--front{transform: rotateY(180deg);}
@@ -358,9 +345,7 @@ h2{
     left:0;
     overflow: hidden;
     border-radius: 5px 5px 8px 8px;
-    //background: #eeeeee;
     background: #ff7777;
-    //filter: hue-rotate(0deg);
     box-sizing: border-box;
     backface-visibility: hidden;
     transition: all 1s;
@@ -372,7 +357,6 @@ h2{
     }
   }
   &__image{
-    //width: 100%;
     height: calc( 80% - 10px);
     margin: 10px 10px 0 10px;
     box-sizing: border-box;
@@ -427,20 +411,17 @@ h2{
     height: 100%;
     padding: 10px;
     font-size: 10px;
-    //background: yellow;
     background: linear-gradient(220deg, #6c6c6c, #dedede);
     transition: all 1s;
     &__name{
       width: 100%;
       font-size: 14px;
       text-align: center;
-      //border-bottom:1px dashed #3cdf6a;
     }
     &__skill{
       text-align: center;
       p{
         font-size: 14px;
-        //border-bottom:1px dashed #3cdf6a;
         margin: 0;}
     }
     &__data{

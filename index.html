@@ -28,14 +28,10 @@
         </ul>
     </nav>
 
-    <!--<div id="planet1"> About me</div>-->
-    <!--<div id="planet2"> Portfolio</div>-->
-    <!--<div id="planet3"> Contact</div>-->
     <div id="aboutMe"> About me</div>
     <div id="contact"> Portfolio</div>
     <div id="portfolio"> Contact</div>
 
-    <!--<section id="aboutMe">-->
     <section id="planet1">
         <div class="closed">
             <div></div>
@@ -51,7 +47,6 @@
         <h4 class="aboutMe__techno">technologies</h4>
         <p class="techno__list">Gulp,  WebStorm, GitHub, Photoshop, Avocode</p>
     </section>
-    <!--<section id="contact">-->
     <section id="planet2">
         <div class="closed" id="contact__closed">
             <div></div>
@@ -64,7 +59,6 @@
         <p class="contact__skype">Skype: successful1991m</p>
         <p>LinkedIn: <a class="contact__linkedIn" href="https://www.linkedin.com/in/artem-tsys/">https://www.linkedin.com</a></p>
     </section>
-    <!--<section id="portfolio">-->
     <section id="planet3">
         <div class="closed" id="portfolio__closed">
             <div></div>
@@ -282,7 +276,8 @@
        var isAndroid = ua.indexOf("android") > -1;
 
        var ie = (/trident/gi).test(ua) || (/msie/gi).test(ua) || (/edge/gi).test(ua);
-       if(iOS && isAndroid) {
+       //if(iOS && isAndroid) {
+         if(!iOS && !isAndroid) {
            document.getElementById('mobile').style.display='flex';
            document.getElementById('desktop').style.display='none';
            document.getElementById('ie').style.display='none';
@@ -300,14 +295,14 @@
 
            $.init();
 
-           var scriptArray = ['app/js/lib/three.min.js', 'app/js/lib/OrbitControls.js', 'app/js/lib/MTLLoader.js', 'app/js/lib/OBJLoader.js', 'app/js/index.js']
+           const scriptArray = ['app/js/lib/three.min.js', 'app/js/lib/OrbitControls.js', 'app/js/lib/MTLLoader.js', 'app/js/lib/OBJLoader.js', 'app/js/index.js']
 
-             scriptArray.map(scriptPath => {
-               let script = document.createElement("script");
-               script.setAttribute('src', scriptPath);
-               script.async = false;
-               document.body.appendChild(script);
-             });
+           scriptArray.map(scriptPath => {
+             let script = document.createElement("script");
+             script.setAttribute('src', scriptPath);
+             script.async = false;
+             document.body.appendChild(script);
+           });
 
 
 //           var script = document.createElement("script");
@@ -332,6 +327,7 @@
 //           document.body.appendChild(script3);
 //           document.body.appendChild(script4);
 //           document.body.appendChild(script5);
+
        }
     </script>
 

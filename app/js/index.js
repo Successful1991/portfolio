@@ -9,6 +9,10 @@ window.addEventListener('load',function () {
   let menu = false;
   let cameraPosition = false;
   let cameraPurposeActive = false;
+
+  let mouseMove = false;
+
+
   const raycaster = new THREE.Raycaster();
   const mouse = new THREE.Vector2();
   const defaultDirectionCamera = {
@@ -334,7 +338,7 @@ window.addEventListener('load',function () {
   }
   ];
 
-    function init() {
+  function init() {
       scene = new THREE.Scene();
 
       camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 200000);
@@ -361,9 +365,9 @@ window.addEventListener('load',function () {
 
       console.log(scene);
     }
-    init();
+  init();
 
-    function addControls() {
+  function addControls() {
       controls = new THREE.OrbitControls(camera);
       controls.maxDistance = 38000;
       controls.minDistance = 10500;
@@ -378,7 +382,7 @@ window.addEventListener('load',function () {
       controls.maxAzimuthAngle = 0.6;
     }
 
-    function loaderSpaceship2() {
+  function loaderSpaceship2() {
       const mtlLoader = new THREE.MTLLoader();
       const interceptUrl = "app/img/intercept2/tie-intercept.mtl";
       mtlLoader.load(interceptUrl, function (materials) {
@@ -393,14 +397,14 @@ window.addEventListener('load',function () {
           scene.add(spaceship);
           spaceshipIndicator = true;
 
-          document.getElementById('desktop').style.opacity=1;
+          document.getElementById('desktop').style.display='block';
           document.getElementById('loader').style.display='none';
           //document.getElementsByTagName('canvas').style.opacity = '1';
         });
       });
     }
 
-    function loaderMeteorite() {
+  function loaderMeteorite() {
       const mtlLoader = new THREE.MTLLoader();
       mtlLoader.setBaseUrl('app/img/meteorite/');
       mtlLoader.setPath('app/img/meteorite/');
@@ -425,7 +429,7 @@ window.addEventListener('load',function () {
     }
 
     // ---- добовление звезд -----
-    function addStar(stars) {
+  function addStar(stars) {
       stars.forEach(star=>{
         const starGeometry = new THREE.Geometry();
         const starMaterial = new THREE.PointsMaterial({
@@ -452,7 +456,7 @@ window.addEventListener('load',function () {
     }
 
     // ---- добовление планет ----
-    function addNewPlanet(planet) {
+  function addNewPlanet(planet) {
       let geonetryShar = new THREE.SphereGeometry(planet.radius, planet.segment, planet.segment);
       let materialShar = new THREE.MeshLambertMaterial({
         map: new THREE.TextureLoader().load(planet.url),
@@ -468,17 +472,17 @@ window.addEventListener('load',function () {
       return object;
     }
 
-    planets = planetsConfig.map(planet=>{
+  planets = planetsConfig.map(planet=>{
       return addNewPlanet(planet);
     });
 
     // ---- вращение планет вокруг центра ----
-    function rotateAroundWorldAxis(object, axis, radians) {
-      var rotWorldMatrix = new THREE.Matrix4();
+  function rotateAroundWorldAxis(object, axis, radians) {
+      const rotWorldMatrix = new THREE.Matrix4();
       rotWorldMatrix.makeRotationAxis(axis.normalize(), radians);
 
-      var currentPos = new THREE.Vector4(object.position.x, object.position.y, object.position.z, 1);
-      var newPos = currentPos.applyMatrix4(rotWorldMatrix);
+      const currentPos = new THREE.Vector4(object.position.x, object.position.y, object.position.z, 1);
+      const newPos = currentPos.applyMatrix4(rotWorldMatrix);
 
       rotWorldMatrix.multiply(object.matrix);
       object.matrix = rotWorldMatrix;
@@ -487,7 +491,7 @@ window.addEventListener('load',function () {
     }
 
     // ---- анимацию полета метеоритов ----
-    function returnCometsPosition(comet) {
+  function returnCometsPosition(comet) {
         if (comet.position.z <= -12000 || comet.position.z >= 18000) {
           return -12000;
         }else {
@@ -495,92 +499,89 @@ window.addEventListener('load',function () {
         }
     }
 
-    function addGalactic(galactic) {
-        galaxyAdd = galactic.map((galaxy)=>{
-        let galacticTopMaterial = new THREE.MeshBasicMaterial({
-          map: THREE.ImageUtils.loadTexture(galaxy.url),
-          blending: THREE.AdditiveBlending,
-          depthWrite: false,
-          transparent: true,
-        });
-        let geometry = new THREE.PlaneGeometry( galaxy.height, galaxy.width, 1 );
-        let material = galacticTopMaterial;
-
-        let galaxyAdd = new THREE.Mesh( geometry, material );
-        galaxyAdd.position.set(galaxy.position.x,galaxy.position.y,galaxy.position.z);
-        scene.add(galaxyAdd);
-        return galaxyAdd;
+  function addGalactic(galactic) {
+    galaxyAdd = galactic.map((galaxy)=>{
+      const geometry = new THREE.PlaneGeometry( galaxy.height, galaxy.width, 1 );
+      const material = new THREE.MeshBasicMaterial({
+        map: THREE.ImageUtils.loadTexture(galaxy.url),
+        blending: THREE.AdditiveBlending,
+        depthWrite: false,
+        transparent: true,
+          });
+      const galaxyAdd = new THREE.Mesh( geometry, material );
+      galaxyAdd.position.set(galaxy.position.x,galaxy.position.y,galaxy.position.z);
+      scene.add(galaxyAdd);
+      return galaxyAdd;
       });
   }
 
-    function hideTooltips() {
+  function hideTooltips() {
       planets.forEach(planet=>{
         document.getElementById(planet.popupName).style.visibility = "hidden";
       });
     }
 
-    function renderClick(event) {
-      console.log('function renderClick(event)');
+  function renderClick(event) {
       hideTooltips();
       mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
       mouse.y = -( event.clientY / window.innerHeight ) * 2 + 1;
 
       raycaster.setFromCamera(mouse, camera);
       let intersects = raycaster.intersectObjects(scene.children);
-
-      console.log(intersects);
       planets.forEach(planet=>{
         if (
+          intersects.length > 0 &&
           intersects[0].object.name === planet.name &&
           !infoActive
         ) {
-          //clickMenuItem("aboutMe");
           clickMenuItem(planet.name);
           movementToThePlanet(planet);
-          infoActive = true;
         }
       });
       renderer.render(scene, camera);
     }
 
 // ----- обновление размера окна -----
-    function onWindowResize() {
+  function onWindowResize() {
       camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
       renderer.setSize(window.innerWidth, window.innerHeight);
     }
 
 // ------ наведение на объект ------
-    function onDocumentMouseMove(event) {
-      mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-      mouse.y = -( event.clientY / window.innerHeight ) * 2 + 1;
-      renderMouseMove();
+  function onDocumentMouseMove(event) {
+      if(!mouseMove){
+        mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+        mouse.y = -( event.clientY / window.innerHeight ) * 2 + 1;
+        renderMouseMove();
+      }
     }
 
-    function renderMouseMove() {
+  function renderMouseMove() {
       raycaster.setFromCamera(mouse, camera);
       let intersects = raycaster.intersectObjects(scene.children);
-      if (!indicatorHint) {
+
+      if (!indicatorHint && !infoActive) {
         planets.forEach(planet=>{
-          if (intersects.length > 0 && intersects[0].object.name === planet.name) {
+          if (intersects.length > 0 && intersects[0].object.name === planet.name && !infoActive) {
             indicatorHint = true;
             document.getElementById(planet.popupName).style.visibility = "visible";
           }
         });
-      }
-
-      if(( intersects.length === 0 ) ||
-         (intersects[0].object.name !== planets[0].name &&
-          intersects[0].object.name !== planets[1].name &&
-          intersects[0].object.name !== planets[2].name
-      )){
+      }else if(
+        (intersects.length === 0 ) ||
+        (intersects[0].object.name !== planets[0].name &&
+         intersects[0].object.name !== planets[1].name &&
+         intersects[0].object.name !== planets[2].name)
+      ){
         hideTooltips();
         indicatorHint = false;
       }
+
       renderer.render(scene, camera);
     }
 
-    function movementToThePlanet(planetObj) {
+  function movementToThePlanet(planetObj) {
     let shar = planetObj;
     let pl = shar.geometry.parameters.radius * 1.5;
     let x = shar.position.z < camera.position.z ? shar.position.x + pl : shar.position.x - pl;
@@ -608,6 +609,7 @@ window.addEventListener('load',function () {
       cameraPosition = newCameraPosition.newPosition(camera.position, defaultPositionCamera,100,200,50,50,120);
       animationResetCameraPosition = requestAnimationFrame(resetCameraPosition);
     }else {
+      mouseMove = false;
       cancelAnimationFrame(animationResetCameraPosition);
     }
   }
@@ -617,7 +619,7 @@ window.addEventListener('load',function () {
     camera.lookAt(from.x,from.y,from.z);
   }
 
-    function getIdClick(event) {
+  function getIdClick(event) {
     let eventPlanetName = event.target.getAttribute('data-planet');
     planets.forEach(planet=>{
       let activeItem = document.getElementById(planet.name).classList.contains('infoActive');
@@ -628,7 +630,8 @@ window.addEventListener('load',function () {
     });
     }
 
-    function clickMenuItem(id) {
+  function clickMenuItem(id) {
+    mouseMove = true;
       removeClassActive();
       resetVariableInfo();
       controls.dispose();
@@ -636,23 +639,22 @@ window.addEventListener('load',function () {
       infoActive = true;
     }
 
-    function resetVariableInfo() {
+  function resetVariableInfo() {
       infoActive = false;
       cameraPosition = false;
       cameraPurposeActive = false;
     }
 
-    function addEventClosed() {
+  function addEventClosed() {
       let close = document.querySelectorAll('.closed');
       for (let i = 0; i < close.length; i++) {
         close[i].addEventListener("click", closedInfo);
       }
     }
 
-    function openMenu() {
+  function openMenu() {
       let attr = document.querySelector('#menu > input').checked;
       let menuItem = document.querySelectorAll(".menu__item");
-
       menuItem.forEach((item,index)=>{
         if(attr){
           item.style.animation = "menuAnimate 1s forwards " + (index / 2) + "s";
@@ -663,22 +665,21 @@ window.addEventListener('load',function () {
       });
     }
 
-    function openInfo(id) {
+  function openInfo(id) {
       if (document.getElementById(id)) {
         document.getElementById(id).classList.add('infoActive');
       }
     }
 
-    function closedInfo() {
+  function closedInfo() {
       removeClassActive();
       setTimeout(function () {
-        addControls();
         resetVariableInfo();
-        //cameraReset = true;
         resetCameraPosition();
+        addControls();
       }, 1000);
     }
-    function removeClassActive() {
+  function removeClassActive() {
       let infoActive = document.querySelectorAll('.infoActive');
       if (infoActive.length > 0) {
         document.querySelector('.infoActive').classList.add('infoClose');
@@ -689,15 +690,14 @@ window.addEventListener('load',function () {
       }
     }
 
-    function animate() {
+  function animate() {
       requestAnimationFrame(animate);
       if (!infoActive && !indicatorHint) {
         rotateAroundWorldAxis(planets[0], new THREE.Vector3(0, 1, 0), 0.001);
         rotateAroundWorldAxis(planets[1], new THREE.Vector3(0, 1, 0), 0.001);
         rotateAroundWorldAxis(planets[2], new THREE.Vector3(0, 1, 0), 0.001);
         controls.update();
-      }
-      else if (infoActive) {
+      } else if (infoActive) {
         controls.enableRotate = false;
       }
 
