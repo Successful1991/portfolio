@@ -1,5 +1,6 @@
 body {
-  overflow: auto; }
+  overflow-x: hidden;
+  overflow-y: scroll; }
 
 #mobile {
   display: -webkit-box;
@@ -16,7 +17,6 @@ body {
   min-height: 100vh;
   background: url("../img/mobile/mobile_fon.png") center no-repeat;
   background-size: cover;
-  overflow: auto;
   -webkit-box-sizing: border-box;
           box-sizing: border-box; }
 
@@ -48,7 +48,8 @@ header {
 
 #mobile__aboutMe {
   height: auto;
-  width: 100%;
+  width: 90%;
+  margin: 0 auto;
   padding: 10px 15px;
   border-radius: 15px;
   background: -webkit-gradient(linear, left top, left bottom, from(#a3c4df), to(#bcbec0));
@@ -62,22 +63,22 @@ header {
 
 .mobile__aboutMe__skills {
   text-align: center;
-  font-size: 18px;
+  font-size: 16px;
   color: #10b97b;
   margin: 5px 0 5px 0; }
 
 .mobile__aboutMe__techno {
   text-align: center;
-  font-size: 18px;
+  font-size: 16px;
   color: #10b97b;
   margin: 5px 0 5px 0; }
 
 .mobile__skills__name {
-  font-size: 16px;
+  font-size: 14px;
   text-align: center; }
 
 .mobile__techno__list {
-  font-size: 15px;
+  font-size: 14px;
   text-align: center; }
 
 footer {
@@ -85,13 +86,16 @@ footer {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  width: 90%;
+  height: auto;
+  margin: 0 auto;
   border-radius: 10px 10px 0 0;
   padding: 10px 0;
   background: -webkit-gradient(linear, left top, left bottom, from(#a3c4df), to(#bcbec0));
   background: -webkit-linear-gradient(top, #a3c4df, #bcbec0);
   background: -o-linear-gradient(top, #a3c4df, #bcbec0);
   background: linear-gradient(180deg, #a3c4df, #bcbec0); }
-  footer h2 {
+  footer .myPhoto__name {
     margin: 0 0 5px 0;
     padding: 0; }
   footer div {
@@ -140,52 +144,77 @@ footer {
     text-decoration: none;
     color: #000000; }
 
-.mobile__slider-p {
-  font-size: 18px;
-  text-align: center; }
-
-#mobile__slider__images {
+#mobile__slider {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: 15px 0; }
+
+.mobile__slider-p {
+  color: #3cdf6a;
+  font-size: 18px;
+  text-align: center; }
+
+#slider {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: end;
+  -webkit-align-items: flex-end;
+      -ms-flex-align: end;
+          align-items: flex-end;
   position: relative;
-  left: 15%;
-  width: auto;
-  height: 164px;
-  padding: 0;
-  list-style: none; }
-  #mobile__slider__images li {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    border: 1px solid grey; }
+  width: 100vw;
+  height: 53.55vw;
+  margin: 20px auto; }
+  #slider > div:nth-child(1) {
+    background: url("../img/portfolio/Acnostia.jpg") center no-repeat;
+    background-size: cover; }
+  #slider div:nth-child(2) {
+    background: url("../img/portfolio/chat.jpg") center no-repeat;
+    background-size: cover; }
+  #slider div:nth-child(3) {
+    background: url("../img/portfolio/facility.jpg") center no-repeat;
+    background-size: cover; }
+  #slider div:nth-child(4) {
+    background: url("../img/portfolio/gitHubApp.jpg") center no-repeat;
+    background-size: cover; }
+  #slider div:nth-child(5) {
+    background: url("../img/portfolio/guru.jpg") center no-repeat;
+    background-size: cover; }
+  #slider div:nth-child(6) {
+    background: url("../img/portfolio/parking.jpg") center no-repeat;
+    background-size: cover; }
+  #slider div:nth-child(7) {
+    background: url("../img/portfolio/popup.jpg") center no-repeat;
+    background-size: cover; }
 
-#mobile__slider__images li {
+#slider > div {
+  position: absolute;
+  width: 90%;
   height: 100%;
-  width: 80%; }
+  overflow: hidden;
+  border-radius: 20px;
+  visibility: hidden; }
 
-#mobile__slider__images li:nth-child(1) {
-  background: url("../img/portfolio/acnostia.jpg") center no-repeat;
-  background-size: contain;
-  z-index: 7; }
+img {
+  height: 100%;
+  width: 100%; }
 
-#mobile__slider__images li:nth-child(2) {
-  background: url("../img/portfolio/messenger.jpg") center no-repeat;
-  background-size: contain;
-  z-index: 6; }
-
-#mobile__slider__images li:nth-child(3) {
-  background: url("../img/portfolio/gitHub-angular.jpg") center no-repeat;
-  background-size: contain;
-  z-index: 5; }
-
-#mobile__slider__images li:nth-child(4) {
-  background: url("../img/portfolio/facility_test.jpg") center no-repeat;
-  background-size: contain;
-  z-index: 4; }
-
-#mobile__slider__images li:nth-child(5) {
-  background: url("../img/portfolio/Todo-List.jpg") center no-repeat;
-  background-size: contain;
-  z-index: 3; }
+.active1, .active2, .active3 {
+  opacity: 1 !important; }

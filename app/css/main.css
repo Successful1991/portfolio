@@ -345,7 +345,7 @@ h2 {
   font-size: 18px;
   color: #ffffff; }
 
-#planet2 {
+#planet3 {
   position: absolute;
   top: 0;
   left: 100%;
@@ -376,7 +376,7 @@ h2 {
   visibility: hidden;
   font-size: 18px;
   color: #ffffff; }
-  #planet2 h2 {
+  #planet3 h2 {
     color: #3cdf6a; }
 
 .contact__linkedIn {
@@ -386,7 +386,7 @@ h2 {
 .contact__phone, .contact__skype {
   margin-bottom: 15px; }
 
-#planet3 {
+#planet2 {
   position: absolute;
   top: 0;
   left: 100%;
@@ -423,7 +423,7 @@ h2 {
   background: -webkit-linear-gradient(155deg, #717171 -10%, transparent 101%);
   background: -o-linear-gradient(155deg, #717171 -10%, transparent 101%);
   background: linear-gradient(-65deg, #717171 -10%, transparent 101%); }
-  #planet3 h2 {
+  #planet2 h2 {
     color: #ffffff;
     margin-bottom: 0; }
 

@@ -1,5 +1,6 @@
 body {
-  overflow: auto;
+  overflow-x: hidden;
+  overflow-y: scroll;
 }
 #mobile{
   display: flex;
@@ -9,7 +10,7 @@ body {
   min-height: 100vh;
   background: url("../img/mobile/mobile_fon.png")center no-repeat;
   background-size: cover;
-  overflow: auto;
+  //overflow: auto;
   box-sizing: border-box;
 }
 h2{
@@ -34,7 +35,8 @@ header{
 }
 #mobile__aboutMe{
   height: auto;
-  width: 100%;
+  width: 90%;
+  margin: 0 auto;
   padding:10px 15px;
   border-radius: 15px;
   background: linear-gradient( 180deg ,#a3c4df, #bcbec0 );
@@ -46,34 +48,37 @@ header{
   }
   &__skills{
     text-align: center;
-    font-size: 18px;
+    font-size: 16px;
     color: #10b97b;
     margin: 5px 0 5px 0;
   }
   &__techno{
     text-align: center;
-    font-size: 18px;
+    font-size: 16px;
     color: #10b97b;
     margin: 5px 0 5px 0;
   }
 }
 .mobile{
   &__skills__name{
-    font-size: 16px;
+    font-size: 14px;
     text-align: center;
   }
   &__techno__list{
-    font-size: 15px;
+    font-size: 14px;
     text-align: center;
   }
 }
 
 footer{
   display: flex;
+  width: 90%;
+  height: auto;
+  margin: 0 auto;
   border-radius: 10px 10px 0 0;
   padding: 10px 0;
   background: linear-gradient( 180deg ,#a3c4df, #bcbec0 );
-  h2{
+  .myPhoto__name{
     margin: 0 0 5px 0;
     padding: 0;
   }
@@ -114,55 +119,60 @@ footer{
     color: #000000;
   }
 }
+#mobile__slider{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 15px 0;
+}
 .mobile__slider-p{
+  color: #3cdf6a;
   font-size: 18px;
   text-align: center;
 }
-#mobile__slider__images{
+#slider{
   display: flex;
+  justify-content: center;
+  align-items: flex-end;
   position: relative;
-  left: 15%;
-  //width: 85%;
-  width: auto;
-  height: 164px;
-  padding: 0;
-  list-style: none;
-  li{
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    border: 1px solid grey;
+  width: 100vw;
+  height: 53.55vw;
+  margin: 20px auto;
+  > div:nth-child(1){
+    background: url("../img/portfolio/Acnostia.jpg")center no-repeat;
+    background-size: cover;
+  }div:nth-child(2){
+    background: url("../img/portfolio/chat.jpg")center no-repeat;
+    background-size: cover;
+  }div:nth-child(3){
+    background: url("../img/portfolio/facility.jpg")center no-repeat;
+    background-size: cover;
+  }div:nth-child(4){
+    background: url("../img/portfolio/gitHubApp.jpg")center no-repeat;
+    background-size: cover;
+  }div:nth-child(5){
+    background: url("../img/portfolio/guru.jpg")center no-repeat;
+    background-size: cover;
+  }div:nth-child(6){
+    background: url("../img/portfolio/parking.jpg")center no-repeat;
+    background-size: cover;
+  }div:nth-child(7){
+    background: url("../img/portfolio/popup.jpg")center no-repeat;
+    background-size: cover;
   }
 }
-#mobile__slider__images {
-  li {
-    height: 100%;
-    width: 80%;
-  }
-  li:nth-child(1){
-    background: url("../img/portfolio/acnostia.jpg") center no-repeat;
-    background-size: contain;
-    z-index: 7;
-    //transform: translateX(0px);
-    }li:nth-child(2){
-      background: url("../img/portfolio/messenger.jpg") center no-repeat;
-      background-size: contain;
-      z-index: 6;
-         //transform: translateX(10px);
-    }li:nth-child(3){
-      background: url("../img/portfolio/gitHub-angular.jpg") center no-repeat;
-      background-size: contain;
-      z-index: 5;
-      //transform: translateX(20px);
-    }li:nth-child(4){
-      background: url("../img/portfolio/facility_test.jpg") center no-repeat;
-      background-size: contain;
-      z-index: 4;
-      //transform: translateX(30px);
-    }li:nth-child(5){
-      background: url("../img/portfolio/Todo-List.jpg") center no-repeat;
-      background-size: contain;
-      z-index: 3;
-      //transform: translateX(40px);
-    }
+#slider > div{
+  position: absolute;
+  width: 90%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 20px;
+  visibility: hidden;
+}
+img{
+  height: 100%;
+  width: 100%;
+}
+.active1,.active2,.active3{
+  opacity: 1!important;
 }

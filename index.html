@@ -48,18 +48,6 @@
         <p class="techno__list">Gulp,  WebStorm, GitHub, Photoshop, Avocode</p>
     </section>
     <section id="planet2">
-        <div class="closed" id="contact__closed">
-            <div></div>
-            <div></div>
-        </div>
-        <h2>Contacts</h2>
-        <p>City: Kiev</p>
-        <p class="contact__phone">Tell: +38 068 247 99 06</p>
-        <p>Email: 19successful91@gmail.com</p>
-        <p class="contact__skype">Skype: successful1991m</p>
-        <p>LinkedIn: <a class="contact__linkedIn" href="https://www.linkedin.com/in/artem-tsys/">https://www.linkedin.com</a></p>
-    </section>
-    <section id="planet3">
         <div class="closed" id="portfolio__closed">
             <div></div>
             <div></div>
@@ -203,6 +191,18 @@
             </div>
         </div>
     </section>
+    <section id="planet3">
+        <div class="closed" id="contact__closed">
+            <div></div>
+            <div></div>
+        </div>
+        <h2>Contacts</h2>
+        <p>City: Kiev</p>
+        <p class="contact__phone">Tell: +38 068 247 99 06</p>
+        <p>Email: 19successful91@gmail.com</p>
+        <p class="contact__skype">Skype: successful1991m</p>
+        <p>LinkedIn: <a class="contact__linkedIn" href="https://www.linkedin.com/in/artem-tsys/">https://www.linkedin.com</a></p>
+    </section>
 
 </article>
 <div id="loader">
@@ -224,20 +224,28 @@
     </div>
     <div id="mobile__slider">
         <p class="mobile__slider-p">Works</p>
-        <ul id="mobile__slider__images">
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-        </ul>
+        <div id="slider">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <!--<div><img src="app/img/portfolio/Acnostia.jpg" alt=""></div>-->
+            <!--<div><img src="app/img/portfolio/chat.jpg" alt=""></div>-->
+            <!--<div><img src="app/img/portfolio/facility.jpg" alt=""></div>-->
+            <!--<div><img src="app/img/portfolio/gitHubApp.jpg" alt=""></div>-->
+            <!--<div><img src="app/img/portfolio/guru.jpg" alt=""></div>-->
+            <!--<div><img src="app/img/portfolio/parking.jpg" alt=""></div>-->
+            <!--<div><img src="app/img/portfolio/popup.jpg" alt=""></div>-->
+        </div>
     </div>
     <footer>
         <div>
-            <h2>Contacts</h2>
+
             <div id="myPhoto"></div>
+            <p class="myPhoto__name">Tsys Artem</p>
         </div>
         <div>
             <ul id="mobile__contacts">
@@ -277,10 +285,13 @@
 
        var ie = (/trident/gi).test(ua) || (/msie/gi).test(ua) || (/edge/gi).test(ua);
        //if(iOS && isAndroid) {
-         if(!iOS && !isAndroid) {
+       if(!iOS && !isAndroid) {
            document.getElementById('mobile').style.display='flex';
            document.getElementById('desktop').style.display='none';
            document.getElementById('ie').style.display='none';
+         let script = document.createElement("script");
+         script.setAttribute('src', 'app/js/mobile.js');
+         document.body.appendChild(script);
          }
          else if (ie) {
            document.getElementById('mobile').style.display='none';

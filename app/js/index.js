@@ -632,12 +632,12 @@ window.addEventListener('load',function () {
 
   function clickMenuItem(id) {
     mouseMove = true;
-      removeClassActive();
-      resetVariableInfo();
-      controls.dispose();
-      openInfo(id);
-      infoActive = true;
-    }
+    removeClassActive();
+    resetVariableInfo();
+    controls.dispose();
+    openInfo(id);
+    infoActive = true;
+  }
 
   function resetVariableInfo() {
       infoActive = false;
