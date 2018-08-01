@@ -283,8 +283,8 @@
        var isAndroid = ua.indexOf("android") > -1;
 
        var ie = (/trident/gi).test(ua) || (/msie/gi).test(ua) || (/edge/gi).test(ua);
-       //if(iOS || isAndroid){
-       if(!iOS && !isAndroid) {
+       if(iOS || isAndroid){
+       //if(!iOS && !isAndroid) {
            document.getElementById('mobile').style.display='flex';
            document.getElementById('desktop').style.display='none';
            document.getElementById('ie').style.display='none';
