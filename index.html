@@ -231,7 +231,7 @@
             <div></div>
             <div></div>
             <div></div>
-            <!--<div><img src="app/img/portfolio/Acnostia.jpg" alt=""></div>-->
+            <!--<div><img src="app/img/portfolio/acnostia.jpg" alt=""></div>-->
             <!--<div><img src="app/img/portfolio/chat.jpg" alt=""></div>-->
             <!--<div><img src="app/img/portfolio/facility.jpg" alt=""></div>-->
             <!--<div><img src="app/img/portfolio/gitHubApp.jpg" alt=""></div>-->
@@ -283,8 +283,8 @@
        var isAndroid = ua.indexOf("android") > -1;
 
        var ie = (/trident/gi).test(ua) || (/msie/gi).test(ua) || (/edge/gi).test(ua);
-       if(iOS || isAndroid){
-       //if(!iOS && !isAndroid) {
+       //if(iOS || isAndroid){
+       if(!iOS && !isAndroid) {
            document.getElementById('mobile').style.display='flex';
            document.getElementById('desktop').style.display='none';
            document.getElementById('ie').style.display='none';

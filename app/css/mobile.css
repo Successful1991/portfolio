@@ -185,7 +185,7 @@ footer {
   width: 100vw;
   height: 53.55vw; }
   #slider > div:first-child {
-    background: url("../img/portfolio/Acnostia.jpg") center no-repeat;
+    background: url("../img/portfolio/acnostia.jpg") center no-repeat;
     background-size: cover; }
   #slider div:nth-child(2) {
     background: url("../img/portfolio/chat.jpg") center no-repeat;
