@@ -250,19 +250,19 @@
         <div>
             <ul id="mobile__contacts">
                 <li>
-                    <span>City: </span>Kiev
+                    <div>City: </div>Kiev
                 </li>
                 <li>
-                    <span>Tell: </span><a href="tel:+380682479906">+380682479906</a>
+                    <div>Tell: </div><a href="tel:+380682479906">+380682479906</a>
                 </li>
                 <li>
-                    <span>E-mail: </span><a href="mailto:successful91@gmail.com">19successful91@gmail.com</a>
+                    <div>E-mail: </div><a href="mailto:successful91@gmail.com">19successful91@gmail.com</a>
                 </li>
                 <li>
-                    <span>Skype: </span><a href="skype:successful1991m?chat">successful1991m</a>
+                    <div>Skype: </div><a href="skype:successful1991m?chat">successful1991m</a>
                 </li>
                 <li>
-                    <span>LinkedIn: </span><a href="https://www.linkedin.com/in/artem-tsys/">www.linkedin.com</a>
+                    <div>LinkedIn: </div><a href="https://www.linkedin.com/in/artem-tsys/">www.linkedin.com</a>
                 </li>
             </ul>
         </div>
@@ -284,8 +284,8 @@
        var isAndroid = ua.indexOf("android") > -1;
 
        var ie = (/trident/gi).test(ua) || (/msie/gi).test(ua) || (/edge/gi).test(ua);
-       //if(iOS && isAndroid) {
-       if(!iOS && !isAndroid) {
+       if(iOS && isAndroid) {
+       //if(!iOS && !isAndroid) {
            document.getElementById('mobile').style.display='flex';
            document.getElementById('desktop').style.display='none';
            document.getElementById('ie').style.display='none';

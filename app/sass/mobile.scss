@@ -37,8 +37,8 @@ header{
   height: auto;
   width: 90%;
   margin: 0 auto;
-  padding:10px 15px;
-  border-radius: 15px;
+  padding:25px 15px;
+  border-radius: 30px;
   background: linear-gradient( 180deg ,#a3c4df, #bcbec0 );
 }
 .mobile__aboutMe {
@@ -48,13 +48,13 @@ header{
   }
   &__skills{
     text-align: center;
-    font-size: 16px;
+    font-size: 18px;
     color: #10b97b;
     margin: 5px 0 5px 0;
   }
   &__techno{
     text-align: center;
-    font-size: 16px;
+    font-size: 18px;
     color: #10b97b;
     margin: 5px 0 5px 0;
   }
@@ -75,7 +75,7 @@ footer{
   width: 90%;
   height: auto;
   margin: 0 auto;
-  border-radius: 10px 10px 0 0;
+  border-radius: 30px ;
   padding: 10px 0;
   background: linear-gradient( 180deg ,#a3c4df, #bcbec0 );
   .myPhoto__name{
@@ -89,9 +89,9 @@ footer{
     align-items: center;
     height:100%;
     &:first-child{
-      width: 35%;
+      width: 30%;
     }&:last-child{
-      width: 65%;
+      width: 70%;
     }
   }
 }
@@ -110,8 +110,11 @@ footer{
   list-style: none;
   padding: 0;
   margin: 0;
-  font-size: 14px;
-  li > span{
+  font-size: 12px;
+  li > div{
+    display: inline-block;
+    text-align: right;
+    width: 55px;
     color: #10b97b;
   }
   a{
@@ -123,7 +126,7 @@ footer{
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 15px 0;
+  margin: 25px 0;
 }
 .mobile__slider-p{
   color: #3cdf6a;
@@ -133,12 +136,11 @@ footer{
 #slider{
   display: flex;
   justify-content: center;
-  align-items: flex-end;
+  align-items: center;
   position: relative;
   width: 100vw;
   height: 53.55vw;
-  margin: 20px auto;
-  > div:nth-child(1){
+  > div:first-child{
     background: url("../img/portfolio/Acnostia.jpg")center no-repeat;
     background-size: cover;
   }div:nth-child(2){
@@ -163,10 +165,10 @@ footer{
 }
 #slider > div{
   position: absolute;
-  width: 90%;
-  height: 100%;
+  width: 85%;
+  height: 90%;
   overflow: hidden;
-  border-radius: 20px;
+  border-radius: 30px;
   visibility: hidden;
 }
 img{
