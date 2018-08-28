@@ -1,4 +1,4 @@
-var $ = {};
+let $ = {};
 
 $.Particle = function( opt ) {
   this.radius = 2;
@@ -37,7 +37,7 @@ $.Particle.prototype.draw = function( i ) {
   $.ctx.arc( this.x, this.y, Math.max( 0.001, this.life * this.radius ), 0, $.TWO_PI );
   $.ctx.fill();
 
-  var size = Math.random() * 1.25;
+  let size = Math.random() * 1.25;
   $.ctx.fillRect( ~~( this.x + ( ( Math.random() - 0.5 ) * 35 ) * this.life ), ~~( this.y + ( ( Math.random() - 0.5 ) * 35 ) * this.life ), size, size );
 };
 

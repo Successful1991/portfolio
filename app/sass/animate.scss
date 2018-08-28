@@ -4,11 +4,11 @@
 @keyframes menuAnimate {
   from{
     visibility: hidden;
-    transform: translateX(-100%);
+    transform: translateX(0);
   }
   to{
     visibility: visible;
-    transform: translateX(0);
+    transform: translateX(100%);
   }
 }
 .openInfo{
@@ -30,11 +30,11 @@
 }
 @keyframes menuDefault {
   from{
-    transform: translateX(0);
+    transform: translateX(100%);
     visibility: visible;
   }
   to{
-    transform: translateX(-100%);
+    transform: translateX(0);
     visibility: hidden;
   }
 }

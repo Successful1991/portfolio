@@ -51,7 +51,13 @@
 
   function swipeLeft() {
     sliderImage.forEach(image=>{
-      image.removeAttribute('class');
+      let list = image.classList;
+      list.forEach( classJob =>{
+        if(classJob !== 'slider__job'){
+          image.classList.remove(classJob);
+        }
+      } );
+
     });
     slider.left();
   }
@@ -78,4 +84,22 @@
   document.getElementById('slider').addEventListener('touchstart',function (e) {
     touchStartX = e.changedTouches[0].clientX;
     touchStartY = e.changedTouches[0].clientY;
+  });
+
+  document.getElementById('slider').addEventListener('click',function (e) {
+    let cardPath = e.path;
+    console.log(e);
+    cardPath.some(card=>{
+      console.log(card);
+      if(card.classList.contains('cardActive')){
+        console.log(card);
+        card.classList.remove('cardActive');
+        return card;
+      }else if(card.classList.contains('slider__job')){
+        console.log(card);
+        card.classList.add('cardActive');
+        return card;
+      }
+    });
+
   });

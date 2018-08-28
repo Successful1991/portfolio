@@ -5,7 +5,8 @@
 	<meta name="viewport"
 				content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-
+    <meta name="description" content="Сайт портфолио Цыс Артёма, для презентации моих работ." />
+    <script src="app/js/loader.js"></script>
 	<link rel="stylesheet" href="app/css/main.css">
 	<link rel="stylesheet" href="app/css/mobile.css">
 	<link rel="stylesheet" href="app/css/animate.css">
@@ -29,8 +30,8 @@
     </nav>
 
     <div id="aboutMe"> About me</div>
-    <div id="contact"> Portfolio</div>
-    <div id="portfolio"> Contact</div>
+    <div id="portfolio"> Portfolio</div>
+    <div id="contact"> Contact</div>
 
     <section id="planet1">
         <div class="closed">
@@ -204,9 +205,9 @@
     </section>
 
 </article>
-<div id="loader">
+<article id="loader">
     <div class="loader__image"></div>
-</div>
+</article>
 <article id="mobile">
     <header>
         <div class="logo"></div>
@@ -224,20 +225,109 @@
     <div id="mobile__slider">
         <p class="mobile__slider-p">Works</p>
         <div id="slider">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <!--<div><img src="app/img/portfolio/acnostia.jpg" alt=""></div>-->
-            <!--<div><img src="app/img/portfolio/chat.jpg" alt=""></div>-->
-            <!--<div><img src="app/img/portfolio/facility.jpg" alt=""></div>-->
-            <!--<div><img src="app/img/portfolio/gitHubApp.jpg" alt=""></div>-->
-            <!--<div><img src="app/img/portfolio/guru.jpg" alt=""></div>-->
-            <!--<div><img src="app/img/portfolio/parking.jpg" alt=""></div>-->
-            <!--<div><img src="app/img/portfolio/popup.jpg" alt=""></div>-->
+            <div class="slider__job">
+                <div class="slider__card slider__card--front" id="slider__image7"></div>
+                <div class="slider__card slider__card--back">
+                    <!--<div class="slider__card__description">-->
+                        <p class="slider__card__name">Description</p>
+                        Application for calculation of empty parking spaces.
+                        forms the parking with blank spaces of 3 types.
+                        the detailed description on GitHub
+                        <div class="slider__card__skill"> <p>Skill</p> HTML, CSS, JavaScript, Angular2, SCSS</div>
+                        <div class="slider__card__link">
+                            <a href="https://github.com/Successful1991/parking" target="_blank">code</a>
+                            <span class="slider__card__data">April 2018</span>
+                        <!--</div>-->
+                    </div>
+                </div>
+            </div>
+            <div class="slider__job">
+                <div class="slider__card slider__card--front" id="slider__image6"></div>
+                <div class="slider__card slider__card--back">
+                    <p class="slider__card__name">Description</p>
+                    small landing page with a large number of animation.
+                    imposition under screens to 768 and of 1200.
+                    the detailed description on GitHub
+                    <div class="slider__card__skill"> <p>Skill</p> HTML, CSS, SCSS, animation, JavaScript</div>
+                    <div class="slider__card__link">
+                        <a href="https://successful1991.github.io/teaser-guru-test/" target="_blank">view</a>
+                        <a href="https://github.com/Successful1991/teaser-guru-test" target="_blank">code</a>
+                        <span class="slider__card__data">March 2018</span>
+                    </div>
+                </div>
+            </div>
+            <div class="slider__job">
+                <div class="slider__card slider__card--front" id="slider__image5"></div>
+                <div class="slider__card slider__card--back">
+                    <p class="slider__card__name">Description</p>
+                    The application is written on Angular 2+ with use of TypeScript.
+                    It is realized: a pagination, addition and removal of records,
+                    validation of new records, the choice of number of records on the page.
+                    <div class="slider__card__skill"> <p>Skill</p> HTML, CSS, JavaScript, Angular2, TypeScript</div>
+                    <div class="slider__card__link">
+                        <a href="https://github.com/Successful1991/TodoList" target="_blank">code</a>
+                        <span class="slider__card__data">February 2018</span>
+                    </div>
+                </div>
+            </div>
+            <div class="slider__job">
+                <div class="slider__card slider__card--front" id="slider__image4"></div>
+                <div class="slider__card slider__card--back">
+                    <p class="slider__card__name">Description</p>
+                    The application for communication, is written on Angular 2.
+                    The chat receives users on API, at the choice of the user correspondence
+                    in which BOT answers opens, correspondences remain in LocalStorage.
+                    <div class="slider__card__skill"> <p>Skill</p>  HTML, CSS, JavaScript, Angular2, Ajax, REST API</div>
+                    <div class="slider__card__link">
+                        <a href="https://successful1991.github.io/Angular2-chat/Angular2-chat/" target="_blank">view</a>
+                        <a href="https://github.com/Successful1991/Angular2-chat" target="_blank">code</a>
+                        <span class="slider__card__data">January 2018</span>
+                    </div>
+                </div>
+            </div>
+            <div class="slider__job">
+                <div class="slider__card slider__card--front" id="slider__image3"></div>
+                <div class="slider__card slider__card--back">
+                    <p class="slider__card__name">Description</p>
+                    The simple one-page website with 2 sliders of slick-slider, navigation,
+                    google map, popup (with different content of breakpoint 1200px.)
+                    <div class="slider__card__skill"> <p>Skill</p>  HTML, CSS, JavaScript, WebStorm, GitHub, Photoshop</div>
+                    <div class="slider__card__link">
+                        <a href="https://successful1991.github.io/Landing-page/" target="_blank">view</a>
+                        <a href="https://github.com/Successful1991/Landing-page" target="_blank">code</a>
+                        <span class="slider__card__data">January 2018</span>
+                    </div>
+                </div>
+            </div>
+            <div class="slider__job">
+                <div class="slider__card slider__card--front" id="slider__image2"></div>
+                <div class="slider__card slider__card--back">
+                    <p class="slider__card__name">Description</p>
+                    The application on the basis of GitHub, carries out search in users or repositories with a
+                    possibility of addition in chosen, there are pages: Home, Favorite, Contact.
+                    <div class="slider__card__skill"> <p>Skill</p>  HTML, CSS, JavaScript, AngularJs, WebStorm, GitHub Api</div>
+                    <div class="slider__card__link">
+                        <a href="https://successful1991.github.io/GitHub-app-Angular/" target="_blank">view</a>
+                        <a href="https://github.com/Successful1991/GitHub-app-Angular" target="_blank">code</a>
+                        <span class="slider__card__data">December 2017</span>
+                    </div>
+                </div>
+            </div>
+            <div class="slider__job">
+                <div class="slider__card slider__card--front" id="slider__image1"></div>
+                <div class="slider__card slider__card--back">
+                    <p class="slider__card__name">Description</p>
+                    The acnostia project has in itself 5 blocks: The homepage, Services, About us, Work, Contacts.
+                    FullPage.js slider, various effects during the targeting, scroll on blocks, adaptability for different devices.
+                    <div class="slider__card__skill"> <p>Skill</p>  HTML, CSS, JavaScript, AngularJs, WebStorm, GitHub Api</div>
+                    <div class="slider__card__link">
+                        <a href="https://successful1991.github.io/Landing-acnostia/" target="_blank">view</a>
+                        <a href="https://github.com/Successful1991/Landing-acnostia" target="_blank">code</a>
+                        <span class="slider__card__data">October 2017</span>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
     <footer>
@@ -276,36 +366,37 @@
     </div>
 </article>
 
-<script src="app/js/loader.js"></script>
-    <script>
-       var iOS = !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
-       var ua = navigator.userAgent.toLowerCase();
-       var isAndroid = ua.indexOf("android") > -1;
 
-       var ie = (/trident/gi).test(ua) || (/msie/gi).test(ua) || (/edge/gi).test(ua);
+    <script>
+       const iOS = !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
+       const ua = navigator.userAgent.toLowerCase();
+       const isAndroid = ua.indexOf("android") > -1;
+
+       const ie = (/trident/gi).test(ua) || (/msie/gi).test(ua) || (/edge/gi).test(ua);
        if(iOS || isAndroid){
        //if(!iOS && !isAndroid) {
-           document.getElementById('mobile').style.display='flex';
-           document.getElementById('desktop').style.display='none';
-           document.getElementById('ie').style.display='none';
+           document.getElementById('mobile').style.left='0';
+           document.getElementById('desktop').style.left='-100vw';
+           document.getElementById('loader').style.left='-100vw';
+           document.getElementById('ie').style.left='-100vw';
          let script = document.createElement("script");
          script.setAttribute('src', 'app/js/mobile.js');
          document.body.appendChild(script);
          }
          else if (ie) {
-           document.getElementById('mobile').style.display='none';
-           document.getElementById('desktop').style.display='none';
-           document.getElementById('ie').style.display='flex';
+           document.getElementById('mobile').style.left='-100vw';
+           document.getElementById('desktop').style.left='-100vw';
+           document.getElementById('loader').style.left='-100vw';
+           document.getElementById('ie').style.left='0';
          }
          else {
-           document.getElementById('mobile').style.display='none';
-           document.getElementById('loader').style.display='flex';
-           //document.getElementById('desktop').style.display='flex';
-           document.getElementById('ie').style.display='none';
+           document.getElementById('mobile').style.left='-100vw';
+           document.getElementById('loader').style.left='0';
+           document.getElementById('ie').style.left='-100vw';
 
            $.init();
 
-           const scriptArray = ['app/js/lib/three.min.js', 'app/js/lib/OrbitControls.js', 'app/js/lib/MTLLoader.js', 'app/js/lib/OBJLoader.js', 'app/js/index.js']
+           const scriptArray = ['app/js/lib/three.min.js', 'app/js/lib/OrbitControls.js', 'app/js/lib/MTLLoader.js', 'app/js/lib/OBJLoader.js', 'app/js/index.js'];
 
            scriptArray.map(scriptPath => {
              let script = document.createElement("script");
@@ -313,30 +404,6 @@
              script.async = false;
              document.body.appendChild(script);
            });
-
-
-//           var script = document.createElement("script");
-//           var script2 = document.createElement("script");
-//           var script3 = document.createElement("script");
-//           var script4 = document.createElement("script");
-//           var script5 = document.createElement("script");
-//
-//           script.setAttribute('src', 'app/js/lib/three.min.js');
-//           script.async = false;
-//           script2.setAttribute('src', 'app/js/lib/OrbitControls.js');
-//           script2.async = false;
-//           script3.setAttribute('src', 'app/js/lib/MTLLoader.js');
-//           script3.async = false;
-//           script4.setAttribute('src', 'app/js/lib/OBJLoader.js');
-//           script4.async = false;
-//           script5.setAttribute('src', 'app/js/index.js');
-//           script5.async = false;
-//
-//           document.body.appendChild(script);
-//           document.body.appendChild(script2);
-//           document.body.appendChild(script3);
-//           document.body.appendChild(script4);
-//           document.body.appendChild(script5);
 
        }
     </script>

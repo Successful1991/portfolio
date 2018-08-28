@@ -397,9 +397,8 @@ window.addEventListener('load',function () {
           scene.add(spaceship);
           spaceshipIndicator = true;
 
-          document.getElementById('desktop').style.display='block';
-          document.getElementById('loader').style.display='none';
-          //document.getElementsByTagName('canvas').style.opacity = '1';
+          document.getElementById('desktop').style.left='0';
+          document.getElementById('loader').style.left='-100vw';
         });
       });
     }
@@ -590,16 +589,16 @@ window.addEventListener('load',function () {
       y: shar.position.y,
       z: shar.position.z
     };
-    function animate() {
+    function animateCamera() {
       if (!cameraPosition || !cameraPurposeActive ) {
         cameraPurpose(currentDirectionCamera, planet);
         cameraPosition = newCameraPosition.newPosition(camera.position, shar.position, 110, 5000, 80, 80, 200);
-        animationCameraPosition = requestAnimationFrame(animate);
+        animationCameraPosition = requestAnimationFrame(animateCamera);
       } else {
         cancelAnimationFrame(animationCameraPosition);
       }
   }
-    animate();
+    animateCamera();
 
   }
 
@@ -727,9 +726,7 @@ window.addEventListener('load',function () {
       renderer.render(scene, camera);
     }
 
-    //window.addEventListener('click', renderClick, false);
     window.addEventListener('resize', onWindowResize, false);
-    //document.addEventListener('mousemove', onDocumentMouseMove, false);
 
     document.querySelector('canvas').addEventListener('mousemove', onDocumentMouseMove);
     document.querySelector('canvas').addEventListener('click', renderClick);
