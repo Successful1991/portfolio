@@ -399,13 +399,12 @@
 
            const scriptArray = ['build/js/lib/three.min.js', 'build/js/lib/OrbitControls.min.js', 'build/js/lib/MTLLoader.min.js', 'build/js/lib/OBJLoader.min.js', 'build/js/index.min.js'];
 
-           scriptArray.map(scriptPath => {
+           scriptArray.map(function(scriptPath) {
              let script = document.createElement("script");
              script.setAttribute('src', scriptPath);
              script.async = false;
              document.body.appendChild(script);
            });
-
        }
     </script>
 

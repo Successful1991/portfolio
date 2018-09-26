@@ -294,10 +294,11 @@ window.addEventListener('load',function () {
       Object.keys(from).forEach(key => {
         if (from[key] > to[key] + config.gap[key]) {
           from[key] -= config.shift[key] * 1.3;
-        } else if (from[key] < to[key]-config.gap.z) {
+        } else if ( from[key] < to[key] - config.gap.z) {
           from[key] += config.shift[key];
         } else{config.animateCompleted[key] = true}
       });
+
       if(config.animateCompleted.x && config.animateCompleted.y && config.animateCompleted.z){
         config.animateCompleted.x = false;
         config.animateCompleted.y = false;
@@ -592,12 +593,12 @@ window.addEventListener('load',function () {
     function animateCamera() {
       if (!cameraPosition || !cameraPurposeActive ) {
         cameraPurpose(currentDirectionCamera, planet);
-        cameraPosition = newCameraPosition.newPosition(camera.position, shar.position, 110, 5000, 80, 80, 200);
+        cameraPosition = newCameraPosition.newPosition(camera.position, shar.position, 1100, 5000, 80, 110, 200);
         animationCameraPosition = requestAnimationFrame(animateCamera);
       } else {
         cancelAnimationFrame(animationCameraPosition);
       }
-  }
+    }
     animateCamera();
 
   }
@@ -605,7 +606,7 @@ window.addEventListener('load',function () {
   function resetCameraPosition(){
     if(!cameraPosition || !cameraPurposeActive) {
       cameraPurpose(currentDirectionCamera, defaultDirectionCamera);
-      cameraPosition = newCameraPosition.newPosition(camera.position, defaultPositionCamera,100,200,50,50,120);
+      cameraPosition = newCameraPosition.newPosition(camera.position, defaultPositionCamera,100,200,50,60,120);
       animationResetCameraPosition = requestAnimationFrame(resetCameraPosition);
     }else {
       mouseMove = false;
@@ -614,7 +615,7 @@ window.addEventListener('load',function () {
   }
 
   function cameraPurpose(from, to){
-    cameraPurposeActive = newCameraPosition.newPosition(from, to,240,240,50,50,120);
+    cameraPurposeActive = newCameraPosition.newPosition(from, to,240,240,50,60,120);
     camera.lookAt(from.x,from.y,from.z);
   }
 
