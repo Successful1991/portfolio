@@ -202,7 +202,7 @@ window.addEventListener('load',function () {
         z:-92000
       },
       rotation: 0,
-      url:'app/img/stars/galactictop.png'
+      url:'build/img/stars/galactictop.png'
     },{
     height: 90000,
       width: 60000,
@@ -212,7 +212,7 @@ window.addEventListener('load',function () {
         z:-42000
       },
       rotation: 20,
-      url:'app/img/stars/galactic2.jpg'
+      url:'build/img/stars/galactic2.jpg'
     },{
     height: 64000,
       width: 64000,
@@ -222,7 +222,7 @@ window.addEventListener('load',function () {
         z:-100000
       },
       rotation: -1,
-      url:'app/img/stars/atlantis_nebula-final.png'
+      url:'build/img/stars/atlantis_nebula-final.png'
     },{
     height: 64000,
       width: 64000,
@@ -232,7 +232,7 @@ window.addEventListener('load',function () {
         z:-100000
       },
       rotation: -1,
-      url:'app/img/stars/downloaded-finish.jpg'
+      url:'build/img/stars/downloaded-finish.jpg'
   }];
   const starsType = [
     {
@@ -240,31 +240,31 @@ window.addEventListener('load',function () {
       distance:5500,
       opacity:1,
       size:6,
-      url:'app/img/stars/p_0.png'
+      url:'build/img/stars/p_0.png'
     },{
     amount:3000,
       distance:5500,
       opacity:0.5,
       size:4,
-      url:'app/img/stars/star_preview.png'
+      url:'build/img/stars/star_preview.png'
     },{
     amount:2000,
       distance:5500,
       opacity:1,
       size:8,
-      url:'app/img/stars/galactic_blur.png'
+      url:'build/img/stars/galactic_blur.png'
     },{
     amount:10,
       distance:5500,
       opacity:1,
       size:60,
-      url:'app/img/stars/corona.png'
+      url:'build/img/stars/corona.png'
     },{
     amount:100,
       distance:5500,
       opacity:1,
       size:15,
-      url:'app/img/stars/galactic_sharp.png'
+      url:'build/img/stars/galactic_sharp.png'
     },{
     amount:7000,
       distance:5500,
@@ -314,7 +314,7 @@ window.addEventListener('load',function () {
     popupName:'aboutMe',
     radius: 900,
     segment: 60,
-    url: 'app/img/planet_Bog.jpg',
+    url: 'build/img/planet_Bog.jpg',
     posX: 0,
     posY: 0,
     posZ: -4000
@@ -323,7 +323,7 @@ window.addEventListener('load',function () {
     popupName:'portfolio',
     radius: 900,
     segment: 60,
-    url: 'app/img/Venus2.jpg',
+    url: 'build/img/Venus2.jpg',
     posX: -4000,
     posY: 0,
     posZ: 4000
@@ -332,7 +332,7 @@ window.addEventListener('load',function () {
     popupName:'contact',
     radius: 900,
     segment: 50,
-    url: 'app/img/planet_Quom.jpg',
+    url: 'build/img/planet_Quom.jpg',
     posX: 4000,
     posY: 0,
     posZ: 4000
@@ -385,12 +385,12 @@ window.addEventListener('load',function () {
 
   function loaderSpaceship2() {
       const mtlLoader = new THREE.MTLLoader();
-      const interceptUrl = "app/img/intercept2/tie-intercept.mtl";
+      const interceptUrl = "build/img/intercept2/tie-intercept.mtl";
       mtlLoader.load(interceptUrl, function (materials) {
         materials.preload();
         const objLoader = new THREE.OBJLoader();
         objLoader.setMaterials(materials);
-        objLoader.setPath('app/img/');
+        objLoader.setPath('build/img/');
         objLoader.load('intercept2/tie-intercept.obj', function (object) {
           object.position.set(planets[1].position.x, planets[1].position.y, planets[1].position.z);
           object.scale.set(12.5, 12.5, 12.5);
@@ -406,14 +406,12 @@ window.addEventListener('load',function () {
 
   function loaderMeteorite() {
       const mtlLoader = new THREE.MTLLoader();
-      mtlLoader.setBaseUrl('app/img/meteorite/');
-      mtlLoader.setPath('app/img/meteorite/');
-      const url = "meteority_letyat.mtl";
+      mtlLoader.setBaseUrl('build/img/meteorite/');mtlLoader.setPath('build/img/meteorite/');const url = "meteority_letyat.mtl";
       mtlLoader.load(url, function (materials) {
         materials.preload();
         const objLoader = new THREE.OBJLoader();
         objLoader.setMaterials(materials);
-        objLoader.setPath('app/img/meteorite/');
+        objLoader.setPath('build/img/meteorite/');
         objLoader.load('meteority_letyat.obj', function (object) {
 
           meteorite = cometsConfig.map((comet,i)=>{
