@@ -423,9 +423,7 @@
         objLoader.load('meteority_letyat.obj', function (object) {
 
           meteorite = cometsConfig.map((cometConf)=>{
-
             let comet = object.clone();
-            console.log(comet);
             comet.position.set(cometConf.position.x,cometConf.position.y,cometConf.position.z);
             comet.scale.set(cometConf.scale,cometConf.scale,cometConf.scale);
             scene.add(comet);
@@ -731,15 +729,13 @@
       renderer.render(scene, camera);
     }
 
-  window.addEventListener('resize', onWindowResize, false);
-  document.querySelector('canvas').addEventListener('mousemove', onDocumentMouseMove);
-  document.querySelector('canvas').addEventListener('click', renderClick);
-  document.getElementById('burger').addEventListener("click", openMenu);
-  document.getElementById('menu__list').addEventListener("click", getIdClick);
-
-
   window.addEventListener('load',function () {
     init();
+    window.addEventListener('resize', onWindowResize, false);
+    document.querySelector('canvas').addEventListener('mousemove', onDocumentMouseMove);
+    document.querySelector('canvas').addEventListener('click', renderClick);
+    document.getElementById('burger').addEventListener("click", openMenu);
+    document.getElementById('menu__list').addEventListener("click", getIdClick);
   });
 
 
