@@ -531,6 +531,9 @@ h2 {
     .job__image7 {
       background: url("../img/portfolio/parking.jpg") center no-repeat;
       background-size: contain; }
+    .job__image8 {
+      background: url("../img/portfolio/Creative-Digital-Agencies.jpg") center no-repeat;
+      background-size: contain; }
   .job__name {
     display: -webkit-box;
     display: -webkit-flex;

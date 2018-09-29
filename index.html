@@ -58,6 +58,25 @@
         <div class="portfolio__jobs">
             <div class="job">
                 <div class="job__card job__card--front">
+                    <div class="job__image job__image1"></div>
+                    <div class="job__name">Creative-Digital-Agencies</div>
+                </div>
+                <div class="job__card job__card--back">
+                    <div class="job__description">
+                        <p class="job__description__name">Creative-Digital-Agencies</p>
+                        Imposition of the model, HTML5,SCSS, gulp were used.
+                        without js, the adaptability became approximately
+                        <div class="job__description__skill"> <p>Skill</p> HTML, CSS, npm, Gulp, WebStorm</div>
+                        <div class="job__description__link">
+                            <a href="https://successful1991.github.io/Creative-Digital-Agencies/" target="_blank">view</a>
+                            <a href="https://github.com/Successful1991/Creative-Digital-Agencies" target="_blank">code</a>
+                            <span class="job__description__data">September 2018</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="job">
+                <div class="job__card job__card--front">
                     <div class="job__image job__image7"></div>
                     <div class="job__name">Parking App</div>
                 </div>
@@ -227,6 +246,20 @@
         <p class="mobile__slider-p">Works</p>
         <div id="slider">
             <div class="slider__job">
+                <div class="slider__card slider__card--front" id="slider__image8"></div>
+                <div class="slider__card slider__card--back">
+                    <p class="slider__card__name">Description</p>
+                    Imposition of the model, HTML5,SCSS, gulp were used.
+                    without js, the adaptability became approximately
+                    <div class="slider__card__skill"> <p>Skill</p> HTML, CSS, npm, Gulp, WebStorm</div>
+                    <div class="slider__card__link">
+                        <a href="https://successful1991.github.io/Creative-Digital-Agencies/" target="_blank">view</a>
+                        <a href="https://github.com/Successful1991/Creative-Digital-Agencies" target="_blank">code</a>
+                        <span class="slider__card__data">September 2018</span>
+                    </div>
+                </div>
+            </div>
+            <div class="slider__job">
                 <div class="slider__card slider__card--front" id="slider__image7"></div>
                 <div class="slider__card slider__card--back">
                     <!--<div class="slider__card__description">-->
@@ -372,8 +405,8 @@
        const iOS = !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
        const ua = navigator.userAgent.toLowerCase();
        const isAndroid = ua.indexOf("android") > -1;
-
        const ie = (/trident/gi).test(ua) || (/msie/gi).test(ua) || (/edge/gi).test(ua);
+
        if(iOS || isAndroid){
        //if(!iOS && !isAndroid) {
            document.getElementById('mobile').style.left='0';
@@ -397,7 +430,7 @@
 
            $.init();
 
-           const scriptArray = ['build/js/lib/three.min.js', 'build/js/lib/OrbitControls.min.js', 'build/js/lib/MTLLoader.min.js', 'build/js/lib/OBJLoader.min.js', 'build/js/index.min.js'];
+           const scriptArray = ['build/js/lib/three.min.js', 'build/js/lib/OrbitControls.js', 'build/js/lib/MTLLoader.js', 'build/js/lib/OBJLoader.js', 'build/js/index.min.js'];
 
            scriptArray.map(function(scriptPath) {
              let script = document.createElement("script");

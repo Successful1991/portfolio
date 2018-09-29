@@ -1,4 +1,3 @@
-window.addEventListener('load',function () {
   let cometLoadingIndicator = false;
   let scene,camera,controls,renderer,meteorite,animationCameraPosition,animationResetCameraPosition,galaxyAdd,spaceship;
   let t = 0;
@@ -37,14 +36,14 @@ window.addEventListener('load',function () {
         y: 3200,
         z: -1600
       },
-      scale: 40,
+      scale: 2,
       animate:{
         rotation:{
           x: 0.01,
           y: 0.03
         },
         position:{
-          z: 10
+          z: 17
         }}
     },{
       position:{
@@ -52,7 +51,7 @@ window.addEventListener('load',function () {
         y:1200,
         z:-3000
       },
-      scale: 50,
+      scale: 1,
       animate:{
         rotation:{
           x: 0.02,
@@ -68,7 +67,7 @@ window.addEventListener('load',function () {
         y:1900,
         z:-6500
       },
-      scale: 40,
+      scale: 5,
       animate:{
         rotation:{
           x: 0.01,
@@ -84,14 +83,14 @@ window.addEventListener('load',function () {
         y:-3200,
         z:-13000
       },
-      scale: 55,
+      scale: 5,
       animate:{
         rotation:{
           x: 0.03,
           y: 0.01
         },
         position:{
-          z: 8
+          z: 12
         }
       }
     },{
@@ -100,14 +99,14 @@ window.addEventListener('load',function () {
         y:2800,
         z:4000
       },
-      scale: 30,
+      scale: 3,
       animate:{
         rotation:{
           x:0,
           y: 0.03
         },
         position:{
-          z: 9
+          z: 14
         }
       }
     },{
@@ -116,7 +115,7 @@ window.addEventListener('load',function () {
         y:3800,
         z:500
       },
-      scale: 40,
+      scale: 7,
       animate:{
         rotation:{
           x: 0.02,
@@ -132,14 +131,14 @@ window.addEventListener('load',function () {
         y:-4100,
         z:-10000
       },
-      scale: 54,
+      scale: 4,
       animate:{
         rotation:{
           x: 0,
           y:0.01
         },
         position:{
-          z: 13
+          z: 30
         }
       }
     },{
@@ -148,7 +147,7 @@ window.addEventListener('load',function () {
         y:1300,
         z:-8100
       },
-      scale: 40,
+      scale: 2,
       animate:{
         rotation:{
           x: 0.02,
@@ -164,7 +163,7 @@ window.addEventListener('load',function () {
         y:-1500,
         z:-1100
       },
-      scale: 45,
+      scale: 6,
       animate:{
         rotation:{
           x: 0.02,
@@ -180,7 +179,7 @@ window.addEventListener('load',function () {
         y:4500,
         z:-4000
       },
-      scale: 35,
+      scale: 8,
       animate:{
         rotation:{
           x: 0.03,
@@ -340,33 +339,42 @@ window.addEventListener('load',function () {
   ];
 
   function init() {
-      scene = new THREE.Scene();
+    scene = new THREE.Scene();
 
-      camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 200000);
-      camera.position.set(0, 3800, 17000);
-      camera.rotation.set(0, 0, 0);
+    camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 200000);
+    camera.position.set(0, 3800, 17000);
+    camera.rotation.set(0, 0, 0);
 
-      renderer = new THREE.WebGLRenderer();
-      renderer.setSize(window.innerWidth, window.innerHeight);
-      renderer.setClearColor(0x000000, 0.5);
+    renderer = new THREE.WebGLRenderer();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setClearColor(0x000000, 0.5);
 
-      document.getElementById('desktop').appendChild(renderer.domElement);
+    document.getElementById('desktop').appendChild(renderer.domElement);
 // ----- добавление света -----
-      const light = new THREE.DirectionalLight(0xffffff, 1.2);
-      light.position.x = 22000;
-      light.position.y = 12000;
-      scene.add(light);
+    const light = new THREE.DirectionalLight(0xffffff, 1.2);
+    light.position.x = 22000;
+    light.position.y = 12000;
+    scene.add(light);
 
-      const amColor = "#ffffff";
-      const amLight = new THREE.AmbientLight(amColor, 0.25);
-      scene.add(amLight);
+    const amColor = "#ffffff";
+    const amLight = new THREE.AmbientLight(amColor, 0.25);
+    scene.add(amLight);
 
 // ------ add controller -----
-      addControls();
-
+    addControls();
+    planets = planetsConfig.map(planet=>{
+      return addNewPlanet(planet);
+    });
+    addGalactic(galactic);
+    addStar(starsType);
+    addEventClosed();
+    loaderMeteorite();
+    loaderSpaceship2();
       console.log(scene);
+
+    animate();
     }
-  init();
+
 
   function addControls() {
       controls = new THREE.OrbitControls(camera);
@@ -414,10 +422,12 @@ window.addEventListener('load',function () {
         objLoader.setPath('build/img/meteorite/');
         objLoader.load('meteority_letyat.obj', function (object) {
 
-          meteorite = cometsConfig.map((comet,i)=>{
-            comet = object.clone();
-            comet.position.set(cometsConfig[i].position.x,cometsConfig[i].position.y,cometsConfig[i].position.z);
-            comet.scale = cometsConfig[i].scale;
+          meteorite = cometsConfig.map((cometConf)=>{
+
+            let comet = object.clone();
+            console.log(comet);
+            comet.position.set(cometConf.position.x,cometConf.position.y,cometConf.position.z);
+            comet.scale.set(cometConf.scale,cometConf.scale,cometConf.scale);
             scene.add(comet);
             return comet;
           });
@@ -469,10 +479,6 @@ window.addEventListener('load',function () {
       scene.add(object);
       return object;
     }
-
-  planets = planetsConfig.map(planet=>{
-      return addNewPlanet(planet);
-    });
 
     // ---- вращение планет вокруг центра ----
   function rotateAroundWorldAxis(object, axis, radians) {
@@ -725,20 +731,15 @@ window.addEventListener('load',function () {
       renderer.render(scene, camera);
     }
 
-    window.addEventListener('resize', onWindowResize, false);
+  window.addEventListener('resize', onWindowResize, false);
+  document.querySelector('canvas').addEventListener('mousemove', onDocumentMouseMove);
+  document.querySelector('canvas').addEventListener('click', renderClick);
+  document.getElementById('burger').addEventListener("click", openMenu);
+  document.getElementById('menu__list').addEventListener("click", getIdClick);
 
-    document.querySelector('canvas').addEventListener('mousemove', onDocumentMouseMove);
-    document.querySelector('canvas').addEventListener('click', renderClick);
 
-    document.getElementById('burger').addEventListener("click", openMenu);
-    document.getElementById('menu__list').addEventListener("click", getIdClick);
-    addGalactic(galactic);
-    addStar(starsType);
-    addEventClosed();
-    loaderMeteorite();
-    loaderSpaceship2();
-
-    animate();
+  window.addEventListener('load',function () {
+    init();
   });
 
 

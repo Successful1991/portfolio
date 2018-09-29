@@ -142,6 +142,10 @@ body {
     height: 53.55vw;
   }
   #slider {
+    &__image8 {
+      background: url("../img/portfolio/Creative-Digital-Agencies.jpg") center no-repeat;
+      background-size: cover;
+    }
     &__image7 {
       background: url("../img/portfolio/parking.jpg") center no-repeat;
       background-size: cover;

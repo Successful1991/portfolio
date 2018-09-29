@@ -175,6 +175,9 @@ body {
     position: relative;
     width: 100vw;
     height: 53.55vw; }
+  #mobile #slider__image8 {
+    background: url("../img/portfolio/Creative-Digital-Agencies.jpg") center no-repeat;
+    background-size: cover; }
   #mobile #slider__image7 {
     background: url("../img/portfolio/parking.jpg") center no-repeat;
     background-size: cover; }

@@ -152,7 +152,6 @@ h2{
   padding: 0;
   margin: 200px 0 0 0;
   transform: translateX(-100%);
-  //visibility: hidden;
 }
 .menu__item{
   position: relative;
@@ -245,7 +244,6 @@ h2{
   font-family: 'Proxima-Nova-Regular',sans-serif;
   padding: 0 2%;
   box-sizing: border-box;
-  //visibility: hidden;
 }
 
 //#aboutMe{
@@ -393,6 +391,10 @@ h2{
     }
     &7{
       background: url("../img/portfolio/parking.jpg") center no-repeat;
+      background-size: contain;
+    }
+    &8{
+      background: url("../img/portfolio/Creative-Digital-Agencies.jpg") center no-repeat;
       background-size: contain;
     }
   }
