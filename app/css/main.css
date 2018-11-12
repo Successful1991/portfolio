@@ -534,6 +534,12 @@ h2 {
     .job__image8 {
       background: url("../img/portfolio/Creative-Digital-Agencies.jpg") center no-repeat;
       background-size: contain; }
+    .job__image9 {
+      background: url("../img/portfolio/specks.jpg") center no-repeat;
+      background-size: contain; }
+    .job__image10 {
+      background: url("../img/portfolio/2048.jpg") center no-repeat;
+      background-size: contain; }
   .job__name {
     display: -webkit-box;
     display: -webkit-flex;
