@@ -175,6 +175,15 @@ body {
     position: relative;
     width: 100vw;
     height: 53.55vw; }
+  #mobile #slider__image11 {
+    background: url("../img/portfolio/Real-estate_company-min.jpg") center no-repeat;
+    background-size: cover; }
+  #mobile #slider__image10 {
+    background: url("../img/portfolio/2048-min.jpg") center no-repeat;
+    background-size: cover; }
+  #mobile #slider__image9 {
+    background: url("../img/portfolio/specks-min.jpg") center no-repeat;
+    background-size: cover; }
   #mobile #slider__image8 {
     background: url("../img/portfolio/Creative-Digital-Agencies.jpg") center no-repeat;
     background-size: cover; }

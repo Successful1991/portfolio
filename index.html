@@ -7,9 +7,6 @@
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="description" content="Сайт портфолио Цыс Артёма, для презентации моих работ." />
     <script src="build/js/loader.min.js"></script>
-	<!--<link rel="stylesheet" href="app/css/main.css">-->
-	<!--<link rel="stylesheet" href="app/css/mobile.css">-->
-	<!--<link rel="stylesheet" href="app/css/animate.css">-->
 	<link rel="stylesheet" href="build/css/index.min.css">
 
 	<title>Portfolio</title>
@@ -56,6 +53,24 @@
         </div>
         <h2>Portfolio</h2>
         <div class="portfolio__jobs">
+            <div class="job">
+                <div class="job__card job__card--front">
+                    <div class="job__image job__image11"></div>
+                    <div class="job__name">Real estate company</div>
+                </div>
+                <div class="job__card job__card--back">
+                    <div class="job__description">
+                        <p class="job__description__name">Real estate company</p>
+                        Imposition of the homepage, 2 sliders, 1 Tabs.
+                        <div class="job__description__skill"> <p>Skill</p>HTML, SCSS, JS, slick-slider, Gulp, WebStorm</div>
+                        <div class="job__description__link">
+                            <a href="https://stackblitz.com/github/Successful1991/game-2048" target="_blank">view</a>
+                            <a href="https://github.com/Successful1991/game-2048" target="_blank">code</a>
+                            <span class="job__description__data">October 2018</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="job">
                 <div class="job__card job__card--front">
                     <div class="job__image job__image10"></div>
@@ -284,6 +299,46 @@
         <p class="mobile__slider-p">Works</p>
         <div id="slider">
             <div class="slider__job">
+                <div class="slider__card slider__card--front" id="slider__image11"></div>
+                <div class="slider__card slider__card--back">
+                    <p class="slider__card__name">Description</p>
+                    Imposition of the homepage, 2 sliders, 1 Tabs.
+                    <div class="slider__card__skill"> <p>Skill</p>HTML, SCSS, JS, slick-slider, Gulp, WebStorm</div>
+                    <div class="slider__card__link">
+                        <a href="https://github.com/Successful1991/game-2048" target="_blank">code</a>
+                        <span class="slider__card__data">October 2018</span>
+                    </div>
+                </div>
+            </div>
+            <div class="slider__job">
+                <div class="slider__card slider__card--front" id="slider__image10"></div>
+                <div class="slider__card slider__card--back">
+                    <p class="slider__card__name">Description</p>
+                    Game 2048, control is carried out using the keyboard (arrow)
+                    There is a check for victory and lose.
+                    <div class="slider__card__skill"> <p>Skill</p> Angular2+ HTML, CSS, npm, Gulp, WebStorm</div>
+                    <div class="slider__card__link">
+                        <a href="https://stackblitz.com/github/Successful1991/game-2048" target="_blank">view</a>
+                        <a href="https://github.com/Successful1991/game-2048" target="_blank">code</a>
+                        <span class="slider__card__data">October 2018</span>
+                    </div>
+                </div>
+            </div>
+            <div class="slider__job">
+                <div class="slider__card slider__card--front" id="slider__image9"></div>
+                <div class="slider__card slider__card--back">
+                    <p class="slider__card__name">Description</p>
+                    The game is tag, there is a check whether cubes are collected or not,
+                    there is the possibility of mixing cubes.
+                    <div class="slider__card__skill"> <p>Skill</p> Angular2+ HTML, CSS, npm, Gulp, WebStorm</div>
+                    <div class="slider__card__link">
+                        <a href="https://stackblitz.com/github/Successful1991/game-specks" target="_blank">view</a>
+                        <a href="https://github.com/Successful1991/game-specks" target="_blank">code</a>
+                        <span class="slider__card__data">October 2018</span>
+                    </div>
+                </div>
+            </div>
+            <div class="slider__job">
                 <div class="slider__card slider__card--front" id="slider__image8"></div>
                 <div class="slider__card slider__card--back">
                     <p class="slider__card__name">Description</p>
@@ -439,7 +494,7 @@
 </article>
 
 
-    <script>
+<script>
        const iOS = !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
        const ua = navigator.userAgent.toLowerCase();
        const isAndroid = ua.indexOf("android") > -1;
